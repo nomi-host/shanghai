@@ -222,11 +222,14 @@
       if (g.foot) h += `<p class="group-f">${esc(g.foot)}</p>`;
     });
     const done = store.get('check', {});
-    h += `<h3 class="group-h">출발 전 체크리스트</h3><div class="list">`;
-    CHECKLIST.forEach((c, i) => {
-      h += `<label class="check"><input type="checkbox" data-check="${esc(c)}"${done[c] ? ' checked' : ''}><span>${esc(c)}</span></label>`;
+    CHECKLIST.forEach((g) => {
+      h += `<h3 class="group-h">체크리스트 · ${esc(g.group)}</h3><div class="list">`;
+      g.items.forEach((c) => {
+        h += `<label class="check"><input type="checkbox" data-check="${esc(c)}"${done[c] ? ' checked' : ''}><span>${esc(c)}</span></label>`;
+      });
+      h += `</div>`;
     });
-    h += `</div><p class="group-f">체크 상태는 이 기기에만 저장돼요.</p>`;
+    h += `<p class="group-f">체크 상태는 이 기기에만 저장돼요.</p>`;
     h += `<p class="foot">조사 기준 ${esc(TRIP.asOf)}</p>`;
     el.innerHTML = h;
   }
