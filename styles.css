@@ -304,3 +304,6 @@ a.row { color: inherit; }
 /* 첫 화면 제목 + 마스코트 */
 .large-title.brand { display: flex; align-items: center; gap: 10px; }
 .large-title.brand img { width: 42px; height: auto; flex: none; }
+
+/* 큰 제목은 포인트 빨강 */
+.large-title { color: var(--tint); }
