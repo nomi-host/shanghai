@@ -88,8 +88,8 @@
     }
     const chips = [];
     if (p) {
-      chips.push(mapPill(p, '고덕지도에서 열기'));
-      chips.push(gmapPill(p, '구글맵에서 열기'));
+      chips.push(mapPill(p, '고덕지도'));
+      chips.push(gmapPill(p, '구글맵'));
       if (p.addr) chips.push(showPill(p.name, `${p.cn}\n${p.addr}`));
     }
     if (chips.length) h += `<div class="chips">${chips.join('')}</div>`;

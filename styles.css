@@ -325,3 +325,9 @@ a.row { color: inherit; }
 .ico.weather { background: #3C6E9E; } .ico.passport { background: #7B2D5B; } .ico.money { background: #2E8A6B; }
 .ico.plug { background: #E0902A; } .ico.wifi { background: #0E7A8A; } .ico.apps { background: #7B726D; }
 .ico.sos { background: var(--tint); } .ico.info { background: #3C6E9E; } .ico.photo { background: #B0832E; }
+
+/* 버튼 글씨는 포인트 빨강, 상세 버튼은 한 줄 */
+.pill { color: var(--tint); }
+.pill-tint { color: #fff; }
+.detail .chips { flex-wrap: nowrap; }
+.detail .chips .pill { padding: 7px 12px; white-space: nowrap; }
