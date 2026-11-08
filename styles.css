@@ -11,15 +11,21 @@
   --tint: #CC0000;
   --blue: #CC0000;
   --bar: rgba(249,249,249,.82);
-  --food: #FF9500;
-  --dessert: #FF2D55;
-  --shop: #5856D6;
-  --sight: #30B0C7;
-  --bar-c: #AF52DE;
-  --move: #8E8E93;
-  --stay: #34C759;
-  --warn-bg: rgba(255,149,0,.12);
-  --warn: #C93400;
+  --food: #E0902A;
+  --dessert: #D24F6E;
+  --shop: #0E7A8A;
+  --sight: #3C6E9E;
+  --bar-c: #7B2D5B;
+  --move: #7B726D;
+  --stay: #2E5C4F;
+  /* 포인트(빨강) 계열: 연한 바탕은 회청색 배경이 아니라 흰색에 섞어 탁해지지 않게 */
+  --tint-ink: #A80000;      /* 연한 바탕 위 글자 */
+  --tint-soft: #FBEAEA;     /* 알약·스피커·세그먼트 바탕 */
+  --tint-soft-2: #F5D3D3;   /* 눌림·강조 테두리 */
+  /* 주의(경고): 빨강과 같은 따뜻한 계열의 호박색 */
+  --warn-bg: #FCF1E3;
+  --warn: #8F4A00;
+  --info: #3C6E9E;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Apple SD Gothic Neo", "PingFang SC", system-ui, sans-serif;
   -webkit-text-size-adjust: 100%;
   color-scheme: light dark;
@@ -29,14 +35,16 @@
     --bg: #000000; --card: #1C1C1E; --card-pressed: #2C2C2E; --fill: rgba(118,118,128,.24);
     --label: #FFFFFF; --label2: rgba(235,235,245,.6); --label3: rgba(235,235,245,.3);
     --sep: rgba(84,84,88,.65); --tint: #F2423C; --blue: #F2423C; --bar: rgba(22,22,24,.82);
-    --food: #FF9F0A; --dessert: #FF375F; --shop: #5E5CE6; --sight: #40C8E0; --bar-c: #BF5AF2; --stay: #30D158;
-    --warn-bg: rgba(255,159,10,.16); --warn: #FFB340;
+    --tint-ink: #FF7A72; --tint-soft: #3A1D1D; --tint-soft-2: #552626;
+    --warn-bg: #36260F; --warn: #F2B25C; --info: #7FA8D6;
   }
 }
 :root[data-theme="dark"] {
   --bg: #000000; --card: #1C1C1E; --card-pressed: #2C2C2E; --fill: rgba(118,118,128,.24);
   --label: #FFFFFF; --label2: rgba(235,235,245,.6); --label3: rgba(235,235,245,.3);
   --sep: rgba(84,84,88,.65); --tint: #F2423C; --blue: #F2423C; --bar: rgba(22,22,24,.82);
+  --tint-ink: #FF7A72; --tint-soft: #3A1D1D; --tint-soft-2: #552626;
+    --warn-bg: #36260F; --warn: #F2B25C; --info: #7FA8D6;
 }
 
 * { box-sizing: border-box; }
@@ -453,3 +461,18 @@ main { padding-top: calc(10px + env(safe-area-inset-top)); }
 .wx-drawer.is-open .wx-chev { transform: rotate(180deg); }
 .wx-drawer.is-open .wx-sum { padding-bottom: 6px; }
 @media (prefers-reduced-motion: reduce) { .wx-chev { transition: none; } }
+
+
+/* ===== 컬러 시스템 정리 (2026-11-08) =====
+   포인트 빨강 하나 + 연한 빨강(tint-soft) + 회색(fill) + 주의 호박색(warn) + 정보 파랑(info).
+   연한 빨강은 모두 같은 토큰을 씀 — 위쪽 color-mix 규칙들을 덮어씀 */
+.pill:not(.pill-tint), .speak:not(.is-playing), .seg, .menu-tag { background: var(--tint-soft) !important; }
+.pill:not(.pill-tint):active { background: var(--tint-soft-2) !important; }
+.pill:not(.pill-tint), .menu-tag { color: var(--tint-ink); }
+.pill .ms, .pill svg { color: var(--tint); }
+.pill.pill-gray, .pill.pill-gray:active { background: var(--fill) !important; color: var(--label2); }
+.speak:not(.is-playing) { color: var(--tint); }
+.alt.alt-pick { background: var(--tint-soft); box-shadow: inset 0 0 0 1px var(--tint-soft-2); }
+.row.is-now { background: linear-gradient(90deg, var(--tint-soft), transparent 70%); }
+.warn { background: var(--warn-bg); color: var(--warn); }
+.wx-wet { color: var(--info); }
