@@ -123,7 +123,8 @@
 
   function renderPlan() {
     const el = $('#screen-plan');
-    let h = `<div class="title-row"><h1 class="large-title brand"><img src="mascot.png" alt="" width="42" height="45">${esc(TRIP.title)}</h1><button class="refresh refresh-inline" data-refresh aria-label="새로고침"><span class="ms" aria-hidden="true">refresh</span></button></div><p class="subhead">${esc(TRIP.sub)}</p>`;
+    const head = `<div class="title-row"><h1 class="large-title brand"><img src="mascot.png" alt="" width="42" height="45">${esc(TRIP.title)}</h1><button class="refresh refresh-inline" data-refresh aria-label="새로고침"><span class="ms" aria-hidden="true">refresh</span></button></div><p class="subhead">${esc(TRIP.sub)}</p>`;
+    let h = '';
     const allOn = planMode === 'all';
     const dayBtns = DAYS.map((x, i) => `<button class="day${i === todayIdx ? ' is-today' : ''}" role="tab" aria-selected="${!allOn && i === dayIdx}" data-day="${i}"><span class="day-w">${esc(x.w)}</span><span class="day-n">${Number(x.date.slice(8))}</span></button>`).join('');
     const allBtn = `<button class="day day-all" role="tab" aria-selected="${allOn}" data-pm="all" aria-label="전체 일정 펼쳐 보기"><span class="day-w">전체</span><span class="day-n"><span class="ms" aria-hidden="true">view_agenda</span></span></button>`;
@@ -144,8 +145,11 @@
       if (d.foot) h += `<p class="group-f">${esc(d.foot)}</p>`;
     }
     h += `<p class="foot">조사 기준 ${esc(TRIP.asOf)} · 출발 전 영업시간 재확인</p>`;
-    el.innerHTML = h;
-    fillWx(el);
+    // 제목(마스코트)은 한 번만 그리고, 날짜를 바꿀 땐 아래만 갈아끼움 → 아이콘 깜박임 방지
+    let body = el.querySelector('#plan-body');
+    if (!body) { el.innerHTML = `${head}<div id="plan-body"></div>`; body = el.querySelector('#plan-body'); }
+    body.innerHTML = h;
+    fillWx(body);
   }
 
   function nowCard() {
