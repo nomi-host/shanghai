@@ -117,8 +117,10 @@
   function renderPlan() {
     const el = $('#screen-plan');
     let h = `<div class="title-row"><h1 class="large-title brand"><img src="mascot.png" alt="" width="42" height="45">${esc(TRIP.title)}</h1><button class="refresh refresh-inline" data-refresh aria-label="새로고침"><span class="ms" aria-hidden="true">refresh</span></button></div><p class="subhead">${esc(TRIP.sub)}</p>`;
-    h += nowCard();
-    h += `<div class="seg" role="group" aria-label="보기 방식"><button data-pm="day" aria-pressed="${planMode === 'day'}">날짜별</button><button data-pm="all" aria-pressed="${planMode === 'all'}">전체 펼쳐 보기</button></div>`;
+    const allOn = planMode === 'all';
+    const dayBtns = DAYS.map((x, i) => `<button class="day${i === todayIdx ? ' is-today' : ''}" role="tab" aria-selected="${!allOn && i === dayIdx}" data-day="${i}"><span class="day-w">${esc(x.w)}</span><span class="day-n">${Number(x.date.slice(8))}</span></button>`).join('');
+    const allBtn = `<button class="day day-all" role="tab" aria-selected="${allOn}" data-pm="all" aria-label="전체 일정 펼쳐 보기"><span class="day-w">전체</span><span class="day-n"><span class="ms" aria-hidden="true">view_agenda</span></span></button>`;
+    h += `<div class="trip-card">${nowCard()}<div class="days" role="tablist" aria-label="날짜">${dayBtns}${allBtn}</div></div>`;
     if (planMode === 'all') {
       h += `<p class="group-f" style="margin:0 4px 6px">모든 일정이 펼쳐져 있어요. 길게 눌러 글자를 선택하고 복사할 수 있어요.</p>`;
       DAYS.forEach((d, dIdx) => {
@@ -129,7 +131,6 @@
       });
     } else {
       const d = DAYS[dayIdx];
-      h += `<div class="days" role="tablist" aria-label="날짜">${DAYS.map((x, i) => `<button class="day${i === todayIdx ? ' is-today' : ''}" role="tab" aria-selected="${i === dayIdx}" data-day="${i}"><span class="day-w">${esc(x.w)}</span><span class="day-n">${Number(x.date.slice(8))}</span></button>`).join('')}</div>`;
       h += `<div class="day-head"><h2>${esc(d.title)}</h2>${d.sub ? `<p>${esc(d.sub)}</p>` : ''}</div>`;
       const nowI = dayIdx === todayIdx ? d.items.reduce((acc, it, i) => (/^\d/.test(it.t) && it.t <= now.hm ? i : acc), -1) : -1;
       h += `<div class="list">${d.items.map((it, i) => itemHtml(it, i, dayIdx, nowI, false)).join('')}</div>`;
@@ -143,14 +144,14 @@
     const start = DAYS[0].date;
     if (now.date < start) {
       const diff = Math.round((Date.parse(start) - Date.parse(now.date)) / 86400000);
-      return `<div class="now-card"><div class="now-big">D-${diff}</div><div><div class="now-k">출발까지</div><div class="now-s">${esc(TRIP.flightOut)}</div></div></div>`;
+      return `<div class="trip-top"><div class="trip-big">D-${diff}</div><div class="trip-info"><div class="trip-k">출발까지</div><div class="trip-s">${esc(TRIP.flightOut)}</div></div></div>`;
     }
-    if (todayIdx < 0) return '';
+    if (todayIdx < 0) return '<div class="trip-top"><div class="trip-info"><div class="trip-k">여행 끝</div><div class="trip-s">즐거웠어요</div></div></div>';
     const d = DAYS[todayIdx];
     const next = d.items.find((it) => /^\d/.test(it.t) && it.t > now.hm);
-    if (!next) return `<div class="now-card"><div><div class="now-k">오늘 일정 끝</div><div class="now-s">푹 쉬기</div></div></div>`;
+    if (!next) return `<div class="trip-top"><div class="trip-info"><div class="trip-k">오늘 일정 끝</div><div class="trip-s">푹 쉬기</div></div></div>`;
     const p = next.place ? PLACES[next.place] : null;
-    return `<div class="now-card"><div class="now-big">${esc(next.t)}</div><div style="min-width:0"><div class="now-k">다음 일정</div><div class="now-t">${esc(next.title || (p && p.name))}</div>${p ? `<div class="now-s" lang="zh-CN">${esc(p.cn)}</div>` : ''}</div></div>`;
+    return `<div class="trip-top"><div class="trip-big">${esc(next.t)}</div><div class="trip-info"><div class="trip-k">다음 일정</div><div class="trip-s trip-strong">${esc(next.title || (p && p.name))}</div>${p ? `<div class="trip-s" lang="zh-CN">${esc(p.cn)}</div>` : ''}</div></div>`;
   }
 
   /* ---------- 장소 ---------- */
@@ -337,7 +338,7 @@
       return;
     }
     const day = e.target.closest('[data-day]');
-    if (day) { dayIdx = Number(day.dataset.day); store.set('day', dayIdx); renderPlan(); return; }
+    if (day) { dayIdx = Number(day.dataset.day); store.set('day', dayIdx); planMode = 'day'; store.set('planMode', 'day'); renderPlan(); return; }
     const say = e.target.closest('[data-say]');
     if (say && say.id !== 'showSpeak') { speak(say.dataset.say, say); return; }
     const show = e.target.closest('[data-show-zh]');

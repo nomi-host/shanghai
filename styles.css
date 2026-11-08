@@ -369,3 +369,15 @@ a.row { color: inherit; }
 .large-title.brand { white-space: nowrap; font-size: clamp(26px, 8vw, 34px); }
 .large-title.brand img { width: clamp(34px, 10vw, 42px); }
 .now-big { white-space: nowrap; flex: none; }
+
+/* D-day + 날짜를 한 카드로 */
+.trip-card { background: var(--card); border-radius: 16px; padding: 14px 12px 10px; margin: 2px 0 18px; }
+.trip-top { display: flex; align-items: center; gap: 14px; padding: 0 6px 12px; border-bottom: .5px solid var(--sep); }
+.trip-big { font-size: 30px; font-weight: 700; color: var(--tint); font-variant-numeric: tabular-nums; letter-spacing: -.01em; white-space: nowrap; flex: none; }
+.trip-info { min-width: 0; }
+.trip-k { font-size: 12px; font-weight: 600; color: var(--label2); text-transform: uppercase; letter-spacing: .02em; }
+.trip-s { font-size: 15px; color: var(--label); margin-top: 1px; }
+.trip-strong { font-weight: 600; }
+.trip-card .days { grid-template-columns: repeat(5, 1fr); gap: 2px; margin: 10px 0 0; }
+.day-all .day-n .ms { font-size: 20px; color: var(--label2); width: auto; }
+.day-all[aria-selected="true"] .day-n .ms { color: #fff; }
