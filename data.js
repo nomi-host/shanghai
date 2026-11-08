@@ -14,42 +14,50 @@ window.TRIP_DATA = (() => {
     yuyuan_st: { name: '위위안역', cn: '豫园地铁站', cat: 'move', area: '황푸', q: '豫园地铁站', status: 'planned', memo: '10·14호선' },
 
     lailai: { name: '라이라이 샤오롱바오', cn: '莱莱小笼', cat: 'food', area: '황푸', addr: '黄浦区天津路506号', hours: '08:00–14:00, 15:00–20:00', q: '莱莱小笼 天津路', status: 'planned', memo: '현금만' },
-    libaixie: { name: '리바이시에 와이탄점', cn: '李百蟹 外滩店', cat: 'food', area: '와이탄', addr: '黄浦区中山东二路22号 外滩22号3楼', hours: '10:00–22:00', q: '李百蟹 外滩22号', status: 'planned', memo: '창가 요청' },
-    zhangshifu: { name: '장스푸 상하이식 아침', cn: '张师傅 早餐', cat: 'food', area: '징안', addr: '静安区石门二路487号', q: '石门二路487号', status: 'planned', memo: '오픈 시간 확인 필요' },
+    libaixie: { name: '리바이시에 와이탄점', cn: '李百蟹 外滩·豫园店', cat: 'food', area: '와이탄', addr: '黄浦区中山东二路22号3楼 (外滩22号)', hours: '10:00–22:00', q: '李百蟹 外滩·豫园店', status: 'planned', memo: '창가 요청' },
+    zhangshifu: { name: '장스푸 상하이식 아침', cn: '张师傅早餐店', cat: 'food', area: '징안', addr: '静安区石门二路487号', hours: '05:00–13:00', q: '张师傅早餐店 石门二路', status: 'planned', memo: '소액 현금' },
     renheguan: { name: '런허관 징안점', cn: '人和馆 愚园路店', cat: 'food', area: '징안', addr: '静安区愚园路142-146号3楼', hours: '주말 11:00–21:30', q: '人和馆 愚园路', status: 'planned', memo: '전화 예약 · 미슐랭 1스타는 본점' },
-    diandoude: { name: '점도덕 신천지점', cn: '点都德 中海环宇荟店', cat: 'food', area: '신천지', addr: '黄浦区黄陂南路838号 中海环宇荟B1', hours: '09:00–21:30', q: '点都德 中海环宇荟', status: 'planned' },
-    bakerspice: { name: 'Baker & Spice 안푸로점', cn: 'Baker&Spice 安福路', cat: 'dessert', area: '헝푸', addr: '徐汇区安福路195号', hours: '07:00–22:00', q: 'Baker&Spice 安福路', status: 'planned' },
+    diandoude: { name: '점도덕 환우회점', cn: '点都德 环宇荟店', cat: 'food', area: '신천지', addr: '黄浦区黄陂南路838弄 环宇荟B1', hours: '09:00–21:30', q: '点都德 环宇荟', status: 'planned' },
+    bakerspice: { name: 'Baker & Spice 안푸로점', cn: 'Baker&Spice 安福路', cat: 'dessert', area: '헝푸', addr: '徐汇区安福路195号', hours: '09:00–21:00', q: 'Baker&Spice 安福路', status: 'planned' },
 
-    dongliang: { name: '동량 메종', cn: '栋梁之家', cat: 'shop', area: '창닝', addr: '长宁区武夷路168号 翡悦里174号别墅', hours: '10:00–22:00', q: '栋梁之家 武夷路', status: 'planned' },
-    columbia: { name: '상생신소', cn: '上生新所', cat: 'architecture', area: '창닝', addr: '长宁区延安西路1262号', hours: '야외 단지 · 츠타야 10:00–22:00', q: '上生新所', status: 'planned' },
+    dongliang: { name: '동량 메종', cn: '栋梁之家', cat: 'shop', area: '창닝', addr: '长宁区武夷路168号 翡悦里174号别墅', hours: '11:00–20:00', q: '栋梁之家 武夷路', status: 'planned' },
+    columbia: { name: '상생신소', cn: '上生新所', cat: 'architecture', area: '창닝', addr: '长宁区延安西路1262号', hours: '10:00–22:00', q: '上生新所', status: 'planned' },
     yuyuanlu: { name: '위위안로', cn: '愚园路', cat: 'street', area: '창닝', q: '愚园路 长宁', status: 'planned', memo: '노양방 산책' },
-    zhangyuan: { name: '장위안', cn: '张园', cat: 'architecture', area: '징안', addr: '静安区威海路288号', hours: '상점 10:00–22:00', q: '张园 威海路', status: 'planned' },
-    labelhood: { name: '레이블후드 하우스', cn: '蕾虎之家', cat: 'shop', area: '징안', addr: '静安区巨鹿路796号', hours: '10:00–22:00', q: '蕾虎之家 巨鹿路', status: 'planned' },
+    zhangyuan: { name: '장위안', cn: '张园', cat: 'architecture', area: '징안', addr: '静安区茂名北路258号', hours: '08:00–24:00 · 상점은 대체로 10시부터', q: '张园 威海路', status: 'planned' },
+    labelhood: { name: '레이블후드 Pillar', cn: 'LABELHOOD Pillar 富民路店', cat: 'shop', area: '징안', addr: '静安区富民路182弄1-32号', hours: '10:00–22:00', q: 'LABELHOOD Pillar', status: 'planned' },
     iccf: { name: 'ICCF Garden · ICICLE', cn: '之禾卡纷花园', cat: 'shop', area: '헝푸', addr: '徐汇区衡山路2号', hours: '10:00–21:00', q: '之禾卡纷花园', status: 'planned' },
-    lemaire: { name: '르메르 우캉로', cn: 'LEMAIRE 武康路', cat: 'shop', area: '헝푸', addr: '徐汇区武康路40弄2号', q: 'LEMAIRE 武康路', status: 'planned', memo: '위챗 예약제' },
+    lemaire: { name: '르메르 우캉로', cn: 'LEMAIRE 武康路', cat: 'shop', area: '헝푸', addr: '徐汇区武康路40弄2号', hours: '11:00–21:00', q: 'LEMAIRE 武康路', status: 'planned', memo: '위챗 예약제' },
     wukang: { name: '우캉맨션', cn: '武康大楼', cat: 'architecture', area: '헝푸', addr: '徐汇区淮海中路1842号', q: '武康大楼', status: 'planned', memo: '외관만' },
     xiayan: { name: '샤옌 옛집', cn: '夏衍旧居', cat: 'sight', area: '헝푸', addr: '徐汇区乌鲁木齐南路178号', hours: '수–토 10:00–16:30 예약제', q: '夏衍旧居', status: 'backup', memo: '일요일 휴관 추정' },
-    chiikawa: { name: '치이카와 플래그십', cn: '吉伊卡哇 旗舰店', cat: 'shop', area: '남경동로', addr: '黄浦区南京东路139号 外滩中央广场', q: '吉伊卡哇 南京东路', status: 'planned' },
-    miniso: { name: '미니소랜드', cn: 'MINISO LAND', cat: 'shop', area: '남경동로', addr: '黄浦区南京东路670号', hours: '09:00–23:30', q: 'MINISO LAND 南京东路', status: 'planned' },
-    duoyun: { name: '다원서점 상하이타워', cn: '朵云书院 旗舰店', cat: 'sight', area: '루자쭈이', addr: '浦东新区陆家嘴环路479号 上海中心大厦52楼', hours: '월 10:30– · 화–일 10:00–', q: '朵云书院 上海中心', status: 'planned', memo: '위챗 예약' },
+    chiikawa: { name: '치이카와 플래그십', cn: 'Chiikawa旗舰店', cat: 'shop', area: '남경동로', addr: '黄浦区南京东路139号 外滩中央广场', hours: '10:00–22:00', q: 'Chiikawa旗舰店 南京东路', status: 'planned' },
+    miniso: { name: '미니소랜드', cn: '名创优品 南京东路670号店', cat: 'shop', area: '남경동로', addr: '黄浦区南京东路670号', hours: '10:00–21:30', q: '名创优品 南京东路670号', status: 'planned' },
+    duoyun: { name: '다원서점 상하이타워', cn: '朵云书院 旗舰店', cat: 'sight', area: '루자쭈이', addr: '浦东新区银城中路501号 上海中心大厦52楼', hours: '10:30–20:00', q: '朵云书院 上海中心', status: 'planned', memo: '위챗 예약' },
     disney: { name: '상하이 디즈니랜드', cn: '上海迪士尼乐园', cat: 'sight', area: '푸동', addr: '浦东新区川沙镇黄赵路310号', q: '上海迪士尼乐园', status: 'planned' },
     bund: { name: '와이탄', cn: '外滩', cat: 'sight', area: '와이탄', q: '外滩观景平台', status: 'planned', memo: '야경' },
 
     punchroom: { name: 'Punch Room', cn: '上海艾迪逊酒店 Punch Room', cat: 'bar', area: '남경동로', addr: '黄浦区南京东路199号 上海艾迪逊酒店', hours: '17:30–02:00', q: '上海艾迪逊酒店', status: 'planned', memo: '예약제 · 스마트 캐주얼' },
-    barleone: { name: 'Bar Leone 상하이', cn: 'Bar Leone 思南公馆', cat: 'bar', area: '프랑스조계', addr: '黄浦区复兴中路527号 思南公馆', hours: '18:00–01:00', q: 'Bar Leone 思南公馆', status: 'planned', memo: '워크인만' },
+    barleone: { name: 'Bar Leone 상하이', cn: 'Bar Leone 思南公馆', cat: 'bar', area: '프랑스조계', addr: '黄浦区复兴中路525-527号 思南公馆', hours: '18:00–01:00', q: 'Bar Leone 思南公馆', status: 'planned', memo: '워크인만 · 1인 약 ¥237' },
 
     /* 후보 — 식당·디저트·차 */
-    zuoting: { name: '좌정우원 (훠궈)', cn: '左庭右院', cat: 'food', area: '창닝', q: '左庭右院 中山公园', status: 'backup', memo: '신선 소고기 훠궈' },
-    jingyunhua: { name: '경운화', cn: '京云华', cat: 'food', area: '', q: '京云华', status: 'backup', memo: '위치 미확인' },
+    zuoting: { name: '좌정우원 (훠궈)', cn: '左庭右院', cat: 'food', area: '창닝', q: '左庭右院 中山公园', status: 'backup', memo: '당일도축 생소고기 훠궈 · 마라/우골/토마토탕' },
+    jingyunhua: { name: '경운화', cn: '京云华', cat: 'food', area: '', q: '京云华', status: 'backup', memo: '가성비 베이징덕 세트 · 위치 미확인' },
     henjiu: { name: '헌저우이치엔 양꼬치', cn: '很久以前羊肉串', cat: 'food', area: '남경동로', q: '很久以前羊肉串 南京东路', status: 'backup', memo: '위챗 원격 줄서기' },
-    xiding: { name: '시딩 (성게 물만두)', cn: '喜鼎海胆水饺', cat: 'food', area: '', q: '喜鼎海胆水饺', status: 'backup', memo: '상하이 지점 미확인' },
-    chizaiji: { name: '지짜이지 창펀왕', cn: '香港池仔记肠粉王', cat: 'food', area: '헝푸', addr: '徐汇区襄阳南路150-1号', q: '池仔记肠粉王', status: 'backup' },
+    xiding: { name: '시딩 (성게 물만두)', cn: '喜鼎海胆水饺', cat: 'food', area: '', q: '喜鼎海胆水饺', status: 'backup', memo: '전복·성게알 딤섬 · 상하이 지점 미확인' },
+    chizaiji: { name: '지짜이지 창펀왕', cn: '香港池仔记肠粉王', cat: 'food', area: '헝푸', addr: '徐汇区襄阳南路150-1号', q: '池仔记肠粉王', status: 'backup', memo: '새우창펀·튀김창펀·콘지' },
     zhuangshi: { name: '장씨네 게살국수', cn: '庄氏隆兴 蟹粉面', cat: 'food', area: '남경동로', addr: '黄浦区浙江中路441号', hours: '10:30–21:30', q: '庄氏隆兴', status: 'backup', memo: '蟹粉黄金捞面' },
-    guershu: { name: '구얼수 수제 요거트', cn: '顾二叔手作酸奶', cat: 'dessert', area: '', q: '顾二叔手作酸奶', status: 'backup' },
+    wuyouxian: { name: '우요우시엔', cn: '屋有鲜', cat: 'food', area: '', q: '屋有鲜', status: 'backup', memo: '게살게알 샤오롱바오 · 미슐랭 1스타라고 메모' },
+    shuaishuai: { name: '슈아이슈아이', cn: '帅帅精致家常味', cat: 'food', area: '', q: '帅帅精致家常味', status: 'backup', memo: '상하이식 가정식 · 홍소육' },
+    xiaoshen: { name: '샤오선화위안 신세계점', cn: '小申花园 新世界店', cat: 'food', area: '', q: '小申花园 新世界店', status: 'backup', memo: '홍소육·찹쌀떡·소고기호두조림·새우튀김' },
+    coucou: { name: 'Coucou 훠궈', cn: '凑凑火锅', cat: 'food', area: '', q: '凑凑火锅', status: 'backup', memo: '대만 프리미엄 훠궈' },
+    guershu: { name: '구얼수 수제 요거트', cn: '顾二叔手作酸奶', cat: 'dessert', area: '', q: '顾二叔手作酸奶', status: 'backup', memo: '케일연잎 요거트 스무디' },
     forlong: { name: 'FOR LONG 마카롱', cn: 'FOR LONG', cat: 'dessert', area: '헝푸', addr: '徐汇区太原路232号', hours: '평일 10–18 · 주말 10–19', q: 'FOR LONG 太原路', status: 'backup' },
+    huangshiyi: { name: 'Huangshiyi 우유 디저트', cn: 'Huangshiyi Pinhui Shuiniunai Desserts', cat: 'dessert', area: '', q: 'Huangshiyi Pinhui Shuiniunai Desserts', status: 'backup', memo: '우유 디저트 · 중국어 상호 미확인' },
     sugarplum: { name: 'Sugar Plum', cn: 'Sugar Plum', cat: 'dessert', area: '쉬후이', addr: '徐汇区东湖路7号-1室', q: 'Sugar Plum 东湖路', status: 'backup', memo: '산시난루역 7번 출구' },
     sloppygin: { name: 'Sloppy gin', cn: 'Sloppy gin', cat: 'dessert', area: '', q: 'Sloppy gin 上海', status: 'backup', memo: '정체 미확인' },
     basao: { name: 'Basao 차', cn: '八月茶 Basao', cat: 'tea', area: '', q: '八月茶', status: 'backup', memo: '상설 매장 미확인' },
+    mollytea: { name: 'Molly Tea', cn: '茉莉奶白', cat: 'tea', area: '', q: '茉莉奶白', status: 'backup', memo: '사과재스민 밀크티 + 치즈폼' },
+    heytea: { name: '헤이티', cn: '喜茶', cat: 'tea', area: '', q: '喜茶', status: 'backup' },
+    dayin: { name: '다인서점', cn: '大隐书局', cat: 'sight', area: '헝푸', q: '大隐书局 武康大楼', status: 'backup', memo: '우캉맨션 1층 서점' },
 
     /* 후보 — 숍 */
     chillmore: { name: 'chillmore', cn: 'chillmore 且悠', cat: 'shop', area: '헝푸', addr: '徐汇区宝庆路21号', q: '且悠 宝庆路', status: 'backup', memo: '향기 브랜드' },
@@ -136,6 +144,43 @@ window.TRIP_DATA = (() => {
     mango: { menu: [['杨枝甘露', '양즈깐루', ''], ['鲜切水果', '과일 컷', '']] },
   };
 
+  /* 대표 사진 출처 (img/credits.json에서 옮김). 정보 탭 '사진 출처'에 나열되고, 아래에서 EXTRA[key].photo/alt/credit로 붙는다.
+     src: commons(위키미디어 공용) | pixabay. '참고 이미지'는 그 가게 실물이 아닌 일반 사진. */
+  const CREDITS = {
+    lailai: { author: 'Leanne_hei', license: 'Pixabay Content License', src: 'pixabay', page: 'https://pixabay.com/photos/shanghai-gourmet-crab-package-4402658/', alt: '게살 샤오롱바오(蟹粉小笼包) — 참고 이미지, 이 가게 사진 아님' },
+    libaixie: { author: 'Zicheng zic', license: 'CC BY 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:%E8%8B%8F%E5%B7%9E%E8%9F%B9%E7%B2%89%E9%9D%A2.jpg', alt: '게살·게알 면(蟹粉面) — 참고 이미지, 이 식당 사진 아님' },
+    zhangshifu: { author: 'zhangtingzhi', license: 'Pixabay Content License', src: 'pixabay', page: 'https://pixabay.com/photos/fried-bread-stick-soybean-milk-6902988/', alt: '油条(꽈배기)와 豆浆(두유) 상하이식 아침 — 참고 이미지, 이 가게 사진 아님' },
+    renheguan: { author: 'f64wd', license: 'Pixabay Content License', src: 'pixabay', page: 'https://pixabay.com/photos/braised-pork-belly-gourmet-8568606/', alt: '홍소육 스타일 돼지삼겹 조림 — 참고 이미지, 이 식당 사진 아님' },
+    diandoude: { author: 'NickyGirly', license: 'Pixabay Content License', src: 'pixabay', page: 'https://pixabay.com/photos/dim-sum-hargao-chinese-food-906211/', alt: '하가우·샤오마이 딤섬 — 참고 이미지, 이 가게 사진 아님' },
+    bakerspice: { author: 'kerdkanno', license: 'Pixabay Content License', src: 'pixabay', page: 'https://pixabay.com/photos/ice-cream-cones-scooper-5928048/', alt: '젤라또 콘 — 참고 이미지, 이 가게 사진 아님' },
+    dongliang: { author: 'Antigng', license: 'CC BY-SA 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:%E6%AD%A6%E5%A4%B7%E8%B7%AF154%E5%8F%B7%E4%BD%8F%E5%AE%85.jpg', alt: '매장 근처 武夷路 154호 옛 서양식 주택 — 참고 이미지, 매장 건물 아님' },
+    columbia: { author: 'WQL', license: 'CC BY-SA 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Columbia_Circle_16.jpg', alt: '상생신소 컬럼비아 서클의 아치형 클럽하우스 건물' },
+    yuyuanlu: { author: 'Livelikerw', license: 'CC BY-SA 3.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Yuyuan_Rd._Shanghai.JPG', alt: '위위안로(愚园路) 거리' },
+    zhangyuan: { author: 'Juan Antonio Segal', license: 'CC BY 2.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Zhang_Yuan,_Shanghai,_China_2024_(54281266880).jpg', alt: '장위안 석고문 골목(2024)' },
+    labelhood: { author: 'oichikawa', license: 'CC BY 3.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:%E5%B7%A8%E9%B9%BF%E8%B7%AF_-_panoramio.jpg', alt: '근처 巨鹿路 가로수길 — 참고 이미지, 매장 사진 아님' },
+    iccf: { author: 'Livelikerw', license: 'CC BY-SA 3.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Dongping_Rd._Shanghai.JPG', alt: '근처 东平路 거리 — 참고 이미지, ICCF 가든 사진 아님' },
+    lemaire: { author: 'SSYoung', license: 'CC BY-SA 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Wukang_Road,_Shanghai,_May_2016.JPG', alt: '매장이 있는 우캉로(武康路) 거리 — 참고 이미지, 매장 사진 아님' },
+    wukang: { author: 'N509FZ', license: 'CC BY-SA 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Wukang_Mansion_(20191114161507).jpg', alt: '우캉맨션(武康大楼) 외관' },
+    chiikawa: { author: 'HeroicLife', license: 'CC BY 2.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:East_Nanjing_Pedestrian_Shopping_Street.jpg', alt: '난징동루 보행가 낮 풍경 — 참고 이미지, 매장 사진 아님' },
+    miniso: { author: 'EditQ', license: 'CC BY-SA 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:East_Nanjing_Road_at_night,_Shanghai.jpg', alt: '난징동루 야경 — 참고 이미지, 매장 사진 아님' },
+    duoyun: { author: 'Stefan Fussan', license: 'CC BY-SA 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Shanghai_-_Shanghai_Tower_-_0003(cropped).jpg', alt: '상하이타워 외관 (다원서점은 52층)' },
+    disney: { author: 'Riku Lu', license: 'CC0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Enchanted_Storybook_Castle_(125424).jpg', alt: '상하이 디즈니랜드 마법 동화 성' },
+    bund: { author: 'Ernest Jourdier', license: 'CC BY 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Bund_at_night_Shanghai.jpg', alt: '와이탄 야경' },
+    punchroom: { author: 'riitou', license: 'Pixabay Content License', src: 'pixabay', page: 'https://pixabay.com/photos/drink-cocktail-prost-candle-yummy-2404636/', alt: '촛불 켠 바의 칵테일 — 참고 이미지, 이 바 사진 아님' },
+    barleone: { author: 'Briam-Cute', license: 'Pixabay Content License', src: 'pixabay', page: 'https://pixabay.com/photos/martini-cocktail-glass-5542599/', alt: '올리브 마티니 — 참고 이미지, 이 바 사진 아님' },
+    crab: { label: '털게찜 배달', author: 'Jpatokal', license: 'CC BY-SA 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Roe_inside_steamed_female_hairy_crab.jpg', alt: '찐 상하이 털게 암게의 게알 — 참고 이미지' },
+    mango: { label: '양즈깐루 배달', author: 'Thomas.Lu', license: 'CC BY 3.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:MangoPomeloSago_1.jpg', alt: '양즈깐루(망고 포멜로 사고) — 참고 이미지' },
+    hotel: { author: 'Dave Proffer', license: 'CC BY 2.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Yu_Yuan_Gardens_and_Bazaar_(3020090400).jpg', alt: '호텔 근처 위위안 상가 거리 — 참고 이미지, 호텔 사진 아님' },
+    sha: { author: '4300streetcar', license: 'CC BY 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Shanghai_Hongqiao_International_Airport_Terminal_1_building_May_2026.jpg', alt: '홍차오 공항 1터미널 외관(2026)' },
+  };
+  Object.entries(CREDITS).forEach(([k, c]) => {
+    EXTRA[k] = Object.assign(EXTRA[k] || {}, {
+      photo: `img/${k}.jpg`,
+      alt: c.alt,
+      credit: `사진: ${c.author} · ${c.src === 'pixabay' ? 'Pixabay' : c.license}`,
+    });
+  });
+
   const DAYS = [
     {
       date: '2026-11-21', w: '토', title: '창닝 노양방 거리', sub: '큰 식사: 저녁 리바이시에',
@@ -157,7 +202,7 @@ window.TRIP_DATA = (() => {
         { t: '16:00', place: 'yuyuanlu', title: '위위안로 산책', note: '노양방(옛 서양식 주택) 거리' },
         { t: '17:30', place: 'hotel', title: '호텔 체크인', note: '배달앱에 호텔 주소·전화 등록, 프런트에서 중문 주소 받아두기' },
         { t: '19:00', place: 'libaixie', title: '저녁: 리바이시에 게살덮밥', note: '동방명주 정면 창가 · 주말 대기 최대 2시간',
-          warn: '와이탄에 九江路80号 지점도 있어요. 반드시 外滩22号 3층 지점인지 확인하세요.',
+          warn: '고덕에선 ‘外滩·豫园店’으로 나오고 주소는 中山东二路22号 3층이에요.',
           detail: [
             { h: '대표 메뉴', li: ['蟹黄面(게알 비빔면), 蟹黄饭(게알 덮밥)', '2인 세트 "蟹黄全宴" 약 ¥338, 면·밥 리필 무제한이라는 후기', '느끼하면 蟹醋(게 식초)나 생강 식초 요청'] },
             { h: '웨이팅', li: ['따종띠엔핑에서 "李百蟹 外滩22号" → 排队/取号 버튼으로 원격 번호표(지원 여부 당일 확인)', '버튼이 없으면 체크인 전에 들러 현장 번호표 받기', '번호표 받을 때 江景位/靠窗(강 뷰 창가) 요청 — 회화 탭에 문장 있음'] },
@@ -174,15 +219,14 @@ window.TRIP_DATA = (() => {
     {
       date: '2026-11-22', w: '일', title: '징안·헝푸 편집샵 + 칵테일', sub: '큰 식사: 점심 런허관',
       items: [
-        { t: '08:00', place: 'zhangshifu', title: '아침: 장스푸 상하이식 아침', note: '大饼·油条·粢饭·豆浆 · 정오 무렵 마감',
-          warn: '石门二路487号로는 확인되지 않았어요. 武定路의 张师傅早餐店일 가능성이 커요. 가오더로 위치를 확인하세요.',
+        { t: '08:00', place: 'zhangshifu', title: '아침: 장스푸 상하이식 아침', note: '大饼·油条·粢饭·豆浆 · 영업 05:00–13:00',
           detail: [
             { h: '뭘 먹나', li: ['상하이 아침 4대장: 大饼(숯불 깨떡)·油条(꽈배기)·粢饭(찹쌀 주먹밥)·豆浆(두유)', '豆浆은 甜浆(단 맛)·咸浆(짠 맛) 중 고르기', '2인 소식: 粢饭 1개 나눠 먹기 + 大饼油条 1세트 + 豆浆 2잔, ¥10대'] },
             { h: '팁', li: ['새벽 5–6시부터 굽고 인기 품목은 일찍 품절 → 9시 전 도착', '소액 현금 챙기기'] },
           ],
           alts: [A.nanyang, A.zhenyuan, A.congyoubing] },
         { t: '09:00', place: 'zhangyuan', title: '장위안 산책', note: '석고문 골목 리테일 단지 · 골목은 9시 산책 가능, 상점은 10시' },
-        { t: '10:00', place: 'labelhood', note: '중국 디자이너 편집샵 하우스형 매장. 富民路184号에 Pillar 매장 별도' },
+        { t: '10:00', place: 'labelhood', note: '중국 디자이너 편집샵 · 巨鹿路 House는 고덕에서 확인 안 돼 Pillar점으로' },
         { t: '12:30', place: 'renheguan', title: '점심: 런허관 게살비빔밥 + 홍소육', note: '예약 필수 · 미슐랭 1스타는 본점',
           detail: [
             { h: '예약', li: ['전화 021-6266-8003 → "11月22日中午十二点半，两位" (회화 탭 전화 예약 문장)', '따종띠엔핑 가게 페이지에 订座/预订 버튼이 있으면 앱 예약', '실패하면 11:00 오픈 직후 워크인. 피크 대기 1시간 이상'] },
@@ -196,7 +240,7 @@ window.TRIP_DATA = (() => {
         { t: '16:30', place: 'lemaire', title: '우캉로: 르메르 → 우캉맨션', note: '르메르는 위챗 미니프로그램 예약제 · 우캉맨션은 외관만',
           warn: '샤옌 옛집은 수–토만 열어서 일요일 일정에서 뺐어요.' },
         { t: '19:00', place: 'chiikawa', note: '내륙 첫 공식 플래그십 · 예약 없이 입장' },
-        { t: '20:00', place: 'miniso', note: '3층 IP 굿즈 플래그십 · 23:30까지' },
+        { t: '20:00', place: 'miniso', note: '3층 IP 굿즈 플래그십 · 21:30까지' },
         { t: '21:00', place: 'hotel', title: '호텔에서 털게찜 배달', cat: 'food', extra: 'crab', cn: '熟大闸蟹 外卖', note: '11월 하순은 수컷(公蟹) 제철',
           detail: [
             { h: '주문 순서', li: ['알리페이 → "饿了么" 미니프로그램, 또는 위챗 → "美团外卖" 미니프로그램 (우상단 ··· 번역)', '검색어: 熟大闸蟹 / 现蒸大闸蟹 (쪄서 배달). 生·活蟹는 호텔에서 못 찌니 제외', '주소: 上海市黄浦区人民路388号 上海外滩智选假日酒店 + 객실번호', '판매량·리뷰 많은 가게, 蟹醋·생강차 포함 여부 확인', '배달은 보통 로비까지 → 내려가서 받기'] },
@@ -215,7 +259,6 @@ window.TRIP_DATA = (() => {
       date: '2026-11-23', w: '월', title: '푸동 → 디즈니 → Bar Leone', sub: '디즈니 겨울 축제 기간',
       items: [
         { t: '09:00', place: 'diandoude', title: '브런치: 점도덕 딤섬', note: '10호선 신천지역 · 위위안에서 2정거장',
-          warn: '이 지점이 9시에 여는지 확정하지 못했어요. 전날 따종띠엔핑에서 영업시간을 확인하세요.',
           detail: [
             { h: '추천 메뉴', li: ['金牌虾饺皇(새우 하가우)', '金莎海虾红米肠(바삭 새우 창펀) — 시그니처', '招牌烧卖 또는 蜜汁叉烧包', '디저트 香芒夹心椰汁糕(망고 코코넛 푸딩)'] },
             { h: '팁', li: ['2인 소식이면 4접시 정도. 1인 약 ¥100', '종이 메뉴에 체크하거나 테이블 QR로 주문'] },
@@ -255,12 +298,12 @@ window.TRIP_DATA = (() => {
     {
       date: '2026-11-24', w: '화', title: '귀국', sub: 'KE2058 홍차오 10:55 → 김포 14:00',
       items: [
-        { t: '07:30', place: 'hotel', title: '체크아웃' },
-        { t: '08:00', place: 'sha', title: '10호선 또는 디디로 홍차오 T1', cat: 'move', note: '국제선은 출발 2.5–3시간 전 도착 권장',
+        { t: '07:30', place: 'hotel', title: '체크아웃', extra: null },
+        { t: '08:00', place: 'sha', title: '10호선 또는 디디로 홍차오 T1', cat: 'move', extra: null, note: '국제선은 출발 2.5–3시간 전 도착 권장',
           detail: [
             { h: '출국 체크', li: ['지하철역은 虹桥1号航站楼(T1). 10호선 약 20분 + 도보', '보조배터리는 3C 마크 있는 것이 안전(출국 검색에서 압수 후기). 1인 2개까지, 기내 사용 금지', '보조배터리는 위탁수하물 금지'] },
           ] },
-        { t: '10:55', place: 'sha', title: 'KE2058 출발', cat: 'plane', cn: '' },
+        { t: '10:55', place: 'sha', title: 'KE2058 출발', cat: 'plane', cn: '', extra: null },
       ],
     },
   ];
@@ -419,5 +462,5 @@ window.TRIP_DATA = (() => {
     ]},
   ];
 
-  return { TRIP, PLACES, DAYS, INFO, CHECKLIST, PHRASES, EXTRA };
+  return { TRIP, PLACES, DAYS, INFO, CHECKLIST, PHRASES, EXTRA, CREDITS };
 })();

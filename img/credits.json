@@ -1,0 +1,177 @@
+{
+ "lailai": {
+  "src": "pixabay",
+  "author": "Leanne_hei",
+  "license": "Pixabay Content License",
+  "page": "https://pixabay.com/photos/shanghai-gourmet-crab-package-4402658/",
+  "subject": "게살 샤오롱바오(蟹粉小笼包) 일반 사진"
+ },
+ "libaixie": {
+  "src": "commons",
+  "author": "Zicheng zic",
+  "license": "CC BY 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E8%8B%8F%E5%B7%9E%E8%9F%B9%E7%B2%89%E9%9D%A2.jpg",
+  "subject": "쑤저우 蟹粉面(게살·게알 면) 일반 사진 - 해당 식당 아님"
+ },
+ "zhangshifu": {
+  "src": "pixabay",
+  "author": "zhangtingzhi",
+  "license": "Pixabay Content License",
+  "page": "https://pixabay.com/photos/fried-bread-stick-soybean-milk-6902988/",
+  "subject": "油条+豆浆 아침 일반 사진"
+ },
+ "renheguan": {
+  "src": "pixabay",
+  "author": "f64wd",
+  "license": "Pixabay Content License",
+  "page": "https://pixabay.com/photos/braised-pork-belly-gourmet-8568606/",
+  "subject": "红烧肉/东坡肉 스타일 돼지삼겹 조림 일반 사진"
+ },
+ "diandoude": {
+  "src": "pixabay",
+  "author": "NickyGirly",
+  "license": "Pixabay Content License",
+  "page": "https://pixabay.com/photos/dim-sum-hargao-chinese-food-906211/",
+  "subject": "딤섬(하가우·샤오마이) 일반 사진"
+ },
+ "bakerspice": {
+  "src": "pixabay",
+  "author": "kerdkanno",
+  "license": "Pixabay Content License",
+  "page": "https://pixabay.com/photos/ice-cream-cones-scooper-5928048/",
+  "subject": "젤라또/아이스크림 콘 일반 사진"
+ },
+ "dongliang": {
+  "src": "commons",
+  "author": "Antigng",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E6%AD%A6%E5%A4%B7%E8%B7%AF154%E5%8F%B7%E4%BD%8F%E5%AE%85.jpg",
+  "subject": "武夷路 154号 옛 서양식 주택 실물"
+ },
+ "columbia": {
+  "src": "commons",
+  "author": "WQL",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Columbia_Circle_16.jpg",
+  "subject": "上生新所 Columbia Circle 아치형 클럽하우스 건물 실물"
+ },
+ "yuyuanlu": {
+  "src": "commons",
+  "author": "Livelikerw",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Yuyuan_Rd._Shanghai.JPG",
+  "subject": "愚园路 거리 실물"
+ },
+ "zhangyuan": {
+  "src": "commons",
+  "author": "Juan Antonio Segal",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Zhang_Yuan,_Shanghai,_China_2024_(54281266880).jpg",
+  "subject": "张园 석고문 골목 실물(2024)"
+ },
+ "labelhood": {
+  "src": "commons",
+  "author": "oichikawa",
+  "license": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E5%B7%A8%E9%B9%BF%E8%B7%AF_-_panoramio.jpg",
+  "subject": "巨鹿路 거리 실물(가로수길)"
+ },
+ "iccf": {
+  "src": "commons",
+  "author": "Livelikerw",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Dongping_Rd._Shanghai.JPG",
+  "subject": "东平路 거리 실물"
+ },
+ "lemaire": {
+  "src": "commons",
+  "author": "SSYoung",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Wukang_Road,_Shanghai,_May_2016.JPG",
+  "subject": "武康路 거리 실물"
+ },
+ "wukang": {
+  "src": "commons",
+  "author": "N509FZ",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Wukang_Mansion_(20191114161507).jpg",
+  "subject": "武康大楼 Wukang Mansion 실물"
+ },
+ "chiikawa": {
+  "src": "commons",
+  "author": "HeroicLife",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:East_Nanjing_Pedestrian_Shopping_Street.jpg",
+  "subject": "南京东路 보행가 낮 풍경 실물"
+ },
+ "miniso": {
+  "src": "commons",
+  "author": "EditQ",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:East_Nanjing_Road_at_night,_Shanghai.jpg",
+  "subject": "南京东路 야경 실물"
+ },
+ "duoyun": {
+  "src": "commons",
+  "author": "Stefan Fussan",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Shanghai_-_Shanghai_Tower_-_0003(cropped).jpg",
+  "subject": "上海中心大厦 Shanghai Tower 외관 실물"
+ },
+ "disney": {
+  "src": "commons",
+  "author": "Riku Lu",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Enchanted_Storybook_Castle_(125424).jpg",
+  "subject": "上海迪士尼乐园 Enchanted Storybook Castle 실물"
+ },
+ "bund": {
+  "src": "commons",
+  "author": "Ernest Jourdier",
+  "license": "CC BY 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Bund_at_night_Shanghai.jpg",
+  "subject": "外滩 야경 실물"
+ },
+ "punchroom": {
+  "src": "pixabay",
+  "author": "riitou",
+  "license": "Pixabay Content License",
+  "page": "https://pixabay.com/photos/drink-cocktail-prost-candle-yummy-2404636/",
+  "subject": "촛불 켠 바의 칵테일 분위기 일반 사진 - 해당 바 아님"
+ },
+ "barleone": {
+  "src": "pixabay",
+  "author": "Briam-Cute",
+  "license": "Pixabay Content License",
+  "page": "https://pixabay.com/photos/martini-cocktail-glass-5542599/",
+  "subject": "올리브 마티니 일반 사진"
+ },
+ "crab": {
+  "src": "commons",
+  "author": "Jpatokal",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Roe_inside_steamed_female_hairy_crab.jpg",
+  "subject": "찐 상하이 털게(大闸蟹) 암게 게알 일반 사진"
+ },
+ "mango": {
+  "src": "commons",
+  "author": "Thomas.Lu",
+  "license": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:MangoPomeloSago_1.jpg",
+  "subject": "杨枝甘露(망고 포멜로 사고) 일반 사진"
+ },
+ "hotel": {
+  "src": "commons",
+  "author": "Dave Proffer",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Yu_Yuan_Gardens_and_Bazaar_(3020090400).jpg",
+  "subject": "豫园 상가 주변 거리 실물"
+ },
+ "sha": {
+  "src": "commons",
+  "author": "4300streetcar",
+  "license": "CC BY 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Shanghai_Hongqiao_International_Airport_Terminal_1_building_May_2026.jpg",
+  "subject": "上海虹桥国际机场 1터미널 외관 실물(2026)"
+ }
+}

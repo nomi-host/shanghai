@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const { PLACES, DAYS, INFO, CHECKLIST, PHRASES, TRIP, EXTRA = {} } = window.TRIP_DATA;
+  const { PLACES, DAYS, INFO, CHECKLIST, PHRASES, TRIP, EXTRA = {}, CREDITS = {} } = window.TRIP_DATA;
   const $ = (s, el = document) => el.querySelector(s);
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const store = {
@@ -13,7 +13,7 @@
     food: 'restaurant', dessert: 'icecream', tea: 'emoji_food_beverage', shop: 'shopping_bag', sight: 'photo_camera',
     architecture: 'villa', street: 'directions_walk', bar: 'local_bar', move: 'directions_subway', plane: 'flight',
     stay: 'hotel', info: 'info', weather: 'partly_cloudy_day', passport: 'badge', money: 'payments', plug: 'power',
-    wifi: 'wifi', apps: 'apps', sos: 'sos', castle: 'castle',
+    wifi: 'wifi', apps: 'apps', sos: 'sos', castle: 'castle', photo: 'photo_library',
   };
   const ms = (name, cls = '') => `<span class="ms ${cls}" aria-hidden="true">${name}</span>`;
   const icon = (cat) => `<span class="ico ${esc(cat)}" aria-hidden="true">${ms(MS[cat] || 'info', 'fill')}</span>`;
@@ -196,8 +196,28 @@
       h += `<label class="check"><input type="checkbox" data-check="${i}"${done[i] ? ' checked' : ''}><span>${esc(c)}</span></label>`;
     });
     h += `</div><p class="group-f">체크 상태는 이 기기에만 저장돼요.</p>`;
+    h += creditsHtml();
     h += `<p class="foot">조사 기준 ${esc(TRIP.asOf)}</p>`;
     el.innerHTML = h;
+  }
+
+  /* 사진 출처: CC BY/BY-SA는 저작자·라이선스·원본 링크 표기 */
+  const LICENSE_URL = {
+    'CC BY 2.0': 'https://creativecommons.org/licenses/by/2.0/', 'CC BY 3.0': 'https://creativecommons.org/licenses/by/3.0/',
+    'CC BY 4.0': 'https://creativecommons.org/licenses/by/4.0/', 'CC BY-SA 3.0': 'https://creativecommons.org/licenses/by-sa/3.0/',
+    'CC BY-SA 4.0': 'https://creativecommons.org/licenses/by-sa/4.0/', CC0: 'https://creativecommons.org/publicdomain/zero/1.0/',
+    'Pixabay Content License': 'https://pixabay.com/service/license-summary/',
+  };
+  function creditsHtml() {
+    const list = Object.entries(CREDITS);
+    if (!list.length) return '';
+    const link = (href, text) => href ? `<a href="${esc(href)}" target="_blank" rel="noopener">${esc(text)}</a>` : esc(text);
+    const items = list.map(([k, c]) => {
+      const name = c.label || (PLACES[k] && PLACES[k].name) || k;
+      const src = c.src === 'pixabay' ? 'Pixabay' : 'Wikimedia Commons';
+      return `<li><span class="credit-name">${esc(name)}</span><span class="credit-meta">${esc(c.author)} · ${link(LICENSE_URL[c.license], c.license)} · ${link(c.page, src + ' 원본')}</span></li>`;
+    }).join('');
+    return `<h3 class="group-h">사진 출처</h3><div class="list"><button class="row" style="--inset:57px" aria-expanded="false" aria-controls="info-credits" data-toggle="info-credits">${icon('photo')}<span class="row-main"><span class="row-title" style="display:block">사진 출처</span><span class="row-sub" style="display:block">대표 사진 ${list.length}장 · 저작자·라이선스·원본</span></span>${CHEV}</button><div class="detail" id="info-credits"><div class="detail-inner"><div class="detail-pad" style="padding-left:57px"><p>상세 화면의 대표 사진은 위키미디어 공용·Pixabay의 자유 이용 사진이에요. ‘참고 이미지’는 그 가게 실물이 아닌 일반 사진이에요. 사진은 원본에서 잘라 썼어요.</p><ul class="credits">${items}</ul></div></div></div></div>`;
   }
 
   /* ---------- 회화 ---------- */
