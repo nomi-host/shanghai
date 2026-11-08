@@ -9,7 +9,7 @@
   --label3: rgba(60,60,67,.3);
   --sep: rgba(60,60,67,.29);
   --tint: #CC0000;
-  --blue: #007AFF;
+  --blue: #CC0000;
   --bar: rgba(249,249,249,.82);
   --food: #FF9500;
   --dessert: #FF2D55;
@@ -28,7 +28,7 @@
   :root:not([data-theme="light"]) {
     --bg: #000000; --card: #1C1C1E; --card-pressed: #2C2C2E; --fill: rgba(118,118,128,.24);
     --label: #FFFFFF; --label2: rgba(235,235,245,.6); --label3: rgba(235,235,245,.3);
-    --sep: rgba(84,84,88,.65); --tint: #F2423C; --blue: #0A84FF; --bar: rgba(22,22,24,.82);
+    --sep: rgba(84,84,88,.65); --tint: #F2423C; --blue: #F2423C; --bar: rgba(22,22,24,.82);
     --food: #FF9F0A; --dessert: #FF375F; --shop: #5E5CE6; --sight: #40C8E0; --bar-c: #BF5AF2; --stay: #30D158;
     --warn-bg: rgba(255,159,10,.16); --warn: #FFB340;
   }
@@ -36,7 +36,7 @@
 :root[data-theme="dark"] {
   --bg: #000000; --card: #1C1C1E; --card-pressed: #2C2C2E; --fill: rgba(118,118,128,.24);
   --label: #FFFFFF; --label2: rgba(235,235,245,.6); --label3: rgba(235,235,245,.3);
-  --sep: rgba(84,84,88,.65); --tint: #F2423C; --blue: #0A84FF; --bar: rgba(22,22,24,.82);
+  --sep: rgba(84,84,88,.65); --tint: #F2423C; --blue: #F2423C; --bar: rgba(22,22,24,.82);
 }
 
 * { box-sizing: border-box; }
@@ -416,3 +416,19 @@ main { padding-top: calc(10px + env(safe-area-inset-top)); }
 .wx-src { font-size: 11px; color: var(--label3); margin-top: 6px; }
 .wx-empty { display: flex; gap: 8px; align-items: center; font-size: 14px; color: var(--label2); }
 .wx-empty .ms { color: var(--label2); }
+
+/* 파란 악센트 → 빨강 (스피커 버튼 바탕도 알약과 같은 연한 빨강) */
+.speak { background: color-mix(in srgb, var(--tint) 12%, var(--bg)); color: var(--tint); }
+.speak.is-playing { background: var(--tint); color: #fff; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .speak:not(.is-playing) { background: color-mix(in srgb, var(--tint) 24%, #1C1C1E); } }
+:root[data-theme="dark"] .speak:not(.is-playing) { background: color-mix(in srgb, var(--tint) 24%, #1C1C1E); }
+
+/* 상세 버튼 3개: 위아래 1.5px씩 얇게, '크게 보여주기'는 회색·오른쪽 */
+.detail .chips .pill { padding-top: 5.5px; padding-bottom: 5.5px; min-height: 37px; }
+.chips .pill-gray { margin-left: auto; }
+.pill.pill-gray, .pill.pill-gray:active { background: var(--fill); color: var(--label2); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pill.pill-gray { background: var(--fill); } }
+:root[data-theme="dark"] .pill.pill-gray { background: var(--fill); }
+
+/* 날씨 카드 바탕 한 톤 낮게 */
+.wx-card { background: color-mix(in srgb, var(--card) 95%, #000); }

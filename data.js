@@ -20,7 +20,7 @@ window.TRIP_DATA = (() => {
     diandoude: { name: '점도덕 환우회점', cn: '点都德 环宇荟店', cat: 'food', area: '신천지', addr: '黄浦区黄陂南路838弄 环宇荟B1', hours: '09:00–21:30', q: '点都德 环宇荟', status: 'planned' },
     bakerspice: { name: 'Baker & Spice 안푸로점', cn: 'Baker&Spice 安福路', cat: 'dessert', area: '헝푸', addr: '徐汇区安福路195号', hours: '09:00–21:00', q: 'Baker&Spice 安福路', status: 'backup' },
 
-    dongliang: { name: '동량 메종', cn: '栋梁之家', cat: 'shop', area: '창닝', addr: '长宁区武夷路168号 翡悦里174号别墅', hours: '11:00–20:00', q: '栋梁之家 武夷路', status: 'planned' },
+    dongliang: { name: '메종 동량', cn: '栋梁之家', cat: 'shop', area: '창닝', addr: '长宁区武夷路168号 翡悦里174号别墅', hours: '11:00–20:00', q: '栋梁之家 武夷路', status: 'planned' },
     columbia: { name: '상생신소', cn: '上生新所', cat: 'architecture', area: '창닝', addr: '长宁区延安西路1262号', hours: '10:00–22:00', q: '上生新所', status: 'planned' },
     yuyuanlu: { name: '위위안로', cn: '愚园路', cat: 'street', area: '창닝', q: '愚园百货公司', status: 'planned', memo: '‘영원히 넓히지 않는 길’ 노양방 거리 · 숍 80여 곳' },
     zhangyuan: { name: '장위안', cn: '张园', cat: 'architecture', area: '징안', addr: '静安区茂名北路258号', hours: '08:00–24:00 · 상점은 대체로 10시부터', q: '张园 威海路', status: 'planned' },
@@ -74,7 +74,7 @@ window.TRIP_DATA = (() => {
 
     /* 후보 — 숍 */
     chillmore: { name: 'chillmore', cn: 'chillmore 且悠', cat: 'shop', area: '헝푸', addr: '徐汇区宝庆路21号', q: '且悠 宝庆路', status: 'backup', memo: '향기 브랜드' },
-    onheon: { name: 'onheon', cn: 'onheon', cat: 'shop', area: '헝푸', addr: '徐汇区复兴西路49弄3号楼', hours: '11:00–20:00', q: 'onheon 复兴西路', status: 'backup', memo: '라이프스타일 편집샵' },
+    onheon: { name: '온허온 onheon', cn: 'onheon', cat: 'shop', area: '헝푸', addr: '徐汇区复兴西路49弄3号楼', hours: '11:00–20:00', q: 'onheon 复兴西路', status: 'planned', memo: '갤러리 같은 라이프스타일 편집숍 · 르메르에서 걸어서 3분' },
     softserve: { name: 'Soft Serve 柔软供应', cn: 'Soft Serve柔软供应', cat: 'shop', area: '헝푸', addr: '徐汇区汾阳路64弄2号', hours: '11:30–19:30', q: 'Soft Serve 柔软供应', status: 'backup', memo: '편집샵' },
     societyhome: { name: 'Society of Home', cn: 'Society of Home 洛克外滩源', cat: 'shop', area: '와이탄', addr: '黄浦区虎丘路78号', hours: '10:00–21:00', q: 'Society of Home 虎丘路', status: 'backup', memo: '호텔에서 가까움' },
     jaja: { name: 'jajainthemoment 허둥 옛집점', cn: 'jajainthemoment 何东旧居店', cat: 'shop', area: '징안', addr: '静安区陕西北路457号W幢2层201室', hours: '10:00–21:00', q: 'jajainthemoment', status: 'backup', memo: '편집샵 · 何东旧居 안' },
@@ -176,7 +176,8 @@ window.TRIP_DATA = (() => {
     diandoude: { menu: [['金牌虾饺皇', '새우 하가우', '대표'], ['金莎海虾红米肠', '바삭 새우 창펀', '시그니처'], ['招牌烧卖', '샤오마이', ''], ['蜜汁叉烧包', '차슈바오', ''], ['香芒夹心椰汁糕', '망고 코코넛 푸딩', '디저트']],
       must: ['바삭 새우 창펀(红米肠)', '4접시 안쪽으로 소식'] },
     bakerspice: { menu: [['Gelato', '젤라또', ''], ['Glass of wine', '와인 한 잔', '']], must: ['안푸로 산책 중 쉬어가기'] },
-    dongliang: { must: ['단독 양옥 건물 자체를 구경', '중국 디자이너 브랜드 셀렉션 둘러보기'] },
+    dongliang: { must: ['100년 된 서양식 주택 + 햇살 드는 안뜰·정원', '방마다 다른 브랜드 — 고급 기성복부터 리빙까지', '정원에서 사진'] },
+    onheon: { must: ['갤러리처럼 진열된 주얼리·향수·빈티지 소품', '기념 선물 사고 포장 부탁하기', '복흥서로 플라타너스 길 산책'] },
     columbia: { must: ['옛 컬럼비아 클럽 수영장 건물', '쑨커 별장(孙科别墅) 외관', '츠타야 서점'] },
     yuyuanlu: { must: ['노양방(옛 서양식 주택) 골목 산책', '작은 숍·카페 구경하며 천천히'] },
     zhangyuan: { must: ['석고문(石库门) 골목 사진', '리노베이션된 명품 매장 건물 외관'] },
@@ -324,10 +325,35 @@ window.TRIP_DATA = (() => {
   });
 
   /* 따종띠엔핑 후기 사진(실제 가게) — 있는 곳은 참고 이미지 대신 이걸로 */
-  const DP = { notelab: '향 실험실 칵테일', sijiminfu: '베이징덕', zuoting: '생소고기 훠궈', henjiu: '양꼬치', libaixie: '게알 요리', renheguan: '런허관 요리', zhangshifu: '상하이식 아침', diandoude: '딤섬', kaisha: 'KAISHA', fever: 'Fever Bar', noras: "Nora's", sloppygin: 'Sloppy Gin', basao: 'BASAO', onheon: 'onheon', softserve: 'Soft Serve', jaja: 'jajainthemoment', habiter: 'HABITER', zamani: 'ZAMANI', viandn: 'Via NDN', qiansu: '천수 1000 Trees', psa: 'PSA 상하이 당대예술박물관', rockbund: '와이탄 미술관', yuyuan: '위위안 야경' };
+  const DP = { dongliang: '메종 동량', notelab: '향 실험실 칵테일', sijiminfu: '베이징덕', zuoting: '생소고기 훠궈', henjiu: '양꼬치', libaixie: '게알 요리', renheguan: '런허관 요리', zhangshifu: '상하이식 아침', diandoude: '딤섬', kaisha: 'KAISHA', fever: 'Fever Bar', noras: "Nora's", sloppygin: 'Sloppy Gin', basao: 'BASAO', onheon: 'onheon', softserve: 'Soft Serve', jaja: 'jajainthemoment', habiter: 'HABITER', zamani: 'ZAMANI', viandn: 'Via NDN', qiansu: '천수 1000 Trees', psa: 'PSA 상하이 당대예술박물관', rockbund: '와이탄 미술관', yuyuan: '위위안 야경' };
   Object.entries(DP).forEach(([k, what]) => {
     EXTRA[k] = EXTRA[k] || {};
     EXTRA[k].photos = [1, 2, 3, 4].map((n) => ({ src: `img/${k}-dp${n}.jpg`, alt: what, credit: '' }));
+  });
+
+  /* 구글맵 검색어 보정 (2026-11-08 전수 점검). 구글은 중국 주소 검색에 약해서 주소를 붙이면 길만 잡힘 →
+     실제로 장소가 잡히는 검색어만 gq로. 구글맵에 아예 없는 곳은 g:false → 구글맵 버튼 숨기고 고덕만. */
+  const GQ = {
+    hotel: 'Holiday Inn Express Shanghai The Bund', sha: 'Shanghai Hongqiao International Airport Terminal 1',
+    dongliang: 'Dongliang Shanghai Wuyi Road', iccf: '之禾卡纷花园', lemaire: 'LEMAIRE 武康路', qiansu: '天安千树',
+    renheguan: '人和馆 愚园路', shuaishuai: '帅帅精致家常味 长乐路', jiajia: '佳家汤包 黄河路', jzclub: 'JZ Club Shanghai',
+    labelhood: 'LABELHOOD 富民路', xiayan: '夏衍旧居', yuyuanlu: 'Yuyuan Road Shanghai', zhangyuan: '张园 茂名北路',
+    punchroom: 'The Shanghai EDITION', barleone: 'Bar Leone 思南公馆', duoyun: 'Shanghai Tower', xiaoshen: '上海新世界城',
+    miniso: 'MINISO LAND Shanghai Nanjing East Road', henjiu: '很久以前羊肉串 南京东路', basao: 'BASAO 香港路',
+    coucou: '凑凑火锅 淮海中路', dahuchun: '大壶春 四川中路', diandoude: '点都德 黄陂南路', sijiminfu: '四季民福烤鸭店 南京西路',
+    sijiminfu_bund: '四季民福烤鸭店 吴淞路', xiding: '喜鼎海胆水饺 长宁路', zhuangshi: '庄氏隆兴 浙江中路', zuoting: '左庭右院 浦东南路',
+    manji: '满记甜品 南京东路', disney: 'Shanghai Disneyland', disney_taxi: 'Shanghai Disneyland', disney_garden: 'Shanghai Disneyland',
+    disney_mickey: 'Shanghai Disneyland', disney_castle: 'Shanghai Disneyland', disney_metro: 'Disney Resort Station Shanghai Metro',
+    // 대안(A)
+    barleone2: 'Bar Leone 思南公馆', d_garden: 'Shanghai Disneyland', d_mickey: 'Shanghai Disneyland', d_taxi: 'Shanghai Disneyland',
+    d_metro: 'Disney Resort Station Shanghai Metro', siji_bund: '四季民福烤鸭店 吴淞路', punch: 'The Shanghai EDITION', roof: 'The Shanghai EDITION',
+  };
+  const GNO = ['libaixie', 'zhangshifu', 'chiikawa', 'notelab', 'notelab_opt', 'carter', 'coa', 'fever', 'forlong', 'guershu', 'habiter',
+    'huangshiyi', 'jaja', 'joker', 'kaisha', 'luminous', 'mollytea', 'noras', 'onheon', 'ponyup', 'societyhome', 'sloppygin', 'softserve',
+    'sugarplum', 'viandn', 'chillmore', 'ambelie'];
+  [PLACES, A].forEach((M) => {
+    Object.entries(GQ).forEach(([k, q]) => { if (M[k]) M[k].gq = q; });
+    GNO.forEach((k) => { if (M[k]) M[k].g = false; });
   });
 
   const DAYS = [
@@ -393,6 +419,7 @@ window.TRIP_DATA = (() => {
           alts: [A.lanxin, A.rongshu, A.renhe_main] },
         { t: '14:30', place: 'iccf', note: 'ICICLE·CARVEN 매장, 레스토랑, 갤러리, 서점이 모인 정원형 공간' },
         { t: '15:30', place: 'lemaire', title: '우캉로: 르메르 → 우캉맨션', note: '르메르는 위챗 미니프로그램 예약제 · 우캉맨션은 외관만 · 16시 반쯤 양꼬치 원격 번호표' },
+        { t: '16:10', place: 'onheon', note: '르메르에서 걸어서 3분 · 주얼리·향수·빈티지 소품을 갤러리처럼 진열한 편집숍 · 20–25분 · 선물 포장 잘해 줌' },
         { t: '16:45', place: 'psa', title: 'PSA 류자쿤 건축전', note: '우캉로에서 디디 20분 · 2025 프리츠커상 건축가 · 18:30까지',
           warn: '일 11:00–19:00, 입장 18:00까지(고덕 기준). 티켓은 공식 위챗(上海当代艺术博物馆)에서 확인하세요.' },
         { t: '19:00', place: 'chiikawa', note: 'PSA에서 디디 15분 · 내륙 첫 공식 플래그십 · 예약 없이 입장' },

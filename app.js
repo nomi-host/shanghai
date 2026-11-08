@@ -32,12 +32,13 @@
     return `https://uri.amap.com/search?keyword=${kw}&city=310000&src=sh26trip&callnative=1`;
   }
   function gmapUrl(p) {
+    if (p.gq) return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.gq)}`;
     const q = p.addr ? `${p.cn || p.name} ${p.addr}` : `${p.q || p.cn || p.name} 上海`;
     return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
   }
-  const gmapPill = (p, label = '구글맵') => `<a class="pill" href="${gmapUrl(p)}" target="_blank" rel="noopener">${ms('map', 'fill')}${label}</a>`;
+  const gmapPill = (p, label = '구글맵') => p.g === false ? '' : `<a class="pill" href="${gmapUrl(p)}" target="_blank" rel="noopener">${ms('map', 'fill')}${label}</a>`;
   const mapPill = (p, label = '고덕지도') => `<a class="pill" href="${amapUrl(p)}" target="_blank" rel="noopener">${PIN}${label}</a>`;
-  const showPill = (ko, zh) => `<button class="pill" data-show-ko="${esc(ko)}" data-show-zh="${esc(zh)}">크게 보여주기</button>`;
+  const showPill = (ko, zh) => `<button class="pill pill-gray" data-show-ko="${esc(ko)}" data-show-zh="${esc(zh)}">크게 보여주기</button>`;
 
   /* ---------- 시간 ---------- */
   function shanghaiNow() {
