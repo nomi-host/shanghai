@@ -296,3 +296,4 @@ a.row { color: inherit; }
 .chipbar { margin: 4px 0 12px; padding: 2px 0; }
 @media (min-width: 600px) { .chipbar { margin-left: 0; margin-right: 0; padding: 2px 0; } }
 .chipbar { position: relative; }
+.chipbar { scroll-snap-type: none; }
