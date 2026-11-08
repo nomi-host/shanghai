@@ -213,10 +213,13 @@ window.TRIP_DATA = (() => {
     crab: { label: '털게찜 배달', author: 'Jpatokal', license: 'CC BY-SA 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Roe_inside_steamed_female_hairy_crab.jpg', alt: '찐 상하이 털게 암게의 게알 — 참고 이미지' },
     mango: { label: '양즈깐루 배달', author: 'Thomas.Lu', license: 'CC BY 3.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:MangoPomeloSago_1.jpg', alt: '양즈깐루(망고 포멜로 사고) — 참고 이미지' },
   };
-  Object.entries(CREDITS).forEach(([k, c]) => {
-    EXTRA[k] = Object.assign(EXTRA[k] || {}, {
-      photo: `img/${k}.jpg`,
-      alt: c.alt,
+  /* 같은 장소 사진(key, key-2, key-3 …)을 묶어 EXTRA[key].photos 로 — 상세에서 스와이프 */
+  Object.entries(CREDITS).sort(([a], [b]) => a.localeCompare(b, 'en', { numeric: true })).forEach(([k, c]) => {
+    const base = k.replace(/-\d+$/, '');
+    const ex = (EXTRA[base] = EXTRA[base] || {});
+    (ex.photos = ex.photos || []).push({
+      src: `img/${k}.jpg`,
+      alt: c.alt || c.subject || '',
       credit: `사진: ${c.author} · ${c.src === 'pixabay' ? 'Pixabay' : c.license}`,
     });
   });

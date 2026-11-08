@@ -55,8 +55,12 @@
   function extraHtml(ex) {
     if (!ex) return '';
     let h = '';
-    if (ex.photo) {
-      h += `<figure class="hero"><img src="${esc(ex.photo)}" alt="${esc(ex.alt || '')}" loading="lazy" decoding="async">${ex.credit ? `<figcaption>${esc(ex.credit)}</figcaption>` : ''}</figure>`;
+    const ph = ex.photos || [];
+    if (ph.length) {
+      const figs = ph.map((p, i) => `<figure class="hero"><img src="${esc(p.src)}" alt="${esc(p.alt)}" loading="lazy" decoding="async">${p.credit ? `<figcaption>${esc(p.credit)}</figcaption>` : ''}${ph.length > 1 ? `<span class="hero-count">${i + 1}/${ph.length}</span>` : ''}</figure>`).join('');
+      h += ph.length > 1
+        ? `<div class="gallery" aria-label="사진 ${ph.length}장, 옆으로 넘겨 보기"><div class="gallery-track">${figs}</div><div class="gallery-dots" aria-hidden="true">${ph.map((_, i) => `<i${i ? '' : ' class="on"'}></i>`).join('')}</div></div>`
+        : figs;
     }
     if (ex.must && ex.must.length) {
       h += `<h4>Must-do</h4><ul class="must">${ex.must.map((x) => `<li>${ms('star', 'fill')}<span>${esc(x)}</span></li>`).join('')}</ul>`;
@@ -392,6 +396,13 @@
     } catch { /* 캐시 접근 불가해도 새로고침은 진행 */ }
     location.reload();
   });
+  /* 갤러리 점 표시: 가로 스크롤 위치에 맞춰 */
+  document.addEventListener('scroll', (e) => {
+    const t = e.target;
+    if (!(t instanceof Element) || !t.classList.contains('gallery-track')) return;
+    const i = Math.round(t.scrollLeft / t.clientWidth);
+    t.parentElement.querySelectorAll('.gallery-dots i').forEach((d, j) => d.classList.toggle('on', j === i));
+  }, true);
   const navbar = $('#navbar');
   function onScroll() { navbar.classList.toggle('is-solid', window.scrollY > 36); }
   window.addEventListener('scroll', onScroll, { passive: true });

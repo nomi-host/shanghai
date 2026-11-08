@@ -389,3 +389,13 @@ main { padding-top: calc(10px + env(safe-area-inset-top)); }
 
 /* 스크롤 때 위 바 제목도 포인트 빨강 */
 .navbar-title { color: var(--tint); }
+
+/* 대표 사진 스와이프 갤러리 */
+.gallery { margin: 4px 0 6px; }
+.gallery-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; border-radius: 12px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.gallery-track::-webkit-scrollbar { display: none; }
+.gallery-track .hero { flex: 0 0 100%; margin: 0; border-radius: 0; scroll-snap-align: center; }
+.hero-count { position: absolute; top: 8px; right: 8px; font-size: 11px; font-weight: 600; color: #fff; background: rgba(0,0,0,.45); padding: 2px 7px; border-radius: 999px; font-variant-numeric: tabular-nums; }
+.gallery-dots { display: flex; justify-content: center; gap: 6px; margin-top: 8px; }
+.gallery-dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--label3); transition: background .2s, width .2s; }
+.gallery-dots i.on { background: var(--tint); width: 16px; border-radius: 3px; }
