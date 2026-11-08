@@ -86,10 +86,12 @@
       if (s.li) h += `<ul>${s.li.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`;
       if (s.p) h += `<p>${esc(s.p)}</p>`;
     });
-    if (it.alts && it.alts.length) {
-      h += `<h4>${esc(it.altsTitle || '대안')}</h4>`;
-      h += it.alts.map((a) => `<div class="alt"><div class="alt-main"><div class="alt-name">${esc(a.name)} <span lang="zh-CN" style="font-weight:400;color:var(--label2)">${esc(a.cn || '')}</span></div><div class="alt-meta">${esc(a.meta || '')}</div></div><div class="alt-btns">${mapPill(a, '고덕')}${gmapPill(a, '구글')}</div></div>`).join('');
-    }
+    // 대안 목록(여러 묶음 가능: altGroups)
+    const groups = it.altGroups || (it.alts && it.alts.length ? [{ title: it.altsTitle || '대안', items: it.alts }] : []);
+    groups.forEach((g) => {
+      h += `<h4>${esc(g.title)}</h4>`;
+      h += g.items.map((a) => `<div class="alt${g.pick ? ' alt-pick' : ''}"><div class="alt-main"><div class="alt-name">${esc(a.name)} <span lang="zh-CN" style="font-weight:400;color:var(--label2)">${esc(a.cn || '')}</span></div><div class="alt-meta">${esc(a.meta || '')}</div></div><div class="alt-btns">${mapPill(a, '고덕')}${gmapPill(a, '구글')}</div></div>`).join('');
+    });
     const chips = [];
     if (p) {
       chips.push(mapPill(p, '고덕지도'));
@@ -106,7 +108,7 @@
     const cat = it.cat || (p && p.cat) || 'move';
     const title = it.title || (p && p.name) || '';
     const zh = it.cn !== undefined ? it.cn : p ? p.cn : '';
-    const hasDetail = !!(it.detail || it.alts || it.warn || p || EXTRA[it.extra]);
+    const hasDetail = !!(it.detail || it.alts || it.altGroups || it.warn || p || EXTRA[it.extra]);
     const id = `d${dIdx}-${i}`;
     const nowCls = i === nowI ? ' is-now' : '';
     const inner = `<span class="row-time">${esc(it.t)}</span>${icon(cat)}<span class="row-main"><span class="row-title" style="display:block">${esc(title)}${it.warn ? ' <span style="color:var(--warn)" aria-label="주의">•</span>' : ''}</span>${zh ? `<span class="row-zh" lang="zh-CN" style="display:block">${esc(zh)}</span>` : ''}${it.note ? `<span class="row-note" style="display:block">${esc(it.note)}</span>` : ''}</span>`;

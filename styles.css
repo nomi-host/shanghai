@@ -401,3 +401,4 @@ main { padding-top: calc(10px + env(safe-area-inset-top)); }
 .gallery-dots i.on { background: var(--tint); width: 16px; border-radius: 3px; }
 .ico.receipt { background: #E0902A; }
 .ms.has-photo { font-size: 15px; color: var(--label3); vertical-align: -2px; width: auto; }
+.alt.alt-pick { background: color-mix(in srgb, var(--tint) 10%, var(--card)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tint) 35%, transparent); }
