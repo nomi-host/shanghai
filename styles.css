@@ -354,3 +354,6 @@ a.row { color: inherit; }
 .pill:not(.pill-tint):active { background: color-mix(in srgb, var(--tint) 22%, var(--bg)); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pill:not(.pill-tint) { background: color-mix(in srgb, var(--tint) 24%, #1C1C1E); } }
 :root[data-theme="dark"] .pill:not(.pill-tint) { background: color-mix(in srgb, var(--tint) 24%, #1C1C1E); }
+
+/* 세그먼트 선택: 그림자 없이 진한 빨강 + 흰 글씨 */
+.seg button[aria-pressed="true"] { background: var(--tint); color: #fff; box-shadow: none; }
