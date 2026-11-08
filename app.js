@@ -13,7 +13,7 @@
     food: 'restaurant', dessert: 'icecream', tea: 'emoji_food_beverage', shop: 'shopping_bag', sight: 'photo_camera',
     architecture: 'villa', street: 'directions_walk', bar: 'local_bar', move: 'directions_subway', plane: 'flight',
     stay: 'hotel', info: 'info', weather: 'partly_cloudy_day', passport: 'badge', money: 'payments', plug: 'power',
-    wifi: 'wifi', apps: 'apps', sos: 'sos', castle: 'castle', photo: 'photo_library',
+    wifi: 'wifi', apps: 'apps', sos: 'sos', castle: 'castle', ticket: 'confirmation_number', pin: 'location_on', luggage: 'luggage', photo: 'photo_library',
   };
   const ms = (name, cls = '') => `<span class="ms ${cls}" aria-hidden="true">${name}</span>`;
   const icon = (cat) => `<span class="ico ${esc(cat)}" aria-hidden="true">${ms(MS[cat] || 'info', 'fill')}</span>`;

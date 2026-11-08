@@ -381,3 +381,8 @@ a.row { color: inherit; }
 .trip-card .days { grid-template-columns: repeat(5, 1fr); gap: 2px; margin: 10px 0 0; }
 .day-all .day-n .ms { font-size: 20px; color: var(--label2); width: auto; }
 .day-all[aria-selected="true"] .day-n .ms { color: #fff; }
+.ico.ticket { background: #D24F6E; } .ico.pin { background: #0E7A8A; } .ico.luggage { background: #B0832E; }
+
+/* 위 여백 줄이기: 첫 화면 제목이 상태바 바로 아래에서 시작 */
+main { padding-top: calc(10px + env(safe-area-inset-top)); }
+.large-title { margin-top: 0; }
