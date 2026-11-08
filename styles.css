@@ -399,3 +399,4 @@ main { padding-top: calc(10px + env(safe-area-inset-top)); }
 .gallery-dots { display: flex; justify-content: center; gap: 6px; margin-top: 8px; }
 .gallery-dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--label3); transition: background .2s, width .2s; }
 .gallery-dots i.on { background: var(--tint); width: 16px; border-radius: 3px; }
+.ico.receipt { background: #E0902A; }
