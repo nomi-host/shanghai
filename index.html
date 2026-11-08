@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="상해">
+<title>상해 3박 4일</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <span class="navbar-title" id="navbarTitle">일정</span>
+  </div>
+</header>
+
+<main id="app">
+  <section class="screen" id="screen-plan" data-title="일정" aria-label="일정"></section>
+  <section class="screen" id="screen-places" data-title="장소" aria-label="장소" hidden></section>
+  <section class="screen" id="screen-info" data-title="정보" aria-label="여행 정보" hidden></section>
+  <section class="screen" id="screen-talk" data-title="회화" aria-label="기초 중국어" hidden></section>
+</main>
+
+<nav class="tabbar" aria-label="탭">
+  <button class="tab is-active" data-tab="plan" aria-current="page">
+    <svg viewBox="0 0 28 28" aria-hidden="true"><rect x="4" y="5.5" width="20" height="18" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 11h20M9.5 3.5v4M18.5 3.5v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="10" cy="16" r="1.4" fill="currentColor"/><circle cx="14" cy="16" r="1.4" fill="currentColor"/><circle cx="18" cy="16" r="1.4" fill="currentColor"/><circle cx="10" cy="20" r="1.4" fill="currentColor"/></svg>
+    <span>일정</span>
+  </button>
+  <button class="tab" data-tab="places">
+    <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 25s8-7.2 8-13.5a8 8 0 1 0-16 0C6 17.8 14 25 14 25Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="14" cy="11.5" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+    <span>장소</span>
+  </button>
+  <button class="tab" data-tab="info">
+    <svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="10.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 12.5v7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="14" cy="8.6" r="1.5" fill="currentColor"/></svg>
+    <span>정보</span>
+  </button>
+  <button class="tab" data-tab="talk">
+    <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M5 7.5A3.5 3.5 0 0 1 8.5 4h11A3.5 3.5 0 0 1 23 7.5v7a3.5 3.5 0 0 1-3.5 3.5H13l-5 4.5V18h0a3.5 3.5 0 0 1-3-3.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M10 9.5h8M10 13h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    <span>회화</span>
+  </button>
+</nav>
+
+<div class="sheet" id="showSheet" role="dialog" aria-modal="true" aria-label="크게 보여주기" hidden>
+  <div class="sheet-body">
+    <p class="show-ko" id="showKo"></p>
+    <p class="show-zh" id="showZh" lang="zh-CN"></p>
+    <p class="show-py" id="showPy"></p>
+    <div class="sheet-actions">
+      <button class="pill pill-tint" id="showSpeak">들려주기</button>
+      <button class="pill" id="showClose">닫기</button>
+    </div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

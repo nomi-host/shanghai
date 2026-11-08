@@ -1,0 +1,305 @@
+(() => {
+  'use strict';
+  const { PLACES, DAYS, INFO, CHECKLIST, PHRASES, TRIP } = window.TRIP_DATA;
+  const $ = (s, el = document) => el.querySelector(s);
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem('sh26:' + k); return v == null ? d : JSON.parse(v); } catch { return d; } },
+    set(k, v) { try { localStorage.setItem('sh26:' + k, JSON.stringify(v)); } catch { /* 저장 불가 환경 */ } },
+  };
+
+  /* ---------- 아이콘 ---------- */
+  const ICON = {
+    food: '<path d="M7 3v7a2 2 0 0 0 2 2v9M11 3v7a2 2 0 0 1-2 2M9 3v6M16.5 21V3c-2 1-3 3.5-3 7v3h3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+    dessert: '<path d="M7 11h10l-1.5 10h-7ZM6.5 11a5.5 5.5 0 0 1 11 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 5.5V3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
+    tea: '<path d="M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5ZM16 10.5h1.5a2.5 2.5 0 0 1 0 5H16M8 3.5c0 1.5 1.5 1.5 1.5 3M12 3.5c0 1.5 1.5 1.5 1.5 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
+    shop: '<path d="M5.5 8h13l-1 13h-11ZM9 10V6.5a3 3 0 0 1 6 0V10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>',
+    sight: '<path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.6" fill="currentColor"/>',
+    architecture: '<path d="M3.5 20.5h17M5 20.5V10l7-5 7 5v10.5M9 20.5v-6h6v6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>',
+    street: '<path d="M8 3 5 21M16 3l3 18M12 4v3M12 10.5v3M12 17v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
+    bar: '<path d="M5 4h14l-7 8ZM12 12v8M8 20.5h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>',
+    move: '<rect x="6" y="3.5" width="12" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M6 11h12M8.5 21l1.5-3.5M15.5 21 14 17.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="9.5" cy="14.3" r="1" fill="currentColor"/><circle cx="14.5" cy="14.3" r="1" fill="currentColor"/>',
+    plane: '<path d="M10.5 4.5c0-1 .7-1.8 1.5-1.8s1.5.8 1.5 1.8v5l7 4v2l-7-2v4.5l2.2 1.6V21L12 20l-3.7 1v-1.4l2.2-1.6V13.5l-7 2v-2l7-4Z" fill="currentColor"/>',
+    stay: '<path d="M3 18.5V7M3 14h18v4.5M21 14v-2.5a3 3 0 0 0-3-3h-7V14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/><circle cx="7" cy="11" r="1.8" fill="currentColor"/>',
+    info: '<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.8" r="1.2" fill="currentColor"/>',
+    weather: '<circle cx="9" cy="9" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9 2.5v1.3M2.5 9h1.3M4.4 4.4l.9.9M13.6 4.4l-.9.9M8 20h9.5a3.5 3.5 0 0 0 0-7 5 5 0 0 0-9.4 1.6A2.7 2.7 0 0 0 8 20Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+    passport: '<rect x="5" y="3" width="14" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10.5" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 17h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
+    money: '<rect x="3" y="6" width="18" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/>',
+    plug: '<path d="M9 3v5M15 3v5M6.5 8h11v3.5a5.5 5.5 0 0 1-11 0ZM12 17v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+    wifi: '<path d="M3 9.5a13 13 0 0 1 18 0M6 13a8.5 8.5 0 0 1 12 0M9 16.5a4 4 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="19.5" r="1.3" fill="currentColor"/>',
+    apps: '<rect x="4" y="4" width="7" height="7" rx="2" fill="currentColor"/><rect x="13" y="4" width="7" height="7" rx="2" fill="currentColor"/><rect x="4" y="13" width="7" height="7" rx="2" fill="currentColor"/><rect x="13" y="13" width="7" height="7" rx="2" fill="currentColor"/>',
+    sos: '<path d="M12 3.5 21 19.5H3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.1" fill="currentColor"/>',
+    castle: '<path d="M4 21V11l2-2 2 2v-4l2-3 2 3 2-3 2 3v4l2-2 2 2v10ZM10 21v-4a2 2 0 0 1 4 0v4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>',
+  };
+  const icon = (cat) => `<span class="ico ${esc(cat)}" aria-hidden="true"><svg viewBox="0 0 24 24">${ICON[cat] || ICON.info}</svg></span>`;
+  const CHEV = '<svg class="chev" viewBox="0 0 9 15" aria-hidden="true"><path d="M1.5 1.5 7.5 7.5l-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const PIN = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 15s5-4.6 5-8.5a5 5 0 0 0-10 0C3 10.4 8 15 8 15Z" fill="currentColor"/><circle cx="8" cy="6.5" r="1.8" fill="var(--card)"/></svg>';
+  const SPK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4Z" fill="currentColor"/><path d="M15.5 9a4.5 4.5 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+  const CAT_KO = { food: '식당', dessert: '디저트', tea: '차', shop: '편집샵·숍', sight: '명소', architecture: '건축', street: '거리', bar: '바', stay: '숙소', move: '이동' };
+
+  /* ---------- 고덕지도 링크 ---------- */
+  function amapUrl(p) {
+    const name = encodeURIComponent(p.cn || p.name);
+    if (p.lng && p.lat) {
+      return `https://uri.amap.com/marker?position=${p.lng},${p.lat}&name=${name}&src=sh26trip&coordinate=gaode&callnative=1`;
+    }
+    const kw = encodeURIComponent(p.q || p.cn || p.name);
+    return `https://uri.amap.com/search?keyword=${kw}&city=310000&src=sh26trip&callnative=1`;
+  }
+  const mapPill = (p, label = '고덕지도') => `<a class="pill" href="${amapUrl(p)}" target="_blank" rel="noopener">${PIN}${label}</a>`;
+  const showPill = (ko, zh) => `<button class="pill" data-show-ko="${esc(ko)}" data-show-zh="${esc(zh)}">크게 보여주기</button>`;
+
+  /* ---------- 시간 ---------- */
+  function shanghaiNow() {
+    const f = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+    const parts = Object.fromEntries(f.formatToParts(new Date()).map((x) => [x.type, x.value]));
+    return { date: `${parts.year}-${parts.month}-${parts.day}`, hm: `${parts.hour}:${parts.minute}` };
+  }
+  const now = shanghaiNow();
+  const todayIdx = DAYS.findIndex((d) => d.date === now.date);
+
+  /* ---------- 일정 ---------- */
+  let dayIdx = todayIdx >= 0 ? todayIdx : store.get('day', 0);
+  if (!(dayIdx >= 0 && dayIdx < DAYS.length)) dayIdx = 0;
+
+  function detailHtml(it, p) {
+    let h = '';
+    if (it.warn) h += `<div class="warn">${esc(it.warn)}</div>`;
+    (it.detail || []).forEach((s) => {
+      h += `<h4>${esc(s.h)}</h4>`;
+      if (s.li) h += `<ul>${s.li.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`;
+      if (s.p) h += `<p>${esc(s.p)}</p>`;
+    });
+    if (it.alts && it.alts.length) {
+      h += `<h4>${esc(it.altsTitle || '대안')}</h4>`;
+      h += it.alts.map((a) => `<div class="alt"><div class="alt-main"><div class="alt-name">${esc(a.name)} <span lang="zh-CN" style="font-weight:400;color:var(--label2)">${esc(a.cn || '')}</span></div><div class="alt-meta">${esc(a.meta || '')}</div></div>${mapPill(a, '지도')}</div>`).join('');
+    }
+    const chips = [];
+    if (p) {
+      chips.push(mapPill(p, '고덕지도에서 열기'));
+      if (p.addr) chips.push(showPill(p.name, `${p.cn}\n${p.addr}`));
+    }
+    if (chips.length) h += `<div class="chips">${chips.join('')}</div>`;
+    return h;
+  }
+
+  function renderPlan() {
+    const el = $('#screen-plan');
+    const d = DAYS[dayIdx];
+    let h = `<h1 class="large-title">${esc(TRIP.title)}</h1><p class="subhead">${esc(TRIP.sub)}</p>`;
+    h += nowCard();
+    h += `<div class="days" role="tablist" aria-label="날짜">${DAYS.map((x, i) => `<button class="day${i === todayIdx ? ' is-today' : ''}" role="tab" aria-selected="${i === dayIdx}" data-day="${i}"><span class="day-w">${esc(x.w)}</span><span class="day-n">${Number(x.date.slice(8))}</span></button>`).join('')}</div>`;
+    h += `<div class="day-head"><h2>${esc(d.title)}</h2>${d.sub ? `<p>${esc(d.sub)}</p>` : ''}</div>`;
+    const nowI = dayIdx === todayIdx ? d.items.reduce((acc, it, i) => (/^\d/.test(it.t) && it.t <= now.hm ? i : acc), -1) : -1;
+    h += `<div class="list">`;
+    d.items.forEach((it, i) => {
+      const p = it.place ? PLACES[it.place] : null;
+      const cat = it.cat || (p && p.cat) || 'move';
+      const title = it.title || (p && p.name) || '';
+      const zh = it.cn !== undefined ? it.cn : p ? p.cn : '';
+      const hasDetail = !!(it.detail || it.alts || it.warn || p);
+      const id = `d${dayIdx}-${i}`;
+      const inner = `<span class="row-time">${esc(it.t)}</span>${icon(cat)}<span class="row-main"><span class="row-title" style="display:block">${esc(title)}${it.warn ? ' <span style="color:var(--warn)" aria-label="주의">•</span>' : ''}</span>${zh ? `<span class="row-zh" lang="zh-CN" style="display:block">${esc(zh)}</span>` : ''}${it.note ? `<span class="row-note" style="display:block">${esc(it.note)}</span>` : ''}</span>`;
+      if (hasDetail) {
+        h += `<button class="row${i === nowI ? ' is-now' : ''}" style="--inset:74px" aria-expanded="false" aria-controls="${id}" data-toggle="${id}">${inner}${CHEV}</button>`;
+        h += `<div class="detail" id="${id}"><div class="detail-inner"><div class="detail-pad">${detailHtml(it, p)}</div></div></div>`;
+      } else {
+        h += `<div class="row${i === nowI ? ' is-now' : ''}" style="--inset:74px">${inner}</div>`;
+      }
+    });
+    h += `</div>`;
+    if (d.foot) h += `<p class="group-f">${esc(d.foot)}</p>`;
+    h += `<p class="foot">조사 기준 ${esc(TRIP.asOf)} · 출발 전 영업시간 재확인</p>`;
+    el.innerHTML = h;
+  }
+
+  function nowCard() {
+    const start = DAYS[0].date;
+    if (now.date < start) {
+      const diff = Math.round((Date.parse(start) - Date.parse(now.date)) / 86400000);
+      return `<div class="now-card"><div class="now-big">D-${diff}</div><div><div class="now-k">출발까지</div><div class="now-s">${esc(TRIP.flightOut)}</div></div></div>`;
+    }
+    if (todayIdx < 0) return '';
+    const d = DAYS[todayIdx];
+    const next = d.items.find((it) => /^\d/.test(it.t) && it.t > now.hm);
+    if (!next) return `<div class="now-card"><div><div class="now-k">오늘 일정 끝</div><div class="now-s">푹 쉬기</div></div></div>`;
+    const p = next.place ? PLACES[next.place] : null;
+    return `<div class="now-card"><div class="now-big">${esc(next.t)}</div><div style="min-width:0"><div class="now-k">다음 일정</div><div class="now-t">${esc(next.title || (p && p.name))}</div>${p ? `<div class="now-s" lang="zh-CN">${esc(p.cn)}</div>` : ''}</div></div>`;
+  }
+
+  /* ---------- 장소 ---------- */
+  let placeFilter = 'all';
+  let placeQuery = '';
+  const CAT_ORDER = ['food', 'dessert', 'tea', 'shop', 'architecture', 'street', 'sight', 'bar', 'stay', 'move'];
+  function renderPlaces() {
+    const el = $('#screen-places');
+    if (!el.dataset.built) {
+      el.innerHTML = `<h1 class="large-title">장소</h1><p class="subhead">누르면 고덕지도 앱에서 열려요. 앱에서 ☆를 눌러 저장하세요.</p>
+      <label class="search"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m11 11 3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="placeQ" placeholder="이름, 중국어, 지역 검색" aria-label="장소 검색"></label>
+      <div class="seg" role="group" aria-label="장소 필터"><button data-pf="all" aria-pressed="true">전체</button><button data-pf="planned" aria-pressed="false">일정</button><button data-pf="backup" aria-pressed="false">후보</button></div>
+      <div id="placeList"></div>
+      <p class="group-f" style="margin-top:20px">한 번에 저장하려면 <a href="gaode.html">고덕지도 빠른 저장 목록</a>을 쓰세요.</p>`;
+      el.dataset.built = '1';
+    }
+    const q = placeQuery.trim().toLowerCase();
+    const items = Object.entries(PLACES).filter(([, p]) => (placeFilter === 'all' || p.status === placeFilter) &&
+      (!q || [p.name, p.cn, p.area, p.addr, CAT_KO[p.cat]].join(' ').toLowerCase().includes(q)));
+    let h = '';
+    CAT_ORDER.forEach((c) => {
+      const g = items.filter(([, p]) => p.cat === c);
+      if (!g.length) return;
+      h += `<h3 class="group-h">${esc(CAT_KO[c])}</h3><div class="list">`;
+      g.forEach(([, p]) => {
+        h += `<a class="row" style="--inset:57px" href="${amapUrl(p)}" target="_blank" rel="noopener">${icon(p.cat)}<span class="row-main"><span class="row-title" style="display:block">${esc(p.name)}${p.status === 'planned' ? '' : ' <span style="font-size:13px;color:var(--label2)">후보</span>'}</span><span class="row-zh" lang="zh-CN" style="display:block">${esc(p.cn)}</span><span class="row-note" style="display:block">${esc([p.area, p.hours, p.memo].filter(Boolean).join(' · '))}</span></span>${CHEV}</a>`;
+      });
+      h += `</div>`;
+    });
+    $('#placeList').innerHTML = h || `<p class="group-f" style="text-align:center;margin-top:30px">검색 결과가 없어요. 다른 이름이나 중국어로 찾아보세요.</p>`;
+  }
+
+  /* ---------- 정보 ---------- */
+  function renderInfo() {
+    const el = $('#screen-info');
+    let h = `<h1 class="large-title">정보</h1><p class="subhead">출발 전에 한 번, 도착해서 한 번 보면 돼요.</p>`;
+    INFO.forEach((g) => {
+      h += `<h3 class="group-h">${esc(g.group)}</h3><div class="list">`;
+      g.rows.forEach((r, i) => {
+        const id = `info-${esc(g.group)}-${i}`.replace(/\s/g, '');
+        h += `<button class="row" style="--inset:57px" aria-expanded="false" aria-controls="${id}" data-toggle="${id}">${icon(r.icon)}<span class="row-main"><span class="row-title" style="display:block">${esc(r.title)}</span>${r.summary ? `<span class="row-sub" style="display:block">${esc(r.summary)}</span>` : ''}</span>${CHEV}</button>`;
+        h += `<div class="detail" id="${id}"><div class="detail-inner"><div class="detail-pad" style="padding-left:57px">${detailHtml(r, null)}${r.show ? `<div class="chips">${showPill(r.show[0], r.show[1])}</div>` : ''}</div></div></div>`;
+      });
+      h += `</div>`;
+      if (g.foot) h += `<p class="group-f">${esc(g.foot)}</p>`;
+    });
+    const done = store.get('check', {});
+    h += `<h3 class="group-h">출발 전 체크리스트</h3><div class="list">`;
+    CHECKLIST.forEach((c, i) => {
+      h += `<label class="check"><input type="checkbox" data-check="${i}"${done[i] ? ' checked' : ''}><span>${esc(c)}</span></label>`;
+    });
+    h += `</div><p class="group-f">체크 상태는 이 기기에만 저장돼요.</p>`;
+    h += `<p class="foot">조사 기준 ${esc(TRIP.asOf)}</p>`;
+    el.innerHTML = h;
+  }
+
+  /* ---------- 회화 ---------- */
+  let zhVoice = null;
+  function pickVoice() {
+    if (!('speechSynthesis' in window)) return;
+    const vs = speechSynthesis.getVoices();
+    zhVoice = vs.find((v) => /zh[-_]CN/i.test(v.lang) && /Ting|Li-mu|Yu-shu|Xiaoxiao/i.test(v.name)) ||
+      vs.find((v) => /zh[-_]CN/i.test(v.lang)) || vs.find((v) => /^zh/i.test(v.lang)) || null;
+  }
+  if ('speechSynthesis' in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+  let slow = store.get('slow', false);
+  function speak(text, btn) {
+    if (!('speechSynthesis' in window)) { alertLine('이 브라우저는 음성 재생을 지원하지 않아요.'); return; }
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text.replace(/\n/g, '，'));
+    u.lang = 'zh-CN';
+    if (zhVoice) u.voice = zhVoice;
+    u.rate = slow ? 0.6 : 0.9;
+    document.querySelectorAll('.speak.is-playing').forEach((b) => b.classList.remove('is-playing'));
+    if (btn) { btn.classList.add('is-playing'); u.onend = u.onerror = () => btn.classList.remove('is-playing'); }
+    speechSynthesis.speak(u);
+  }
+  function alertLine(msg) {
+    const p = document.createElement('p'); p.className = 'warn'; p.textContent = msg;
+    $('#screen-talk').prepend(p); setTimeout(() => p.remove(), 3500);
+  }
+  function renderTalk() {
+    const el = $('#screen-talk');
+    let h = `<h1 class="large-title">회화</h1><p class="subhead">스피커를 누르면 중국어로 읽어줘요. 문장을 누르면 크게 보여줘요.</p>`;
+    h += `<div class="seg" role="group" aria-label="읽는 속도"><button data-speed="0" aria-pressed="${!slow}">보통 속도</button><button data-speed="1" aria-pressed="${slow}">천천히</button></div>`;
+    PHRASES.forEach((g) => {
+      h += `<h3 class="group-h">${esc(g.group)}</h3><div class="list">`;
+      g.items.forEach(([ko, zh, py]) => {
+        h += `<div class="phrase"><button class="phrase-open" data-show-ko="${esc(ko)}" data-show-zh="${esc(zh)}" data-show-py="${esc(py)}"><div class="phrase-ko">${esc(ko)}</div><div class="phrase-zh" lang="zh-CN">${esc(zh)}</div><div class="phrase-py">${esc(py)}</div></button><button class="speak" data-say="${esc(zh)}" aria-label="${esc(ko)} 중국어로 듣기">${SPK}</button></div>`;
+      });
+      h += `</div>`;
+    });
+    h += `<p class="group-f">음성은 기기에 내장된 중국어 음성을 써요. 아이폰은 설정 › 손쉬운 사용 › 읽기 및 말하기 › 음성 › 중국어에서 고음질 음성을 받아두면 더 자연스러워요.</p>`;
+    el.innerHTML = h;
+  }
+
+  /* ---------- 크게 보여주기 ---------- */
+  const sheet = $('#showSheet');
+  let lastFocus = null;
+  function openShow(ko, zh, py) {
+    lastFocus = document.activeElement;
+    $('#showKo').textContent = ko || '';
+    $('#showZh').textContent = zh || '';
+    $('#showZh').style.whiteSpace = 'pre-line';
+    $('#showPy').textContent = py || '';
+    $('#showSpeak').dataset.say = zh || '';
+    sheet.hidden = false;
+    $('#showClose').focus();
+  }
+  function closeShow() { sheet.hidden = true; if ('speechSynthesis' in window) speechSynthesis.cancel(); lastFocus && lastFocus.focus(); }
+  $('#showClose').addEventListener('click', closeShow);
+  $('#showSpeak').addEventListener('click', (e) => speak(e.currentTarget.dataset.say));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !sheet.hidden) closeShow(); });
+
+  /* ---------- 탭 & 이벤트 ---------- */
+  const renderers = { plan: renderPlan, places: renderPlaces, info: renderInfo, talk: renderTalk };
+  let tab = store.get('tab', 'plan');
+  if (!renderers[tab]) tab = 'plan';
+  function setTab(t) {
+    tab = t; store.set('tab', t);
+    document.querySelectorAll('.tab').forEach((b) => {
+      const on = b.dataset.tab === t;
+      b.classList.toggle('is-active', on);
+      on ? b.setAttribute('aria-current', 'page') : b.removeAttribute('aria-current');
+    });
+    document.querySelectorAll('.screen').forEach((s) => { s.hidden = s.id !== `screen-${t}`; });
+    $('#navbarTitle').textContent = $(`#screen-${t}`).dataset.title;
+    renderers[t]();
+    window.scrollTo(0, 0);
+    onScroll();
+  }
+  document.querySelectorAll('.tab').forEach((b) => b.addEventListener('click', () => setTab(b.dataset.tab)));
+
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-toggle]');
+    if (t) {
+      const panel = document.getElementById(t.dataset.toggle);
+      const open = t.getAttribute('aria-expanded') !== 'true';
+      t.setAttribute('aria-expanded', String(open));
+      panel.classList.toggle('is-open', open);
+      return;
+    }
+    const day = e.target.closest('[data-day]');
+    if (day) { dayIdx = Number(day.dataset.day); store.set('day', dayIdx); renderPlan(); return; }
+    const say = e.target.closest('[data-say]');
+    if (say && say.id !== 'showSpeak') { speak(say.dataset.say, say); return; }
+    const show = e.target.closest('[data-show-zh]');
+    if (show) { openShow(show.dataset.showKo, show.dataset.showZh, show.dataset.showPy); return; }
+    const pf = e.target.closest('[data-pf]');
+    if (pf) {
+      placeFilter = pf.dataset.pf;
+      document.querySelectorAll('[data-pf]').forEach((b) => b.setAttribute('aria-pressed', String(b === pf)));
+      renderPlaces(); return;
+    }
+    const sp = e.target.closest('[data-speed]');
+    if (sp) {
+      slow = sp.dataset.speed === '1'; store.set('slow', slow);
+      document.querySelectorAll('[data-speed]').forEach((b) => b.setAttribute('aria-pressed', String(b === sp)));
+    }
+  });
+  document.addEventListener('input', (e) => {
+    if (e.target.id === 'placeQ') { placeQuery = e.target.value; renderPlaces(); }
+  });
+  document.addEventListener('change', (e) => {
+    if (e.target.dataset.check !== undefined) {
+      const done = store.get('check', {}); done[e.target.dataset.check] = e.target.checked; store.set('check', done);
+    }
+  });
+
+  const navbar = $('#navbar');
+  function onScroll() { navbar.classList.toggle('is-solid', window.scrollY > 36); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  setTab(tab);
+  if ('serviceWorker' in navigator && location.protocol === 'https:') {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  }
+})();
