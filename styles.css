@@ -432,3 +432,7 @@ main { padding-top: calc(10px + env(safe-area-inset-top)); }
 
 /* 날씨 카드 바탕 한 톤 낮게 */
 .wx-card { background: var(--fill); }
+
+/* 날짜 카드 안, 날짜 줄 바로 밑 날씨 (바탕·패딩 없이 구분선만) */
+.wx-in .wx-card { background: none; border-radius: 0; padding: 12px 6px 2px; margin: 10px 0 0; border-top: .5px solid var(--sep); }
+.wx-in .wx-outfit { margin-top: 8px; padding-top: 8px; }

@@ -127,7 +127,7 @@
     const allOn = planMode === 'all';
     const dayBtns = DAYS.map((x, i) => `<button class="day${i === todayIdx ? ' is-today' : ''}" role="tab" aria-selected="${!allOn && i === dayIdx}" data-day="${i}"><span class="day-w">${esc(x.w)}</span><span class="day-n">${Number(x.date.slice(8))}</span></button>`).join('');
     const allBtn = `<button class="day day-all" role="tab" aria-selected="${allOn}" data-pm="all" aria-label="전체 일정 펼쳐 보기"><span class="day-w">전체</span><span class="day-n"><span class="ms" aria-hidden="true">view_agenda</span></span></button>`;
-    h += `<div class="trip-card">${nowCard()}<div class="days" role="tablist" aria-label="날짜">${dayBtns}${allBtn}</div></div>`;
+    h += `<div class="trip-card">${nowCard()}<div class="days" role="tablist" aria-label="날짜">${dayBtns}${allBtn}</div>${allOn ? '' : `<div class="wx-in" data-wx="${DAYS[dayIdx].date}"></div>`}</div>`;
     if (planMode === 'all') {
       h += `<p class="group-f" style="margin:0 4px 6px">모든 일정이 펼쳐져 있어요. 길게 눌러 글자를 선택하고 복사할 수 있어요.</p>`;
       DAYS.forEach((d, dIdx) => {
@@ -138,7 +138,7 @@
       });
     } else {
       const d = DAYS[dayIdx];
-      h += `<div data-wx="${d.date}"></div><div class="day-head"><h2>${esc(d.title)}</h2>${d.sub ? `<p>${esc(d.sub)}</p>` : ''}</div>`;
+      h += `<div class="day-head"><h2>${esc(d.title)}</h2>${d.sub ? `<p>${esc(d.sub)}</p>` : ''}</div>`;
       const nowI = dayIdx === todayIdx ? d.items.reduce((acc, it, i) => (/^\d/.test(it.t) && it.t <= now.hm ? i : acc), -1) : -1;
       h += `<div class="list">${d.items.map((it, i) => itemHtml(it, i, dayIdx, nowI, false)).join('')}</div>`;
       if (d.foot) h += `<p class="group-f">${esc(d.foot)}</p>`;
