@@ -331,3 +331,11 @@ a.row { color: inherit; }
 .pill-tint { color: #fff; }
 .detail .chips { flex-wrap: nowrap; }
 .detail .chips .pill { padding: 7px 12px; white-space: nowrap; }
+
+/* 선택한 날짜 동그라미 빨강, 세그먼트 바탕은 연한 빨강 */
+.day[aria-selected="true"] .day-n { background: var(--tint); color: #fff; }
+.seg { background: color-mix(in srgb, var(--tint) 12%, var(--bg)); }
+.seg button { color: var(--label); }
+.seg button[aria-pressed="true"] { color: var(--tint); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .seg { background: color-mix(in srgb, var(--tint) 24%, #1C1C1E); } }
+:root[data-theme="dark"] .seg { background: color-mix(in srgb, var(--tint) 24%, #1C1C1E); }
