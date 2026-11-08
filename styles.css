@@ -431,4 +431,4 @@ main { padding-top: calc(10px + env(safe-area-inset-top)); }
 :root[data-theme="dark"] .pill.pill-gray { background: var(--fill); }
 
 /* 날씨 카드 바탕 한 톤 낮게 */
-.wx-card { background: color-mix(in srgb, var(--card) 95%, #000); }
+.wx-card { background: var(--fill); }
