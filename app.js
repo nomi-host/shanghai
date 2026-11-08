@@ -62,7 +62,7 @@
         return zh && /[一-鿿]/.test(zh)
           ? `<button class="menu-item" data-show-ko="${esc(ko)}" data-show-zh="${esc(zh)}" aria-label="${esc(ko)} 크게 보여주기">${body}</button>`
           : `<div class="menu-item">${body}</div>`;
-      }).join('')}</div><p class="menu-hint">중국어 메뉴명을 누르면 크게 보여줘요. 직원에게 그대로 보여주세요.</p>`;
+      }).join('')}</div>${ex.menu.some(([zh]) => /[\u4e00-\u9fff]/.test(zh)) ? '<p class="menu-hint">중국어 메뉴명을 누르면 크게 보여줘요. 직원에게 그대로 보여주세요.</p>' : ''}`;
     }
     return h;
   }
