@@ -386,3 +386,6 @@ a.row { color: inherit; }
 /* 위 여백 줄이기: 첫 화면 제목이 상태바 바로 아래에서 시작 */
 main { padding-top: calc(10px + env(safe-area-inset-top)); }
 .large-title { margin-top: 0; }
+
+/* 스크롤 때 위 바 제목도 포인트 빨강 */
+.navbar-title { color: var(--tint); }
