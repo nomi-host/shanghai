@@ -357,3 +357,15 @@ a.row { color: inherit; }
 
 /* 세그먼트 선택: 그림자 없이 진한 빨강 + 흰 글씨 */
 .seg button[aria-pressed="true"] { background: var(--tint); color: #fff; box-shadow: none; }
+
+/* 제목 줄 오른쪽 새로고침 — 제목과 같은 줄, 스크롤하면 위 바의 버튼으로 바뀜 */
+.title-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.title-row .large-title { flex: 1; min-width: 0; }
+.refresh-inline { position: static; flex: none; margin-right: -10px; }
+.navbar .refresh { opacity: 0; pointer-events: none; transition: opacity .2s; }
+.navbar.is-solid .refresh { opacity: 1; pointer-events: auto; }
+
+/* 좁은 폰에서도 제목·D-day 한 줄 */
+.large-title.brand { white-space: nowrap; font-size: clamp(26px, 8vw, 34px); }
+.large-title.brand img { width: clamp(34px, 10vw, 42px); }
+.now-big { white-space: nowrap; flex: none; }
