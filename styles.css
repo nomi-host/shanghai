@@ -297,3 +297,10 @@ a.row { color: inherit; }
 @media (min-width: 600px) { .chipbar { margin-left: 0; margin-right: 0; padding: 2px 0; } }
 .chipbar { position: relative; }
 .chipbar { scroll-snap-type: none; }
+
+/* 선택된 칩은 포인트 빨강 */
+.chip[aria-pressed="true"] { background: var(--tint); color: #fff; }
+.chip[aria-pressed="true"] .ms { color: #fff; }
+/* 첫 화면 제목 + 마스코트 */
+.large-title.brand { display: flex; align-items: center; gap: 10px; }
+.large-title.brand img { width: 42px; height: auto; flex: none; }

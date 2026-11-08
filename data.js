@@ -2,7 +2,7 @@
    place.q = 고덕지도 검색어(지점까지 포함). lng/lat(GCJ-02)을 넣으면 정확한 핀으로 열린다. */
 window.TRIP_DATA = (() => {
   const TRIP = {
-    title: '상해 3박 4일',
+    title: 'Shanghai 4Days',
     sub: '11월 21일 – 24일 · 와이탄 숙소',
     asOf: '2026-11-08',
     flightOut: 'KE2057 김포 08:25 → 홍차오 09:45',

@@ -116,7 +116,7 @@
 
   function renderPlan() {
     const el = $('#screen-plan');
-    let h = `<h1 class="large-title">${esc(TRIP.title)}</h1><p class="subhead">${esc(TRIP.sub)}</p>`;
+    let h = `<h1 class="large-title brand"><img src="mascot.png" alt="" width="42" height="45">${esc(TRIP.title)}</h1><p class="subhead">${esc(TRIP.sub)}</p>`;
     h += nowCard();
     h += `<div class="seg" role="group" aria-label="보기 방식"><button data-pm="day" aria-pressed="${planMode === 'day'}">날짜별</button><button data-pm="all" aria-pressed="${planMode === 'all'}">전체 펼쳐 보기</button></div>`;
     if (planMode === 'all') {
@@ -176,7 +176,7 @@
   function renderPlaces() {
     const el = $('#screen-places');
     if (!el.dataset.built) {
-      el.innerHTML = `<h1 class="large-title">장소</h1><p class="subhead">누르면 고덕지도 앱에서 열려요. 앱에서 ☆를 눌러 저장하세요.</p>
+      el.innerHTML = `<h1 class="large-title">Places</h1><p class="subhead">누르면 고덕지도 앱에서 열려요. 앱에서 ☆를 눌러 저장하세요.</p>
       ${chipBar('pc', CAT_CHIPS, placeCat, '카테고리')}
       <label class="search">${ms('search')}<input type="search" id="placeQ" placeholder="이름, 중국어, 지역 검색" aria-label="장소 검색"></label>
       <div class="seg" role="group" aria-label="장소 필터"><button data-pf="all" aria-pressed="true">전체</button><button data-pf="planned" aria-pressed="false">일정</button><button data-pf="backup" aria-pressed="false">후보</button></div>
@@ -205,7 +205,7 @@
   /* ---------- 정보 ---------- */
   function renderInfo() {
     const el = $('#screen-info');
-    let h = `<h1 class="large-title">정보</h1><p class="subhead">출발 전에 한 번, 도착해서 한 번 보면 돼요.</p><div class="chips" style="margin:0 0 4px"><button class="pill" data-expand-all="screen-info">모두 펼치기</button><button class="pill" data-collapse-all="screen-info">모두 접기</button></div>`;
+    let h = `<h1 class="large-title">Info</h1><p class="subhead">출발 전에 한 번, 도착해서 한 번 보면 돼요.</p><div class="chips" style="margin:0 0 4px"><button class="pill" data-expand-all="screen-info">모두 펼치기</button><button class="pill" data-collapse-all="screen-info">모두 접기</button></div>`;
     INFO.forEach((g) => {
       h += `<h3 class="group-h">${esc(g.group)}</h3><div class="list">`;
       g.rows.forEach((r, i) => {
@@ -275,7 +275,7 @@
   const TALK_ICON = { '기본': 'waving_hand', '줄서기·예약': 'confirmation_number', '맛집 주문': 'ramen_dining', '디즈니': 'castle', '식당': 'restaurant', '바·디저트': 'local_bar', '쇼핑': 'shopping_bag', '교통·길': 'local_taxi', '호텔': 'hotel', '급할 때': 'sos' };
   function renderTalk() {
     const el = $('#screen-talk');
-    let h = `<h1 class="large-title">회화</h1><p class="subhead">스피커를 누르면 중국어로 읽어줘요. 문장을 누르면 크게 보여줘요.</p>`;
+    let h = `<h1 class="large-title">Phrases</h1><p class="subhead">스피커를 누르면 중국어로 읽어줘요. 문장을 누르면 크게 보여줘요.</p>`;
     h += chipBar('tg', [['all', '전체', 'apps'], ...PHRASES.map((g) => [g.group, g.group, TALK_ICON[g.group]])], talkGroup, '상황');
     h += `<div class="seg" role="group" aria-label="읽는 속도"><button data-speed="0" aria-pressed="${!slow}">보통 속도</button><button data-speed="1" aria-pressed="${slow}">천천히</button></div>`;
     PHRASES.filter((g) => talkGroup === 'all' || g.group === talkGroup).forEach((g) => {
