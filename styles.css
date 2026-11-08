@@ -348,3 +348,9 @@ a.row { color: inherit; }
 .refresh.is-spinning .ms { animation: spin .8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @media (min-width: 600px) { .refresh { right: 14px; } }
+
+/* 둥근 버튼 바탕도 세그먼트와 같은 연한 빨강 */
+.pill:not(.pill-tint) { background: color-mix(in srgb, var(--tint) 12%, var(--bg)); }
+.pill:not(.pill-tint):active { background: color-mix(in srgb, var(--tint) 22%, var(--bg)); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pill:not(.pill-tint) { background: color-mix(in srgb, var(--tint) 24%, #1C1C1E); } }
+:root[data-theme="dark"] .pill:not(.pill-tint) { background: color-mix(in srgb, var(--tint) 24%, #1C1C1E); }
