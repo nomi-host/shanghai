@@ -127,7 +127,7 @@
     const allOn = planMode === 'all';
     const dayBtns = DAYS.map((x, i) => `<button class="day${i === todayIdx ? ' is-today' : ''}" role="tab" aria-selected="${!allOn && i === dayIdx}" data-day="${i}"><span class="day-w">${esc(x.w)}</span><span class="day-n">${Number(x.date.slice(8))}</span></button>`).join('');
     const allBtn = `<button class="day day-all" role="tab" aria-selected="${allOn}" data-pm="all" aria-label="전체 일정 펼쳐 보기"><span class="day-w">전체</span><span class="day-n"><span class="ms" aria-hidden="true">view_agenda</span></span></button>`;
-    h += `<div class="trip-card">${nowCard()}<div class="days" role="tablist" aria-label="날짜">${dayBtns}${allBtn}</div>${allOn ? '' : `<div class="wx-in" data-wx="${DAYS[dayIdx].date}"></div>`}</div>`;
+    h += `<div class="trip-card">${nowCard()}<div class="days" role="tablist" aria-label="날짜">${dayBtns}${allBtn}</div></div>${allOn ? '' : `<div class="wx-drawer${store.get('wxOpen', true) ? ' is-open' : ''}" data-wx="${DAYS[dayIdx].date}" data-drawer="1"></div>`}`;
     if (planMode === 'all') {
       h += `<p class="group-f" style="margin:0 4px 6px">모든 일정이 펼쳐져 있어요. 길게 눌러 글자를 선택하고 복사할 수 있어요.</p>`;
       DAYS.forEach((d, dIdx) => {
@@ -182,7 +182,7 @@
     if (wet) o += ' · 우산 챙기기';
     return o;
   }
-  function wxHtml(date) {
+  function wxHtml(date, drawer) {
     if (!wxData || !wxData.h) return '<div class="wx-card wx-empty">날씨를 불러오지 못했어요. 인터넷 연결 후 새로고침해 주세요.</div>';
     const h = wxData.h; const idx = h.time.map((t, i) => (t.startsWith(date) ? i : -1)).filter((i) => i >= 0);
     if (!idx.length) {
@@ -196,8 +196,9 @@
     const pop = Math.max(...day.map((k) => h.precipitation_probability[k] ?? 0));
     const mm = Math.round(day.reduce((s, k) => s + (h.precipitation[k] || 0), 0) * 10) / 10;
     const wet = pop >= 50 || mm >= 1;
+    const sum = `<button class="wx-sum" data-wx-toggle aria-label="날씨 접기·펴기">${ms('partly_cloudy_day', 'fill')}<span class="wx-sum-t"><b class="num">${lo}°–${hi}°</b> · 강수 <span class="num${wet ? ' wx-wet' : ''}">${pop}%</span> · ${esc(outfit(lo, hi, wet).split(' · ')[0])}</span><span class="ms wx-chev" aria-hidden="true">expand_more</span></button>`;
     const cell = (label, v) => `<div class="wx-cell"><span class="wx-l">${label}</span><span class="wx-v num">${v == null ? '–' : v + '°'}</span></div>`;
-    return `<div class="wx-card">
+    return `${drawer ? sum : ''}<div class="wx-card">
       <div class="wx-row">${cell('아침 8시', at(8))}${cell('낮 2시', at(14))}${cell('밤 9시', at(21))}
         <div class="wx-cell"><span class="wx-l">강수확률</span><span class="wx-v num${wet ? ' wx-wet' : ''}">${pop}%</span></div>
         <div class="wx-cell"><span class="wx-l">강수량</span><span class="wx-v num">${mm}<small>mm</small></span></div></div>
@@ -207,7 +208,7 @@
   function fillWx(root) {
     const slots = root.querySelectorAll('[data-wx]');
     if (!slots.length) return;
-    loadWx().then(() => slots.forEach((el) => { el.innerHTML = wxHtml(el.dataset.wx); }));
+    loadWx().then(() => slots.forEach((el) => { el.innerHTML = wxHtml(el.dataset.wx, !!el.dataset.drawer); }));
   }
 
   /* ---------- 장소 ---------- */
@@ -394,6 +395,8 @@
   document.querySelectorAll('.tab').forEach((b) => b.addEventListener('click', () => setTab(b.dataset.tab)));
 
   document.addEventListener('click', (e) => {
+    const wt = e.target.closest('[data-wx-toggle]');
+    if (wt) { const dr = wt.closest('.wx-drawer'); const open = !dr.classList.contains('is-open'); dr.classList.toggle('is-open', open); store.set('wxOpen', open); return; }
     const t = e.target.closest('[data-toggle]');
     if (t) {
       const panel = document.getElementById(t.dataset.toggle);
