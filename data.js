@@ -103,6 +103,8 @@ window.TRIP_DATA = (() => {
 
   /* 대안 식당 (지도 버튼은 q로 검색) */
   const A = {
+    fever: { name: 'Fever Bar', cn: 'Fever Bar 陕西北路', q: 'Fever Bar 陕西北路', meta: '陕西北路600-11号 · 15:30–01:30 · 칵테일 · Nótelab에서 디디 5–10분' },
+    kaisha: { name: 'KAISHA 會社', cn: 'KAISHA會社', q: 'KAISHA會社 康定路', meta: '康定路358号 · 일–목 18:00–01:00 · 칵테일 · Nótelab에서 디디 10분' },
     barleone2: { name: 'Bar Leone 상하이', cn: 'Bar Leone 思南公馆', q: 'Bar Leone 思南公馆', meta: '复兴中路525-527号 · 18:00–01:00 · 워크인 · Nótelab에서 디디 5분' },
     d_pickup: { name: '디디 승차 구역', cn: '迪士尼停车场小型客车上下客区', q: '迪士尼停车场小型客车上下客区', meta: '申迪西路 · 디디(网约车)는 여기서 · 07:00–22:00' },
     d_taxi: { name: '택시 하차점 (승차 줄 근처)', cn: '迪士尼度假区出租车下客点', q: '迪士尼度假区出租车下客点', meta: '고덕엔 택시 승차장 표시가 없어 하차점으로 저장' },
@@ -112,7 +114,7 @@ window.TRIP_DATA = (() => {
     siji_bund: { name: '사계민복 외백도교점', cn: '四季民福 外白渡桥店', q: '四季民福 外白渡桥', meta: '虹口 吴淞路130号 3층 · 와이탄 북쪽 끝, 호텔과 가까움 · 예약 불필요 후기' },
     zuoting_dawan: { name: '좌정우원 신세계다마루점', cn: '左庭右院 新世界大丸', q: '左庭右院 新世界大丸', meta: '南京东路228号 B2 · 10:00–23:00 · 같은 남경동로' },
     zuoting_xinmei: { name: '좌정우원 신메이광장점', cn: '左庭右院 新梅广场', q: '左庭右院 新梅广场', meta: '浦东南路999号 4층 · 10:30–02:00' },
-    luminous: { name: 'Luminous Ocean', cn: '环海 Luminous Ocean', q: 'Luminous Ocean 香山路', meta: '香山路15号 · 금–일 18:00–02:00 · 심해·수족관 콘셉트 신상 바' },
+    luminous: { name: 'Luminous Ocean', cn: '环海 Luminous Ocean', q: 'Luminous Ocean 香山路', meta: '香山路15号 · 일 02:00까지 · 심해·수족관 콘셉트 · Nótelab에서 디디 5분' },
     punch: { name: 'Punch Room (EDITION)', cn: '上海艾迪逊酒店', q: '上海艾迪逊酒店', meta: '南京东路199号 · 17:30–02:00 · 예약제 · 호텔에서 가장 가까움' },
     carter: { name: 'CARTER', cn: 'CARTER 奉贤路', q: 'CARTER 奉贤路', meta: '奉贤路50号 · 일 18:30–01:30 · 아르데코 영국식 칵테일 펍' },
     jzclub: { name: 'JZ Club', cn: 'JZ Club 衡山路', q: 'JZ Club 衡山路', meta: '衡山路8号 · 일 18:30–00:30 · 라이브 재즈' },
@@ -134,7 +136,7 @@ window.TRIP_DATA = (() => {
     tangge: { name: '탕거 (랭함 호텔)', cn: '唐阁', q: '唐阁 朗廷酒店', meta: '马当路99号 5F · 미슐랭 1스타 광둥 딤섬 · 보통 점심부터' },
     leigarden: { name: '레이가든 푸동', cn: '利苑 国金中心', q: '利苑酒家 国金中心', meta: 'IFC 3F · 미슐랭 1스타 딤섬 70종 · 예약 필수' },
     ponyup: { name: 'Pony Up', cn: 'Pony Up', q: 'Pony Up 进贤路', meta: '进贤路230号 · Asia’s 50 Best 2026 19위 · 백바 18:00–02:00' },
-    coa: { name: 'COA', cn: 'COA 复兴中路', q: 'COA 复兴中路', meta: '复兴中路580弄 · Asia’s 50 Best 2026 95위 · Bar Leone 도보 몇 분' },
+    coa: { name: 'COA', cn: 'COA 复兴中路', q: 'COA 复兴中路', meta: '复兴中路580号 · 일 01:30까지 · Asia’s 50 Best 2026 95위 · Bar Leone 옆' },
     speaklow: { name: 'Speak Low', cn: 'Speak Low', q: 'Speak Low 复兴中路', meta: '复兴中路579号 · 스피크이지 · 18:00–01:30' },
     jazzbar: { name: '평화호텔 재즈바', cn: '和平饭店 爵士吧', q: '和平饭店 爵士吧', meta: '南京东路20号 1F · 18:00–24:00 · 숙소 근처' },
     roof: { name: 'EDITION Roof', cn: '艾迪逊 Roof', q: '上海艾迪逊酒店', meta: '29층 · 11/3–11/30 휴업 공지 있음' },
@@ -392,7 +394,7 @@ window.TRIP_DATA = (() => {
             { h: '찾아가기', li: ['陕西南路15号 — 고덕엔 1층 옷가게 ‘Notelab(陕西南路19号)’으로 나옴', '옷가게 안쪽 오른쪽 벽 계단으로 2층'] },
             { h: '한 잔 더?', li: ['Bar Leone(思南公馆)까지 디디 5분 · 01:00 마감 · 예약 없이 줄 서기', '끝나면 호텔까지 디디 15분(23시 넘으면 야간 요금 ¥20–25)'] },
           ],
-          altsTitle: '한 잔 더 · 대안', alts: [A.barleone2, A.punch, A.carter] },
+          altsTitle: '근처 바 (한 잔 더 · 대안)', alts: [A.barleone2, A.luminous, A.coa, A.fever, A.kaisha, A.punch] },
       ],
     },
     {
