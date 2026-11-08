@@ -380,6 +380,15 @@
     }
   });
 
+  /* PWA(홈 화면 앱)엔 새로고침이 없어서 직접 최신 버전 받기 */
+  $('#refreshBtn').addEventListener('click', async (e) => {
+    e.currentTarget.classList.add('is-spinning');
+    try {
+      if ('caches' in window) { const ks = await caches.keys(); await Promise.all(ks.map((k) => caches.delete(k))); }
+      if (navigator.serviceWorker) { const r = await navigator.serviceWorker.getRegistration(); if (r) await r.update(); }
+    } catch { /* 캐시 접근 불가해도 새로고침은 진행 */ }
+    location.reload();
+  });
   const navbar = $('#navbar');
   function onScroll() { navbar.classList.toggle('is-solid', window.scrollY > 36); }
   window.addEventListener('scroll', onScroll, { passive: true });

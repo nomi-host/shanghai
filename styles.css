@@ -339,3 +339,12 @@ a.row { color: inherit; }
 .seg button[aria-pressed="true"] { color: var(--tint); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .seg { background: color-mix(in srgb, var(--tint) 24%, #1C1C1E); } }
 :root[data-theme="dark"] .seg { background: color-mix(in srgb, var(--tint) 24%, #1C1C1E); }
+
+/* 오른쪽 위 새로고침 (본문 좌우 여백에 맞춤) */
+.navbar-inner { position: relative; max-width: 720px; margin: 0 auto; }
+.refresh { position: absolute; right: 6px; top: 0; width: 44px; height: 44px; display: grid; place-items: center; color: var(--label2); border-radius: 50%; }
+.refresh .ms { font-size: 22px; }
+.refresh:active { background: var(--fill); }
+.refresh.is-spinning .ms { animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (min-width: 600px) { .refresh { right: 14px; } }
