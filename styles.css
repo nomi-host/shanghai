@@ -291,3 +291,8 @@ a.row { color: inherit; }
 /* 복사 가능한 텍스트 */
 .detail, .selectable, .selectable .row, .phrase-open, .row-main { -webkit-user-select: text; user-select: text; }
 .alt-btns { display: flex; flex-direction: column; gap: 6px; flex: none; }
+
+/* 칩 줄도 아래 목록과 같은 좌우 여백 안에서 스크롤 */
+.chipbar { margin: 4px 0 12px; padding: 2px 0; }
+@media (min-width: 600px) { .chipbar { margin-left: 0; margin-right: 0; padding: 2px 0; } }
+.chipbar { position: relative; }

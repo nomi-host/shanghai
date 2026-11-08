@@ -166,6 +166,13 @@
   ];
   const chipBar = (attr, items, cur, label) => `<div class="chipbar" role="group" aria-label="${label}">${items.map(([k, t, ic]) =>
     `<button class="chip" data-${attr}="${esc(k)}" aria-pressed="${k === cur}">${ic ? ms(ic, 'fill') : ''}${esc(t)}</button>`).join('')}</div>`;
+  /* 다시 그려도 선택된 칩이 칩 줄 안에 보이게 */
+  function keepChipVisible(root) {
+    const bar = root.querySelector('.chipbar'); const on = bar && bar.querySelector('.chip[aria-pressed="true"]');
+    if (!on) return;
+    const over = on.offsetLeft + on.offsetWidth - (bar.scrollLeft + bar.clientWidth);
+    if (over > 0) bar.scrollLeft += over + 16; else if (on.offsetLeft < bar.scrollLeft) bar.scrollLeft = on.offsetLeft - 16;
+  }
   function renderPlaces() {
     const el = $('#screen-places');
     if (!el.dataset.built) {
@@ -265,7 +272,7 @@
     $('#screen-talk').prepend(p); setTimeout(() => p.remove(), 3500);
   }
   let talkGroup = 'all';
-  const TALK_ICON = { '기본': 'waving_hand', '식당': 'restaurant', '바·디저트': 'local_bar', '쇼핑': 'shopping_bag', '교통·길': 'local_taxi', '호텔': 'hotel', '급할 때': 'sos' };
+  const TALK_ICON = { '기본': 'waving_hand', '줄서기·예약': 'confirmation_number', '맛집 주문': 'ramen_dining', '디즈니': 'castle', '식당': 'restaurant', '바·디저트': 'local_bar', '쇼핑': 'shopping_bag', '교통·길': 'local_taxi', '호텔': 'hotel', '급할 때': 'sos' };
   function renderTalk() {
     const el = $('#screen-talk');
     let h = `<h1 class="large-title">회화</h1><p class="subhead">스피커를 누르면 중국어로 읽어줘요. 문장을 누르면 크게 보여줘요.</p>`;
@@ -280,6 +287,7 @@
     });
     h += `<p class="group-f">음성은 기기에 내장된 중국어 음성을 써요. 아이폰은 설정 › 손쉬운 사용 › 읽기 및 말하기 › 음성 › 중국어에서 고음질 음성을 받아두면 더 자연스러워요.</p>`;
     el.innerHTML = h;
+    keepChipVisible(el);
   }
 
   /* ---------- 크게 보여주기 ---------- */
