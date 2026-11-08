@@ -224,7 +224,7 @@
     const done = store.get('check', {});
     h += `<h3 class="group-h">출발 전 체크리스트</h3><div class="list">`;
     CHECKLIST.forEach((c, i) => {
-      h += `<label class="check"><input type="checkbox" data-check="${i}"${done[i] ? ' checked' : ''}><span>${esc(c)}</span></label>`;
+      h += `<label class="check"><input type="checkbox" data-check="${esc(c)}"${done[c] ? ' checked' : ''}><span>${esc(c)}</span></label>`;
     });
     h += `</div><p class="group-f">체크 상태는 이 기기에만 저장돼요.</p>`;
     h += `<p class="foot">조사 기준 ${esc(TRIP.asOf)}</p>`;
