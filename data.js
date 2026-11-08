@@ -42,7 +42,7 @@ window.TRIP_DATA = (() => {
     bund: { name: '와이탄', cn: '外滩', cat: 'sight', area: '와이탄', q: '外滩观景平台', status: 'planned', memo: '야경' },
 
     punchroom: { name: 'Punch Room', cn: '上海艾迪逊酒店 Punch Room', cat: 'bar', area: '남경동로', addr: '黄浦区南京东路199号 上海艾迪逊酒店', hours: '17:30–02:00', q: '上海艾迪逊酒店', status: 'backup', memo: '예약제 · 스마트 캐주얼' },
-    barleone: { name: 'Bar Leone 상하이', cn: 'Bar Leone 思南公馆', cat: 'bar', area: '프랑스조계', addr: '黄浦区复兴中路525-527号 思南公馆', hours: '18:00–01:00', q: 'Bar Leone 思南公馆', status: 'planned', memo: '워크인만 · 1인 약 ¥237' },
+    barleone: { name: 'Bar Leone 상하이', cn: 'Bar Leone 思南公馆', cat: 'bar', area: '프랑스조계', addr: '黄浦区复兴中路525-527号 思南公馆', hours: '18:00–01:00', q: 'Bar Leone 思南公馆', status: 'backup', memo: '워크인만 · 1인 약 ¥237' },
 
     /* 후보 — 식당·디저트·차 */
     sijiminfu: { name: '사계민복 베이징덕 중신태부점', cn: '四季民福烤鸭店 中信泰富店', cat: 'food', area: '징안', addr: '静安区南京西路1168号 中信泰富广场4楼', hours: '월–목 10:30–21:30 · 금–일 10:30–22:30', q: '四季民福 中信泰富', status: 'planned', memo: '예약 대신 원격 줄서기 · 오픈 직후 가기' },
@@ -91,11 +91,11 @@ window.TRIP_DATA = (() => {
     speaklow: { name: 'Speak Low', cn: 'Speak Low 彼楼', cat: 'bar', area: '프랑스조계', addr: '黄浦区复兴中路579号', hours: '18:00–01:30 · 금토 –02:30', q: 'Speak Low 复兴中路', status: 'backup', memo: '스피크이지' },
     jazzbar: { name: '평화호텔 재즈바', cn: '和平饭店爵士酒吧', cat: 'bar', area: '와이탄', addr: '黄浦区南京东路20号 和平饭店大堂', hours: '18:00–24:00', q: '和平饭店 爵士酒吧', status: 'backup', memo: '호텔 근처 · 라이브 재즈' },
     noras: { name: "Nora's 와인바 (고덕 미확인)", cn: "Nora's Wine Shop & Bar", cat: 'bar', area: '헝푸', addr: '徐汇区永福路47-8号', hours: '15:00–24:00', q: "Nora's 永福路", status: 'backup', memo: '내추럴 와인' },
-    luminous: { name: 'Luminous Ocean', cn: '环海 Luminous Ocean', cat: 'bar', area: '프랑스조계', addr: '黄浦区香山路15号', hours: '월–목 18:00–01:00 · 금–일 18:00–02:00', q: 'Luminous Ocean 香山路', status: 'planned', memo: '심해·수족관 콘셉트 신상 바' },
+    luminous: { name: 'Luminous Ocean', cn: '环海 Luminous Ocean', cat: 'bar', area: '프랑스조계', addr: '黄浦区香山路15号', hours: '월–목 18:00–01:00 · 금–일 18:00–02:00', q: 'Luminous Ocean 香山路', status: 'backup', memo: '심해·수족관 콘셉트 신상 바' },
     jzclub: { name: 'JZ Club', cn: 'JZ Club 衡山路', cat: 'bar', area: '헝푸', addr: '徐汇区衡山路8号', hours: '일 18:30–00:30 · 금토 –01:30', q: 'JZ Club 衡山路', status: 'backup', memo: '라이브 재즈' },
     fever: { name: 'Fever', cn: 'Fever', cat: 'bar', area: '', q: 'Fever bar 上海', status: 'backup' },
     kaisha: { name: 'Kaisha', cn: 'Kaisha', cat: 'bar', area: '', q: 'Kaisha 上海', status: 'backup', memo: '페어링 코스' },
-    notelab: { name: 'Notelab', cn: 'Notelab', cat: 'bar', area: '', q: 'Notelab 上海', status: 'backup' },
+    notelab: { name: 'Nótelab 감각 실험실', cn: 'NOTE LAB·感官实验室', cat: 'bar', area: '징안·신천지 사이', addr: '黄浦区陕西南路15号2楼', hours: '19:00 오픈', q: '陕西南路15号', status: 'planned', memo: '향 실험실 콘셉트 칵테일 · 1층 옷가게 안쪽 오른쪽 계단으로 2층 · 1인 약 ¥121 · 2026년 10월 정식 오픈' },
     carter: { name: 'CARTER', cn: 'CARTER', cat: 'bar', area: '징안', addr: '静安区奉贤路50号', hours: '일–수 18:30–01:30 · 목–토 –02:00', q: 'CARTER 奉贤路', status: 'backup', memo: '아르데코 영국식 칵테일 펍' },
     joker: { name: 'Joker & Joker', cn: 'Joker & Joker', cat: 'bar', area: '징안', addr: '静安区武定路968号2F', q: 'Joker Joker 武定路', status: 'backup' },
     darlin: { name: 'Darlin', cn: 'Darlin', cat: 'bar', area: '', q: 'Darlin bar 上海', status: 'backup' },
@@ -103,6 +103,7 @@ window.TRIP_DATA = (() => {
 
   /* 대안 식당 (지도 버튼은 q로 검색) */
   const A = {
+    barleone2: { name: 'Bar Leone 상하이', cn: 'Bar Leone 思南公馆', q: 'Bar Leone 思南公馆', meta: '复兴中路525-527号 · 18:00–01:00 · 워크인 · Nótelab에서 디디 5분' },
     d_pickup: { name: '디디 승차 구역', cn: '迪士尼停车场小型客车上下客区', q: '迪士尼停车场小型客车上下客区', meta: '申迪西路 · 디디(网约车)는 여기서 · 07:00–22:00' },
     d_taxi: { name: '택시 하차점 (승차 줄 근처)', cn: '迪士尼度假区出租车下客点', q: '迪士尼度假区出租车下客点', meta: '고덕엔 택시 승차장 표시가 없어 하차점으로 저장' },
     d_garden: { name: '이매지네이션 가든 — 야간 쇼 명당', cn: '奇想花园', q: '上海迪士尼 奇想花园', meta: '성 정면 · 45–60분 전 자리 잡기' },
@@ -305,6 +306,12 @@ window.TRIP_DATA = (() => {
     });
   });
 
+  /* Nótelab은 실물 사진이 없어 칵테일 참고 사진을 같이 씀 */
+  EXTRA.notelab = Object.assign(EXTRA.notelab || {}, {
+    photos: (EXTRA.barleone && EXTRA.barleone.photos) || [],
+    must: ['잔 옆 향 장치와 함께 마시는 시그니처', '1층 옷가게 안쪽 계단을 지나 2층으로', '한 잔 더면 Bar Leone까지 디디 5분'],
+  });
+
   const DAYS = [
     {
       date: '2026-11-21', w: '토', title: '창닝 노양방 거리', sub: '점심 베이징덕 · 저녁 리바이시에(2인 세트 하나 나눠 먹기)',
@@ -342,7 +349,7 @@ window.TRIP_DATA = (() => {
       ],
     },
     {
-      date: '2026-11-22', w: '일', title: '징안·헝푸 편집샵 + 칵테일', sub: '점심 런허관 · 저녁 양꼬치',
+      date: '2026-11-22', w: '일', title: '징안·헝푸 편집샵 + 칵테일', sub: '점심 런허관 · 저녁 양꼬치 · 밤 Nótelab',
       items: [
         { t: '08:00', place: 'zhangshifu', title: '아침: 장스푸 상하이식 아침', note: '大饼·油条·粢饭·豆浆 · 영업 05:00–13:00',
           detail: [
@@ -372,16 +379,17 @@ window.TRIP_DATA = (() => {
             { h: '팁', li: ['자동으로 도는 숯불 그릴에 꼬치를 올려 구워 먹는 방식', '2인 소식이면 양꼬치 10개 + 채소·빵 꼬치 몇 개로 시작'] },
           ],
           altsTitle: '대기가 너무 길면', alts: [A.zhuangshi, A.zuoting_dawan] },
-        { t: '22:30', place: 'luminous', title: '칵테일: Luminous Ocean', note: '민영님 리스트의 신상 바 · 일요일 02:00까지 · 남경동로에서 디디 15분',
+        { t: '22:30', place: 'notelab', title: '칵테일: Nótelab 감각 실험실', note: '남경동로에서 디디 15분 · 1층 옷가게 안쪽 오른쪽 계단으로 2층',
           detail: [
-            { h: '왜 여기', li: ['리스트에 있던 바 중 일요일 밤 늦게까지 열고 남경동로에서 가까운 곳', '심해·수족관을 테마로 한 조명 공간. 2026 가이드에서 ‘상하이 최신 핫플’로 소개', '고덕 기준 금–일 18:00–02:00(월–목은 01:00까지)'] },
-            { h: '다른 선택', li: ['피곤하면 호텔에서 가장 가까운 Punch Room(예약제)', '아르데코 칵테일 펍이 좋으면 CARTER(일요일 01:30까지)', '라이브 재즈는 JZ Club(일요일 00:30까지라 22:30 도착이면 짧음)'] },
+            { h: '이런 곳', li: ['향(감각) 실험실 콘셉트 칵테일 바 — 잔 옆 향 장치, ‘향수를 마시는 느낌’이라는 리뷰', '2026년 10월 중순 정식 오픈한 신상 · 따종띠엔핑 4.7점 · 1인 약 ¥121', '19:00 오픈(마감 시간은 따종띠엔핑 앱에서 확인)'] },
+            { h: '찾아가기', li: ['陕西南路15号 — 고덕엔 1층 옷가게 ‘Notelab(陕西南路19号)’으로 나옴', '옷가게 안쪽 오른쪽 벽 계단으로 2층'] },
+            { h: '한 잔 더?', li: ['Bar Leone(思南公馆)까지 디디 5분 · 01:00 마감 · 예약 없이 줄 서기', '끝나면 호텔까지 디디 15분(23시 넘으면 야간 요금 ¥20–25)'] },
           ],
-          altsTitle: '바 대안', alts: [A.punch, A.carter, A.jzclub] },
+          altsTitle: '한 잔 더 · 대안', alts: [A.barleone2, A.punch, A.carter] },
       ],
     },
     {
-      date: '2026-11-23', w: '월', title: '푸동 → 디즈니 → Bar Leone', sub: '아침은 늦잠 · 점심 훠궈 · 밤 털게 야식',
+      date: '2026-11-23', w: '월', title: '푸동 → 디즈니', sub: '아침은 늦잠 · 점심 훠궈 · 밤엔 호텔에서 털게·디저트 배달',
       items: [
         { t: '10:30', place: 'duoyun', title: '상하이타워 52층 다원서점', note: '오픈 시간 맞춰 · 무료 · 위챗 사전 예약 · 118층 전망대와 별개',
           detail: [
@@ -407,25 +415,20 @@ window.TRIP_DATA = (() => {
             { h: '나갈 때 디디 잡기', li: ['쇼 끝난 직후는 할증·배차 지연 심함(최대 ¥300 후기). 피날레 전에 나오거나 디즈니타운에서 30–60분 쉬었다 호출', '디디 승차: 고덕에 저장한 ‘上海迪士尼停车场小型客车上下客区’(申迪西路, 주차장 승하차 구역)에서. 디디 앱 목적지 입력 때 출발지를 이곳으로 지정', '택시: 고덕엔 승차장 표시가 없고 ‘出租车下客点’ 근처에 대기 줄이 생김. 현장 안내판을 따르기', '회화 탭 "디디 타는 곳이 어디예요?"를 직원에게 보여주기', '지하철: 11호선 迪士尼역 막차 약 22:30 → 환승해서 위위안, 40–60분'] },
           ],
           altsTitle: '고덕에 찍어 둔 위치', alts: [A.d_garden, A.d_mickey, A.d_pickup, A.d_taxi, A.d_metro] },
-        { t: '21:30', place: 'barleone', title: 'Bar Leone 상하이', note: '디즈니에서 디디 45분+ · 예약 불가, 워크인 · 01:00 마감',
-          detail: [
-            { h: '이런 곳', li: ['홍콩 Bar Leone(World’s 50 Best Bars 2025 1위)의 2호점, 2025-11 오픈', '1층 저도수(스프리츠·하이볼), 2층 스피릿 칵테일', '시그니처 Olive Oil Sour, Filthy Martini(상하이 메뉴 포함 여부는 현장 확인). 최고 ¥150 내외'] },
-            { h: '줄 서기', li: ['예약 안 받음. 입구 번호표 시스템이 있다는 정보', '평일 늦은 밤이라 주말보다 짧을 가능성. 01:00 마감이라 21:30 전 도착 목표', '대기가 길면 같은 거리 COA·Speak Low로'] },
-          ],
-          altsTitle: '같은 거리 대안', alts: [A.coa, A.speaklow, A.ponyup] },
-        { t: '23:00', place: 'hotel', title: '호텔 야식: 털게찜 배달', cat: 'food', extra: 'crab', cn: '熟大闸蟹 外卖', note: '11월 하순은 수컷(公蟹) 제철',
+        { t: '21:30', place: 'hotel', title: '디즈니 → 바로 호텔', cat: 'stay', extra: null, note: '디디 40–50분 · 쇼 끝나기 직전에 호출 · 호텔 가는 길에 배달 주문' },
+        { t: '22:00', place: 'hotel', title: '호텔에서 털게찜 배달', cat: 'food', extra: 'crab', cn: '熟大闸蟹 外卖', note: '11월 하순은 수컷(公蟹) 제철',
           detail: [
             { h: '주문 순서', li: ['알리페이 → "饿了么" 미니프로그램, 또는 위챗 → "美团外卖" 미니프로그램 (우상단 ··· 번역)', '검색어: 熟大闸蟹 / 现蒸大闸蟹 (쪄서 배달). 生·活蟹는 호텔에서 못 찌니 제외', '주소: 上海市黄浦区人民路388号 上海外滩智选假日酒店 + 객실번호', '판매량·리뷰 많은 가게, 蟹醋·생강차 포함 여부 확인', '배달은 보통 로비까지 → 내려가서 받기'] },
             { h: '고르는 법', li: ['11/11 이후 수컷 제철: 배딱지가 뾰족한 尖脐 = 수컷', '"公蟹 4两"처럼 무게로 검색. 1마리 ¥30–60대가 보통'] },
             { h: '막히면', li: ['외국 번호·카드로 결제가 안 되면 호텔 프런트에 대리 주문 부탁 (회화 탭 호텔 문장)'] },
           ] },
-        { t: '밤', place: 'hotel', title: '호텔에서 양즈깐루·과일 배달', cat: 'dessert', extra: 'mango', cn: '杨枝甘露 · 鲜切水果',
+        { t: '22:00', place: 'hotel', title: '같이: 양즈깐루·과일 배달', cat: 'dessert', extra: 'mango', cn: '杨枝甘露 · 鲜切水果',
           detail: [
             { h: '주문', li: ['검색어: 杨枝甘露 / 水果捞 / 鲜切水果', '늦은 밤엔 "营业中" 필터 + 배달 예상시간 확인. 로비에서 수령', '메모의 Huangshiyi = 黄氏壹品汇·水牛奶甜品(瞿溪路店) — 물소 우유 디저트, 새벽 2시까지라 디즈니 다녀온 뒤 야식 배달에 딱', '홍콩식 체인 满记甜品도 무난'] },
           ],
           alts: [A.huangshiyi, A.manji] },
       ],
-      foot: '디즈니에서 너무 지치면 Bar Leone 대신 호텔 근처 Punch Room(02:00까지)이나 바로 호텔로.',
+      foot: '디디 안에서 배달앱 주문하면 호텔 도착쯤 받을 수 있어요. 털게는 熟大闸蟹(쪄서 배달)로.',
     },
     {
       date: '2026-11-24', w: '화', title: '귀국', sub: 'KE2058 홍차오 10:55 → 김포 14:00',
@@ -460,7 +463,7 @@ window.TRIP_DATA = (() => {
         detail: [
           { h: '미리 예약', li: ['런허관 — 전화 021-6266-8003 · 11/22 12:30', '르메르 우캉로 — 위챗 미니프로그램 · 11/22 15:30 전후', '다원서점 — 위챗 "世纪朵云" · 11/23 10:30'] },
           { h: '당일 원격 줄서기', li: ['사계민복 — 11/21 공항에서 나오며 (따종띠엔핑·위챗)', '리바이시에 — 11/21 체크인 전후 (따종띠엔핑 "李百蟹")', '헌저우이치엔 — 11/22 17시쯤 (위챗·알리페이 "很久以前羊肉串" → 南京路第一百货店)', '좌정우원 — 11/23 다원서점에서 (따종띠엔핑·위챗)'] },
-          { h: '예약 없이 가는 곳', li: ['Luminous Ocean(11/22), Bar Leone(11/23)은 워크인', '장스푸·치이카와·미니소·장위안은 그냥 가면 됨'] },
+          { h: '예약 없이 가는 곳', li: ['Nótelab(11/22)은 워크인 · 들르면 Bar Leone도 워크인', '장스푸·치이카와·미니소·장위안은 그냥 가면 됨'] },
         ] },
       { icon: 'pin', title: '고덕지도 즐겨찾기', summary: 'food · shopping · place 저장 완료',
         detail: [
@@ -516,13 +519,12 @@ window.TRIP_DATA = (() => {
             '11/22 레이블후드 → 런허관(愚园路): ¥14–16 · 10분',
             '11/22 런허관 → ICCF(衡山路): ¥18–20 · 15분',
             '11/22 우캉로 → 호텔: ¥30–35 · 25분',
-            '11/22 헌저우이치엔 → Luminous Ocean: ¥18–22 · 15분 (23시 넘으면 야간 요금)',
-            '11/22 Luminous Ocean → 호텔: ¥20–25(야간) · 15분',
+            '11/22 헌저우이치엔 → Nótelab: ¥18–22 · 15분 (23시 넘으면 야간 요금)',
+            '11/22 Nótelab → 호텔: ¥20–25(야간) · 15분 (Bar Leone 들르면 Nótelab → Bar Leone ¥14 · 5분)',
             '11/23 호텔 → 상하이타워: ¥20–25 · 15–20분',
             '11/23 상하이타워 → 좌정우원: ¥14 · 5분',
             '11/23 좌정우원 → 디즈니: ¥80–110 · 35–45분',
-            '11/23 디즈니 → Bar Leone: ¥90–120 · 45분+ (쇼 직후 디디는 할증 가능)',
-            '11/23 Bar Leone → 호텔: ¥20–25(야간) · 15분',
+            '11/23 디즈니 → 호텔: ¥90–120 · 40–50분 (쇼 직후 디디는 할증 가능)',
             '11/24 호텔 → 홍차오 T1: ¥60–80 · 출근 시간이라 40–60분 (지하철 추천)',
           ] },
           { h: '공항 ↔ 호텔은 지하철 추천', li: ['10호선이 홍차오 T1 → 위위안역 환승 없이 12정거장, 타는 시간 약 20분 + 걷기·대기 = 문 앞까지 35–40분', '택시는 안 막히면 35분, 고가도로가 막히면 50분 이상 + 택시 승강장 줄', '호텔이 위위안역 7번 출구 50m라 짐이 있어도 편함. 귀국 날(화 08시)은 출근 시간이라 지하철이 더 확실'] },
