@@ -57,10 +57,10 @@
  },
  "yuyuanlu": {
   "src": "commons",
-  "author": "Livelikerw",
-  "license": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Yuyuan_Rd._Shanghai.JPG",
-  "subject": "愚园路 거리 실물"
+  "author": "Shwangtianyuan",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:228_Yuyuan_Road_from_far_view-20220723.jpg",
+  "subject": "愚园路 228号 부근 거리 실물(2022)"
  },
  "zhangyuan": {
   "src": "commons",
@@ -159,19 +159,5 @@
   "license": "CC BY 3.0",
   "page": "https://commons.wikimedia.org/wiki/File:MangoPomeloSago_1.jpg",
   "subject": "杨枝甘露(망고 포멜로 사고) 일반 사진"
- },
- "hotel": {
-  "src": "commons",
-  "author": "Dave Proffer",
-  "license": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Yu_Yuan_Gardens_and_Bazaar_(3020090400).jpg",
-  "subject": "豫园 상가 주변 거리 실물"
- },
- "sha": {
-  "src": "commons",
-  "author": "4300streetcar",
-  "license": "CC BY 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Shanghai_Hongqiao_International_Airport_Terminal_1_building_May_2026.jpg",
-  "subject": "上海虹桥国际机场 1터미널 외관 실물(2026)"
  }
 }

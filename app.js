@@ -31,6 +31,11 @@
     const kw = encodeURIComponent(p.q || p.cn || p.name);
     return `https://uri.amap.com/search?keyword=${kw}&city=310000&src=sh26trip&callnative=1`;
   }
+  function gmapUrl(p) {
+    const q = p.addr ? `${p.cn || p.name} ${p.addr}` : `${p.q || p.cn || p.name} 上海`;
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
+  }
+  const gmapPill = (p, label = '구글맵') => `<a class="pill" href="${gmapUrl(p)}" target="_blank" rel="noopener">${ms('map', 'fill')}${label}</a>`;
   const mapPill = (p, label = '고덕지도') => `<a class="pill" href="${amapUrl(p)}" target="_blank" rel="noopener">${PIN}${label}</a>`;
   const showPill = (ko, zh) => `<button class="pill" data-show-ko="${esc(ko)}" data-show-zh="${esc(zh)}">크게 보여주기</button>`;
 
@@ -79,43 +84,57 @@
     });
     if (it.alts && it.alts.length) {
       h += `<h4>${esc(it.altsTitle || '대안')}</h4>`;
-      h += it.alts.map((a) => `<div class="alt"><div class="alt-main"><div class="alt-name">${esc(a.name)} <span lang="zh-CN" style="font-weight:400;color:var(--label2)">${esc(a.cn || '')}</span></div><div class="alt-meta">${esc(a.meta || '')}</div></div>${mapPill(a, '지도')}</div>`).join('');
+      h += it.alts.map((a) => `<div class="alt"><div class="alt-main"><div class="alt-name">${esc(a.name)} <span lang="zh-CN" style="font-weight:400;color:var(--label2)">${esc(a.cn || '')}</span></div><div class="alt-meta">${esc(a.meta || '')}</div></div><div class="alt-btns">${mapPill(a, '고덕')}${gmapPill(a, '구글')}</div></div>`).join('');
     }
     const chips = [];
     if (p) {
       chips.push(mapPill(p, '고덕지도에서 열기'));
+      chips.push(gmapPill(p, '구글맵에서 열기'));
       if (p.addr) chips.push(showPill(p.name, `${p.cn}\n${p.addr}`));
     }
     if (chips.length) h += `<div class="chips">${chips.join('')}</div>`;
     return h;
   }
 
+  let planMode = store.get('planMode', 'day');
+  function itemHtml(it, i, dIdx, nowI, open) {
+    const p = it.place ? PLACES[it.place] : null;
+    const cat = it.cat || (p && p.cat) || 'move';
+    const title = it.title || (p && p.name) || '';
+    const zh = it.cn !== undefined ? it.cn : p ? p.cn : '';
+    const hasDetail = !!(it.detail || it.alts || it.warn || p || EXTRA[it.extra]);
+    const id = `d${dIdx}-${i}`;
+    const nowCls = i === nowI ? ' is-now' : '';
+    const inner = `<span class="row-time">${esc(it.t)}</span>${icon(cat)}<span class="row-main"><span class="row-title" style="display:block">${esc(title)}${it.warn ? ' <span style="color:var(--warn)" aria-label="주의">•</span>' : ''}</span>${zh ? `<span class="row-zh" lang="zh-CN" style="display:block">${esc(zh)}</span>` : ''}${it.note ? `<span class="row-note" style="display:block">${esc(it.note)}</span>` : ''}</span>`;
+    if (!hasDetail) return `<div class="row${nowCls}" style="--inset:74px">${inner}</div>`;
+    if (open) {
+      // 전체 보기: 버튼이 아닌 일반 블록이라 글자 선택·복사가 됨
+      return `<div class="row${nowCls}" style="--inset:74px">${inner}</div><div class="detail is-open"><div class="detail-inner"><div class="detail-pad">${detailHtml(it, p)}</div></div></div>`;
+    }
+    return `<button class="row${nowCls}" style="--inset:74px" aria-expanded="false" aria-controls="${id}" data-toggle="${id}">${inner}${CHEV}</button><div class="detail" id="${id}"><div class="detail-inner"><div class="detail-pad">${detailHtml(it, p)}</div></div></div>`;
+  }
+
   function renderPlan() {
     const el = $('#screen-plan');
-    const d = DAYS[dayIdx];
     let h = `<h1 class="large-title">${esc(TRIP.title)}</h1><p class="subhead">${esc(TRIP.sub)}</p>`;
     h += nowCard();
-    h += `<div class="days" role="tablist" aria-label="날짜">${DAYS.map((x, i) => `<button class="day${i === todayIdx ? ' is-today' : ''}" role="tab" aria-selected="${i === dayIdx}" data-day="${i}"><span class="day-w">${esc(x.w)}</span><span class="day-n">${Number(x.date.slice(8))}</span></button>`).join('')}</div>`;
-    h += `<div class="day-head"><h2>${esc(d.title)}</h2>${d.sub ? `<p>${esc(d.sub)}</p>` : ''}</div>`;
-    const nowI = dayIdx === todayIdx ? d.items.reduce((acc, it, i) => (/^\d/.test(it.t) && it.t <= now.hm ? i : acc), -1) : -1;
-    h += `<div class="list">`;
-    d.items.forEach((it, i) => {
-      const p = it.place ? PLACES[it.place] : null;
-      const cat = it.cat || (p && p.cat) || 'move';
-      const title = it.title || (p && p.name) || '';
-      const zh = it.cn !== undefined ? it.cn : p ? p.cn : '';
-      const hasDetail = !!(it.detail || it.alts || it.warn || p || EXTRA[it.extra]);
-      const id = `d${dayIdx}-${i}`;
-      const inner = `<span class="row-time">${esc(it.t)}</span>${icon(cat)}<span class="row-main"><span class="row-title" style="display:block">${esc(title)}${it.warn ? ' <span style="color:var(--warn)" aria-label="주의">•</span>' : ''}</span>${zh ? `<span class="row-zh" lang="zh-CN" style="display:block">${esc(zh)}</span>` : ''}${it.note ? `<span class="row-note" style="display:block">${esc(it.note)}</span>` : ''}</span>`;
-      if (hasDetail) {
-        h += `<button class="row${i === nowI ? ' is-now' : ''}" style="--inset:74px" aria-expanded="false" aria-controls="${id}" data-toggle="${id}">${inner}${CHEV}</button>`;
-        h += `<div class="detail" id="${id}"><div class="detail-inner"><div class="detail-pad">${detailHtml(it, p)}</div></div></div>`;
-      } else {
-        h += `<div class="row${i === nowI ? ' is-now' : ''}" style="--inset:74px">${inner}</div>`;
-      }
-    });
-    h += `</div>`;
-    if (d.foot) h += `<p class="group-f">${esc(d.foot)}</p>`;
+    h += `<div class="seg" role="group" aria-label="보기 방식"><button data-pm="day" aria-pressed="${planMode === 'day'}">날짜별</button><button data-pm="all" aria-pressed="${planMode === 'all'}">전체 펼쳐 보기</button></div>`;
+    if (planMode === 'all') {
+      h += `<p class="group-f" style="margin:0 4px 6px">모든 일정이 펼쳐져 있어요. 길게 눌러 글자를 선택하고 복사할 수 있어요.</p>`;
+      DAYS.forEach((d, dIdx) => {
+        const nowI = dIdx === todayIdx ? d.items.reduce((acc, it, i) => (/^\d/.test(it.t) && it.t <= now.hm ? i : acc), -1) : -1;
+        h += `<div class="day-head" style="margin-top:26px"><h2>${Number(d.date.slice(5, 7))}/${Number(d.date.slice(8))}(${esc(d.w)}) ${esc(d.title)}</h2>${d.sub ? `<p>${esc(d.sub)}</p>` : ''}</div>`;
+        h += `<div class="list selectable">${d.items.map((it, i) => itemHtml(it, i, dIdx, nowI, true)).join('')}</div>`;
+        if (d.foot) h += `<p class="group-f">${esc(d.foot)}</p>`;
+      });
+    } else {
+      const d = DAYS[dayIdx];
+      h += `<div class="days" role="tablist" aria-label="날짜">${DAYS.map((x, i) => `<button class="day${i === todayIdx ? ' is-today' : ''}" role="tab" aria-selected="${i === dayIdx}" data-day="${i}"><span class="day-w">${esc(x.w)}</span><span class="day-n">${Number(x.date.slice(8))}</span></button>`).join('')}</div>`;
+      h += `<div class="day-head"><h2>${esc(d.title)}</h2>${d.sub ? `<p>${esc(d.sub)}</p>` : ''}</div>`;
+      const nowI = dayIdx === todayIdx ? d.items.reduce((acc, it, i) => (/^\d/.test(it.t) && it.t <= now.hm ? i : acc), -1) : -1;
+      h += `<div class="list">${d.items.map((it, i) => itemHtml(it, i, dayIdx, nowI, false)).join('')}</div>`;
+      if (d.foot) h += `<p class="group-f">${esc(d.foot)}</p>`;
+    }
     h += `<p class="foot">조사 기준 ${esc(TRIP.asOf)} · 출발 전 영업시간 재확인</p>`;
     el.innerHTML = h;
   }
@@ -179,7 +198,7 @@
   /* ---------- 정보 ---------- */
   function renderInfo() {
     const el = $('#screen-info');
-    let h = `<h1 class="large-title">정보</h1><p class="subhead">출발 전에 한 번, 도착해서 한 번 보면 돼요.</p>`;
+    let h = `<h1 class="large-title">정보</h1><p class="subhead">출발 전에 한 번, 도착해서 한 번 보면 돼요.</p><div class="chips" style="margin:0 0 4px"><button class="pill" data-expand-all="screen-info">모두 펼치기</button><button class="pill" data-collapse-all="screen-info">모두 접기</button></div>`;
     INFO.forEach((g) => {
       h += `<h3 class="group-h">${esc(g.group)}</h3><div class="list">`;
       g.rows.forEach((r, i) => {
@@ -315,6 +334,15 @@
     if (say && say.id !== 'showSpeak') { speak(say.dataset.say, say); return; }
     const show = e.target.closest('[data-show-zh]');
     if (show) { openShow(show.dataset.showKo, show.dataset.showZh, show.dataset.showPy); return; }
+    const pm = e.target.closest('[data-pm]');
+    if (pm) { planMode = pm.dataset.pm; store.set('planMode', planMode); renderPlan(); return; }
+    const ea = e.target.closest('[data-expand-all],[data-collapse-all]');
+    if (ea) {
+      const open = ea.hasAttribute('data-expand-all');
+      const root = document.getElementById(ea.dataset.expandAll || ea.dataset.collapseAll);
+      root.querySelectorAll('[data-toggle]').forEach((b) => { b.setAttribute('aria-expanded', String(open)); document.getElementById(b.dataset.toggle)?.classList.toggle('is-open', open); });
+      return;
+    }
     const pc = e.target.closest('[data-pc]');
     if (pc) {
       placeCat = pc.dataset.pc;

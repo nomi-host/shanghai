@@ -13,16 +13,16 @@ window.TRIP_DATA = (() => {
     sha: { name: '홍차오 공항 T1', cn: '虹桥国际机场T1航站楼', cat: 'move', area: '창닝', addr: '上海虹桥国际机场1号航站楼', q: '虹桥机场T1航站楼', status: 'planned', memo: '국제선' },
     yuyuan_st: { name: '위위안역', cn: '豫园地铁站', cat: 'move', area: '황푸', q: '豫园地铁站', status: 'planned', memo: '10·14호선' },
 
-    lailai: { name: '라이라이 샤오롱바오', cn: '莱莱小笼', cat: 'food', area: '황푸', addr: '黄浦区天津路506号', hours: '08:00–14:00, 15:00–20:00', q: '莱莱小笼 天津路', status: 'planned', memo: '현금만' },
+    lailai: { name: '라이라이 샤오롱바오', cn: '莱莱小笼', cat: 'food', area: '황푸', addr: '黄浦区天津路506号', hours: '08:00–14:00, 15:00–20:00', q: '莱莱小笼 天津路', status: 'backup', memo: '현금만' },
     libaixie: { name: '리바이시에 와이탄점', cn: '李百蟹 外滩·豫园店', cat: 'food', area: '와이탄', addr: '黄浦区中山东二路22号3楼 (外滩22号)', hours: '10:00–22:00', q: '李百蟹 外滩·豫园店', status: 'planned', memo: '창가 요청' },
     zhangshifu: { name: '장스푸 상하이식 아침', cn: '张师傅早餐店', cat: 'food', area: '징안', addr: '静安区石门二路487号', hours: '05:00–13:00', q: '张师傅早餐店 石门二路', status: 'planned', memo: '소액 현금' },
     renheguan: { name: '런허관 징안점', cn: '人和馆 愚园路店', cat: 'food', area: '징안', addr: '静安区愚园路142-146号3楼', hours: '주말 11:00–21:30', q: '人和馆 愚园路', status: 'planned', memo: '전화 예약 · 미슐랭 1스타는 본점' },
     diandoude: { name: '점도덕 환우회점', cn: '点都德 环宇荟店', cat: 'food', area: '신천지', addr: '黄浦区黄陂南路838弄 环宇荟B1', hours: '09:00–21:30', q: '点都德 环宇荟', status: 'planned' },
-    bakerspice: { name: 'Baker & Spice 안푸로점', cn: 'Baker&Spice 安福路', cat: 'dessert', area: '헝푸', addr: '徐汇区安福路195号', hours: '09:00–21:00', q: 'Baker&Spice 安福路', status: 'planned' },
+    bakerspice: { name: 'Baker & Spice 안푸로점', cn: 'Baker&Spice 安福路', cat: 'dessert', area: '헝푸', addr: '徐汇区安福路195号', hours: '09:00–21:00', q: 'Baker&Spice 安福路', status: 'backup' },
 
     dongliang: { name: '동량 메종', cn: '栋梁之家', cat: 'shop', area: '창닝', addr: '长宁区武夷路168号 翡悦里174号别墅', hours: '11:00–20:00', q: '栋梁之家 武夷路', status: 'planned' },
     columbia: { name: '상생신소', cn: '上生新所', cat: 'architecture', area: '창닝', addr: '长宁区延安西路1262号', hours: '10:00–22:00', q: '上生新所', status: 'planned' },
-    yuyuanlu: { name: '위위안로', cn: '愚园路', cat: 'street', area: '창닝', q: '愚园路 长宁', status: 'planned', memo: '노양방 산책' },
+    yuyuanlu: { name: '위위안로', cn: '愚园路', cat: 'street', area: '창닝', q: '愚园百货公司', status: 'planned', memo: '‘영원히 넓히지 않는 길’ 노양방 거리 · 숍 80여 곳' },
     zhangyuan: { name: '장위안', cn: '张园', cat: 'architecture', area: '징안', addr: '静安区茂名北路258号', hours: '08:00–24:00 · 상점은 대체로 10시부터', q: '张园 威海路', status: 'planned' },
     labelhood: { name: '레이블후드 Pillar', cn: 'LABELHOOD Pillar 富民路店', cat: 'shop', area: '징안', addr: '静安区富民路182弄1-32号', hours: '10:00–22:00', q: 'LABELHOOD Pillar', status: 'planned' },
     iccf: { name: 'ICCF Garden · ICICLE', cn: '之禾卡纷花园', cat: 'shop', area: '헝푸', addr: '徐汇区衡山路2号', hours: '10:00–21:00', q: '之禾卡纷花园', status: 'planned' },
@@ -35,13 +35,15 @@ window.TRIP_DATA = (() => {
     disney: { name: '상하이 디즈니랜드', cn: '上海迪士尼乐园', cat: 'sight', area: '푸동', addr: '浦东新区川沙镇黄赵路310号', q: '上海迪士尼乐园', status: 'planned' },
     bund: { name: '와이탄', cn: '外滩', cat: 'sight', area: '와이탄', q: '外滩观景平台', status: 'planned', memo: '야경' },
 
-    punchroom: { name: 'Punch Room', cn: '上海艾迪逊酒店 Punch Room', cat: 'bar', area: '남경동로', addr: '黄浦区南京东路199号 上海艾迪逊酒店', hours: '17:30–02:00', q: '上海艾迪逊酒店', status: 'planned', memo: '예약제 · 스마트 캐주얼' },
+    punchroom: { name: 'Punch Room', cn: '上海艾迪逊酒店 Punch Room', cat: 'bar', area: '남경동로', addr: '黄浦区南京东路199号 上海艾迪逊酒店', hours: '17:30–02:00', q: '上海艾迪逊酒店', status: 'backup', memo: '예약제 · 스마트 캐주얼' },
     barleone: { name: 'Bar Leone 상하이', cn: 'Bar Leone 思南公馆', cat: 'bar', area: '프랑스조계', addr: '黄浦区复兴中路525-527号 思南公馆', hours: '18:00–01:00', q: 'Bar Leone 思南公馆', status: 'planned', memo: '워크인만 · 1인 약 ¥237' },
 
     /* 후보 — 식당·디저트·차 */
-    zuoting: { name: '좌정우원 (훠궈)', cn: '左庭右院', cat: 'food', area: '창닝', q: '左庭右院 中山公园', status: 'backup', memo: '당일도축 생소고기 훠궈 · 마라/우골/토마토탕' },
+    sijiminfu: { name: '사계민복 베이징덕 중신태부점', cn: '四季民福烤鸭店 中信泰富店', cat: 'food', area: '징안', addr: '静安区南京西路1168号 中信泰富广场4楼', hours: '월–목 10:30–21:30 · 금–일 10:30–22:30', q: '四季民福 中信泰富', status: 'planned', memo: '예약 대신 원격 줄서기 · 오픈 직후 가기' },
+    sijiminfu_bund: { name: '사계민복 외백도교점', cn: '四季民福烤鸭店 外白渡桥店', cat: 'food', area: '와이탄', addr: '虹口区吴淞路130号 城投控股大厦辅楼3楼', q: '四季民福 外白渡桥', status: 'backup', memo: '와이탄 북쪽 끝 · 예약 불필요 후기' },
+    zuoting: { name: '좌정우원 신메이광장점', cn: '左庭右院 新梅广场店', cat: 'food', area: '루자쭈이', addr: '浦东新区浦东南路999号 新梅联合广场4层406', hours: '10:30–02:00', q: '左庭右院 新梅广场', status: 'planned', memo: '당일도축 생소고기 훠궈 · 마라/우골/토마토탕' },
     jingyunhua: { name: '경운화', cn: '京云华', cat: 'food', area: '', q: '京云华', status: 'backup', memo: '가성비 베이징덕 세트 · 위치 미확인' },
-    henjiu: { name: '헌저우이치엔 양꼬치', cn: '很久以前羊肉串', cat: 'food', area: '남경동로', q: '很久以前羊肉串 南京东路', status: 'backup', memo: '위챗 원격 줄서기' },
+    henjiu: { name: '헌저우이치엔 양꼬치 남경로점', cn: '很久以前羊肉串 南京路第一百货店', cat: 'food', area: '남경동로', addr: '黄浦区南京东路 第一百货商业中心', hours: '11:00–03:00', q: '很久以前羊肉串 南京路第一百货', status: 'planned', memo: '위챗·알리페이 원격 줄서기 · 주말 저녁 2–3시간 대기' },
     xiding: { name: '시딩 (성게 물만두)', cn: '喜鼎海胆水饺', cat: 'food', area: '', q: '喜鼎海胆水饺', status: 'backup', memo: '전복·성게알 딤섬 · 상하이 지점 미확인' },
     chizaiji: { name: '지짜이지 창펀왕', cn: '香港池仔记肠粉王', cat: 'food', area: '헝푸', addr: '徐汇区襄阳南路150-1号', q: '池仔记肠粉王', status: 'backup', memo: '새우창펀·튀김창펀·콘지' },
     zhuangshi: { name: '장씨네 게살국수', cn: '庄氏隆兴 蟹粉面', cat: 'food', area: '남경동로', addr: '黄浦区浙江中路441号', hours: '10:30–21:30', q: '庄氏隆兴', status: 'backup', memo: '蟹粉黄金捞面' },
@@ -73,18 +75,27 @@ window.TRIP_DATA = (() => {
 
     /* 후보 — 바 */
     noras: { name: "Nora's 와인바", cn: "Nora's Wine Shop & Bar", cat: 'bar', area: '헝푸', addr: '徐汇区永福路47-8号', hours: '15:00–24:00', q: "Nora's 永福路", status: 'backup', memo: '내추럴 와인' },
-    luminous: { name: 'Luminous Ocean', cn: '环海 Luminous Ocean', cat: 'bar', area: '프랑스조계', addr: '黄浦区香山路15号甲', hours: '18:00–02:00', q: '香山路15号', status: 'backup', memo: '수족관 테마' },
-    jzclub: { name: 'JZ Club', cn: 'JZ Club 衡山路', cat: 'bar', area: '헝푸', addr: '徐汇区衡山路8号', q: 'JZ Club 衡山路', status: 'backup', memo: '재즈 19:30·21:30' },
+    luminous: { name: 'Luminous Ocean', cn: '环海 Luminous Ocean', cat: 'bar', area: '프랑스조계', addr: '黄浦区香山路15号', hours: '월–목 18:00–01:00 · 금–일 18:00–02:00', q: 'Luminous Ocean 香山路', status: 'planned', memo: '심해·수족관 콘셉트 신상 바' },
+    jzclub: { name: 'JZ Club', cn: 'JZ Club 衡山路', cat: 'bar', area: '헝푸', addr: '徐汇区衡山路8号', hours: '일 18:30–00:30 · 금토 –01:30', q: 'JZ Club 衡山路', status: 'backup', memo: '라이브 재즈' },
     fever: { name: 'Fever', cn: 'Fever', cat: 'bar', area: '', q: 'Fever bar 上海', status: 'backup' },
     kaisha: { name: 'Kaisha', cn: 'Kaisha', cat: 'bar', area: '', q: 'Kaisha 上海', status: 'backup', memo: '페어링 코스' },
     notelab: { name: 'Notelab', cn: 'Notelab', cat: 'bar', area: '', q: 'Notelab 上海', status: 'backup' },
-    carter: { name: 'Carter', cn: 'Carter', cat: 'bar', area: '징안', addr: '静安区奉贤路50号', hours: '19:00–01:30', q: 'Carter 奉贤路', status: 'backup' },
+    carter: { name: 'CARTER', cn: 'CARTER', cat: 'bar', area: '징안', addr: '静安区奉贤路50号', hours: '일–수 18:30–01:30 · 목–토 –02:00', q: 'CARTER 奉贤路', status: 'backup', memo: '아르데코 영국식 칵테일 펍' },
     joker: { name: 'Joker & Joker', cn: 'Joker & Joker', cat: 'bar', area: '징안', addr: '静安区武定路968号2F', q: 'Joker Joker 武定路', status: 'backup' },
     darlin: { name: 'Darlin', cn: 'Darlin', cat: 'bar', area: '', q: 'Darlin bar 上海', status: 'backup' },
   };
 
   /* 대안 식당 (지도 버튼은 q로 검색) */
   const A = {
+    siji_bund: { name: '사계민복 외백도교점', cn: '四季民福 外白渡桥店', q: '四季民福 外白渡桥', meta: '虹口 吴淞路130号 3층 · 와이탄 북쪽 끝, 호텔과 가까움 · 예약 불필요 후기' },
+    zuoting_dawan: { name: '좌정우원 신세계다마루점', cn: '左庭右院 新世界大丸', q: '左庭右院 新世界大丸', meta: '南京东路228号 B2 · 10:00–23:00 · 같은 남경동로' },
+    zuoting_xinmei: { name: '좌정우원 신메이광장점', cn: '左庭右院 新梅广场', q: '左庭右院 新梅广场', meta: '浦东南路999号 4층 · 10:30–02:00' },
+    luminous: { name: 'Luminous Ocean', cn: '环海 Luminous Ocean', q: 'Luminous Ocean 香山路', meta: '香山路15号 · 금–일 18:00–02:00 · 심해·수족관 콘셉트 신상 바' },
+    punch: { name: 'Punch Room (EDITION)', cn: '上海艾迪逊酒店', q: '上海艾迪逊酒店', meta: '南京东路199号 · 17:30–02:00 · 예약제 · 호텔에서 가장 가까움' },
+    carter: { name: 'CARTER', cn: 'CARTER 奉贤路', q: 'CARTER 奉贤路', meta: '奉贤路50号 · 일 18:30–01:30 · 아르데코 영국식 칵테일 펍' },
+    jzclub: { name: 'JZ Club', cn: 'JZ Club 衡山路', q: 'JZ Club 衡山路', meta: '衡山路8号 · 일 18:30–00:30 · 라이브 재즈' },
+    jingyunhua: { name: '경운화', cn: '京云华', q: '京云华', meta: '가성비 베이징덕 세트 · 위치 고덕 확인' },
+    zuoting_x: { name: '좌정우원 신세계성점', cn: '左庭右院 新世界城', q: '左庭右院 新世界城', meta: '南京西路2-68号 9F · 10:00–23:00 · 오리 대신 훠궈가 당기면' },
     jiajia: { name: '지아지아탕바오', cn: '佳家汤包', q: '佳家汤包 黄河路', meta: '인민광장 샤오롱바오 노포 · 09:00–21:30 · 1인 ¥40–60' },
     zhuangshi: { name: '좡스룽싱 게살면', cn: '庄氏隆兴', q: '庄氏隆兴 浙江中路', meta: '浙江中路441号 · 蟹粉黄金捞面 · 10:30–21:30 · 1인 ¥110' },
     dahuchun: { name: '다후춘 생지엔', cn: '大壶春', q: '大壶春 四川中路', meta: '四川中路136号 · 군만두식 生煎 · 1인 ¥30 · 와이탄 도보권' },
@@ -113,6 +124,13 @@ window.TRIP_DATA = (() => {
 
   /* 상세 화면 보강: 대표 메뉴(중국어를 누르면 크게 보여줘서 주문용) · Must-do · 사진 */
   const EXTRA = {
+    zuoting: { menu: [['鲜切牛肉拼盘', '당일 도축 소고기 모둠', '대표'], ['牛骨清汤锅', '우골 맑은 탕', '순한 맛'], ['番茄锅', '토마토 탕', ''], ['麻辣锅', '마라 탕', '매움'], ['手打牛肉丸', '수제 소고기 완자', '']],
+      must: ['탕은 2가지 반반(鸳鸯锅)으로', '부위별로 데치는 시간이 달라요 — 직원 안내 따르기', '디즈니 전이라 2인 소식 기준으로 조금만'] },
+    luminous: { must: ['수족관·심해 조명 공간 구경', '남경동로에서 디디 15분'] },
+    sijiminfu: { menu: [['招牌烤鸭 半只', '오리구이 반 마리', '2인 적당'], ['鸭皮蘸白糖', '바삭한 껍질을 설탕에 찍어 먼저', '먹는 법'], ['芥末鸭掌', '겨자 오리발 냉채', ''], ['宫保虾球', '궁바오 새우', ''], ['酸梅汤', '매실 음료', '']],
+      must: ['껍질은 설탕에 찍어 첫 점', '전병(荷叶饼)에 파·오이·소스 싸 먹기', '반 마리면 2인 소식에 충분'] },
+    henjiu: { menu: [['羊肉串', '양꼬치', '대표'], ['牛肉串', '소고기 꼬치', ''], ['烤馒头片', '구운 꽃빵', ''], ['烤韭菜', '부추 구이', ''], ['啤酒', '맥주', '']],
+      must: ['우캉로에 있을 때(17시쯤) 원격 번호표 받기', '자동으로 도는 숯불 그릴에 올려 굽는 재미', '새벽 3시까지 영업 — 대기가 길면 바에 먼저 갔다가 돌아와도 됨'] },
     lailai: { menu: [['蟹粉小笼', '게살 샤오롱바오', '대표'], ['鲜肉小笼', '돼지고기 샤오롱바오', ''], ['蟹粉馄饨', '게살 완탕', '털게 시즌']],
       must: ['게살 샤오롱바오는 꼭', '카운터에서 먼저 주문·현금 결제', '생강채 + 식초에 찍어 국물부터 호로록'] },
     libaixie: { menu: [['蟹黄面', '게알 비빔면', '대표'], ['蟹黄饭', '게알 덮밥', ''], ['蟹黄全宴', '2인 세트 · 면·밥 리필', '약 ¥338']],
@@ -155,7 +173,7 @@ window.TRIP_DATA = (() => {
     bakerspice: { author: 'kerdkanno', license: 'Pixabay Content License', src: 'pixabay', page: 'https://pixabay.com/photos/ice-cream-cones-scooper-5928048/', alt: '젤라또 콘 — 참고 이미지, 이 가게 사진 아님' },
     dongliang: { author: 'Antigng', license: 'CC BY-SA 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:%E6%AD%A6%E5%A4%B7%E8%B7%AF154%E5%8F%B7%E4%BD%8F%E5%AE%85.jpg', alt: '매장 근처 武夷路 154호 옛 서양식 주택 — 참고 이미지, 매장 건물 아님' },
     columbia: { author: 'WQL', license: 'CC BY-SA 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Columbia_Circle_16.jpg', alt: '상생신소 컬럼비아 서클의 아치형 클럽하우스 건물' },
-    yuyuanlu: { author: 'Livelikerw', license: 'CC BY-SA 3.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Yuyuan_Rd._Shanghai.JPG', alt: '위위안로(愚园路) 거리' },
+    yuyuanlu: { author: 'Shwangtianyuan', license: 'CC BY-SA 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:228_Yuyuan_Road_from_far_view-20220723.jpg', alt: '위위안로 228호 부근 가로수 거리(2022)' },
     zhangyuan: { author: 'Juan Antonio Segal', license: 'CC BY 2.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Zhang_Yuan,_Shanghai,_China_2024_(54281266880).jpg', alt: '장위안 석고문 골목(2024)' },
     labelhood: { author: 'oichikawa', license: 'CC BY 3.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:%E5%B7%A8%E9%B9%BF%E8%B7%AF_-_panoramio.jpg', alt: '근처 巨鹿路 가로수길 — 참고 이미지, 매장 사진 아님' },
     iccf: { author: 'Livelikerw', license: 'CC BY-SA 3.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Dongping_Rd._Shanghai.JPG', alt: '근처 东平路 거리 — 참고 이미지, ICCF 가든 사진 아님' },
@@ -166,12 +184,11 @@ window.TRIP_DATA = (() => {
     duoyun: { author: 'Stefan Fussan', license: 'CC BY-SA 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Shanghai_-_Shanghai_Tower_-_0003(cropped).jpg', alt: '상하이타워 외관 (다원서점은 52층)' },
     disney: { author: 'Riku Lu', license: 'CC0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Enchanted_Storybook_Castle_(125424).jpg', alt: '상하이 디즈니랜드 마법 동화 성' },
     bund: { author: 'Ernest Jourdier', license: 'CC BY 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Bund_at_night_Shanghai.jpg', alt: '와이탄 야경' },
+    luminous: { author: 'riitou', license: 'Pixabay Content License', src: 'pixabay', page: 'https://pixabay.com/photos/drink-cocktail-prost-candle-yummy-2404636/', alt: '칵테일 바 분위기 — 참고 이미지, 이 바 사진 아님' },
     punchroom: { author: 'riitou', license: 'Pixabay Content License', src: 'pixabay', page: 'https://pixabay.com/photos/drink-cocktail-prost-candle-yummy-2404636/', alt: '촛불 켠 바의 칵테일 — 참고 이미지, 이 바 사진 아님' },
     barleone: { author: 'Briam-Cute', license: 'Pixabay Content License', src: 'pixabay', page: 'https://pixabay.com/photos/martini-cocktail-glass-5542599/', alt: '올리브 마티니 — 참고 이미지, 이 바 사진 아님' },
     crab: { label: '털게찜 배달', author: 'Jpatokal', license: 'CC BY-SA 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Roe_inside_steamed_female_hairy_crab.jpg', alt: '찐 상하이 털게 암게의 게알 — 참고 이미지' },
     mango: { label: '양즈깐루 배달', author: 'Thomas.Lu', license: 'CC BY 3.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:MangoPomeloSago_1.jpg', alt: '양즈깐루(망고 포멜로 사고) — 참고 이미지' },
-    hotel: { author: 'Dave Proffer', license: 'CC BY 2.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Yu_Yuan_Gardens_and_Bazaar_(3020090400).jpg', alt: '호텔 근처 위위안 상가 거리 — 참고 이미지, 호텔 사진 아님' },
-    sha: { author: '4300streetcar', license: 'CC BY 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Shanghai_Hongqiao_International_Airport_Terminal_1_building_May_2026.jpg', alt: '홍차오 공항 1터미널 외관(2026)' },
   };
   Object.entries(CREDITS).forEach(([k, c]) => {
     EXTRA[k] = Object.assign(EXTRA[k] || {}, {
@@ -183,25 +200,26 @@ window.TRIP_DATA = (() => {
 
   const DAYS = [
     {
-      date: '2026-11-21', w: '토', title: '창닝 노양방 거리', sub: '큰 식사: 저녁 리바이시에',
+      date: '2026-11-21', w: '토', title: '창닝 노양방 거리', sub: '점심 베이징덕 · 저녁 리바이시에(2인 세트 하나 나눠 먹기)',
       items: [
         { t: '09:45', place: 'sha', title: '홍차오 도착 → 10호선 위위안역', cat: 'plane', note: '환승 없이 12정거장 · 대기 포함 30–40분 · 호텔에 짐 맡기기',
           detail: [
             { h: '입국 순서', li: ['입국심사: 여권 + 온라인 입국신고 QR(미리 캡처) 제시, 지문 등록기 있으면 먼저', '수하물 → 세관은 신고할 것 없으면 녹색 통로', '호텔 주소를 물어보면 上海市黄浦区人民路388号'] },
             { h: '지하철 타기', li: ['역 이름은 虹桥1号航站楼(T1). T2역과 헷갈리지 않기', '알리페이 › Transport › Shanghai › Metro QR로 개찰구 통과', '10호선 新江湾城 방향 → 豫园 하차 → 7번 출구 50m'] },
           ] },
-        { t: '11:30', place: 'lailai', title: '점심: 라이라이 샤오롱바오', note: '토요일 정오는 피크라 11:30 전에 · 현금만',
+        { t: '11:45', place: 'sijiminfu', title: '점심: 사계민복 베이징덕', note: '호텔에서 디디 15분 · 남경서로 · 오픈 직후라 대기 짧음',
           detail: [
-            { h: '이런 곳', li: ['2026 미슐랭 빕구르망. 골목 안 아주 작은 가게, 합석 많음', '1인 약 ¥60'] },
-            { h: '이용법', li: ['카운터에서 먼저 전부 주문·계산 → 자리에 앉는 방식', '예약 없음, 워크인. 줄이 느리게 줄어드니 11:15–11:30 도착', '결제는 현금만(미슐랭 가이드에 Cash only). 소액권 준비'] },
-            { h: '2인 주문', li: ['蟹粉小笼(게살) 1판 + 鲜肉小笼(돼지고기) 1판으로 시작', '부족하면 추가. 생강채 + 식초에 찍어 먹기'] },
+            { h: '예약이 필요한가', li: ['예약제 식당이 아님. 상하이 외백도교점은 ‘예약 불필요’라는 2026년 후기', '대신 따종띠엔핑·위챗에서 원격 줄서기(排队取号)가 되는 곳이 많음 → 공항에서 나오며 번호표 받기', '토요일 점심 피크(12:00–13:00) 전, 11:30–11:45 도착이 가장 확실'] },
+            { h: '이런 곳', li: ['베이징의 인기 오리구이 체인. 상하이에 5곳', '중신태부점은 남경서로 2호선 南京西路역 근처 쇼핑몰 4층 → 점심 뒤 동량까지 디디 15–20분'] },
+            { h: '2인 주문', li: ['招牌烤鸭 반 마리 + 냉채 1 + 음료로 충분', '저녁(리바이시에)도 있으니 점심은 가볍게'] },
           ],
-          alts: [A.jiajia, A.zhuangshi, A.dahuchun] },
+          alts: [A.siji_bund, A.jingyunhua, A.zuoting_x] },
         { t: '13:30', place: 'dongliang', note: '중국 디자이너 편집샵 동량의 단독 양옥 플래그십' },
         { t: '15:00', place: 'columbia', note: '옛 컬럼비아 컨트리클럽 리노베이션 단지 · 수영장 건물, 쑨커 별장, 츠타야' },
-        { t: '16:00', place: 'yuyuanlu', title: '위위안로 산책', note: '노양방(옛 서양식 주택) 거리' },
+        { t: '16:00', place: 'yuyuanlu', title: '위위안로 산책', note: '愚园百货公司(1018号)부터 동쪽으로 · 숍·카페 80여 곳',
+          detail: [{ h: '갈 만한가', li: ['상하이 ‘영원히 넓히지 않는 64개 길’ 중 하나. 노양방과 명사 옛집이 줄지어 있음', '2025년 기준 숍 80여 곳의 ‘예술 생활 거리’로 재정비 — 편집샵·카페·갤러리 산책용', '시작점: 愚园百货公司(愚园路1018号, 문구·갤러리·카페·브랜드 숍 복합공간) → 동쪽 江苏路 방향으로 걷기', '사진 스팟은 거리보다 골목(弄堂) 입구 쪽. 거리 자체는 평범해 보일 수 있음'] }] },
         { t: '17:30', place: 'hotel', title: '호텔 체크인', note: '배달앱에 호텔 주소·전화 등록, 프런트에서 중문 주소 받아두기' },
-        { t: '19:00', place: 'libaixie', title: '저녁: 리바이시에 게살덮밥', note: '동방명주 정면 창가 · 주말 대기 최대 2시간',
+        { t: '19:00', place: 'libaixie', title: '저녁: 리바이시에 게살덮밥', note: '점심을 먹었으니 2인 세트 하나 나눠 먹기 · 주말 대기 최대 2시간',
           warn: '고덕에선 ‘外滩·豫园店’으로 나오고 주소는 中山东二路22号 3층이에요.',
           detail: [
             { h: '대표 메뉴', li: ['蟹黄面(게알 비빔면), 蟹黄饭(게알 덮밥)', '2인 세트 "蟹黄全宴" 약 ¥338, 면·밥 리필 무제한이라는 후기', '느끼하면 蟹醋(게 식초)나 생강 식초 요청'] },
@@ -217,7 +235,7 @@ window.TRIP_DATA = (() => {
       ],
     },
     {
-      date: '2026-11-22', w: '일', title: '징안·헝푸 편집샵 + 칵테일', sub: '큰 식사: 점심 런허관',
+      date: '2026-11-22', w: '일', title: '징안·헝푸 편집샵 + 칵테일', sub: '점심 런허관 · 저녁 양꼬치',
       items: [
         { t: '08:00', place: 'zhangshifu', title: '아침: 장스푸 상하이식 아침', note: '大饼·油条·粢饭·豆浆 · 영업 05:00–13:00',
           detail: [
@@ -235,42 +253,42 @@ window.TRIP_DATA = (() => {
           ],
           alts: [A.lanxin, A.rongshu, A.renhe_main] },
         { t: '14:30', place: 'iccf', note: 'ICICLE·CARVEN 매장, 레스토랑, 갤러리, 서점이 모인 정원형 공간' },
-        { t: '15:30', place: 'bakerspice', note: '젤라또, 와인 한 잔',
-          altsTitle: '디저트·차 대안', alts: [A.chachaqu, A.peninsula] },
-        { t: '16:30', place: 'lemaire', title: '우캉로: 르메르 → 우캉맨션', note: '르메르는 위챗 미니프로그램 예약제 · 우캉맨션은 외관만',
+        { t: '15:30', place: 'lemaire', title: '우캉로: 르메르 → 우캉맨션', note: '르메르는 위챗 미니프로그램 예약제 · 우캉맨션은 외관만 · 17시쯤 양꼬치 원격 번호표',
           warn: '샤옌 옛집은 수–토만 열어서 일요일 일정에서 뺐어요.' },
+        { t: '17:30', place: 'hotel', title: '호텔에서 쉬기', cat: 'stay', extra: null, note: '쇼핑백 내려놓기 · 저녁 일정 전 휴식' },
         { t: '19:00', place: 'chiikawa', note: '내륙 첫 공식 플래그십 · 예약 없이 입장' },
-        { t: '20:00', place: 'miniso', note: '3층 IP 굿즈 플래그십 · 21:30까지' },
-        { t: '21:00', place: 'hotel', title: '호텔에서 털게찜 배달', cat: 'food', extra: 'crab', cn: '熟大闸蟹 外卖', note: '11월 하순은 수컷(公蟹) 제철',
+        { t: '19:45', place: 'miniso', note: '3층 IP 굿즈 플래그십 · 21:30까지' },
+        { t: '20:30', place: 'henjiu', title: '저녁: 헌저우이치엔 양꼬치', note: '남경동로 · 미니소에서 도보 · 원격 줄서기 필수',
+          warn: '일요일 저녁은 200–300팀, 2–3시간 대기 후기가 있어요. 17시쯤 미리 번호표를 받아 두세요.',
           detail: [
-            { h: '주문 순서', li: ['알리페이 → "饿了么" 미니프로그램, 또는 위챗 → "美团外卖" 미니프로그램 (우상단 ··· 번역)', '검색어: 熟大闸蟹 / 现蒸大闸蟹 (쪄서 배달). 生·活蟹는 호텔에서 못 찌니 제외', '주소: 上海市黄浦区人民路388号 上海外滩智选假日酒店 + 객실번호', '판매량·리뷰 많은 가게, 蟹醋·생강차 포함 여부 확인', '배달은 보통 로비까지 → 내려가서 받기'] },
-            { h: '고르는 법', li: ['11/11 이후 수컷 제철: 배딱지가 뾰족한 尖脐 = 수컷', '"公蟹 4两"처럼 무게로 검색. 1마리 ¥30–60대가 보통'] },
-            { h: '막히면', li: ['외국 번호·카드로 결제가 안 되면 호텔 프런트에 대리 주문 부탁 (회화 탭 호텔 문장)'] },
-          ] },
-        { t: '22:00', place: 'punchroom', title: '칵테일: Punch Room', note: '예약제 라운지 · 스마트 캐주얼 · 칵테일 약 ¥100',
-          detail: [
-            { h: '예약', li: ['OpenTable에서 "The Shanghai EDITION Punch Room" 검색 → 날짜·인원 선택', '또는 +86 21 5368 9540 / thepunchroom.sha@editionhotels.com'] },
-            { h: '이런 곳', li: ['차·향신료·과일·꽃을 쓴 펀치 중심, 우드톤 라운지', '루자쭈이 마천루가 가까이 보임. 매일 17:30–02:00', '가기 전 와이탄 한 번 더(호텔에서 도보 20분)'] },
+            { h: '원격 줄서기', li: ['위챗 또는 알리페이에서 "很久以前羊肉串" 검색 → 미니프로그램 → 上海 → 南京路第一百货店 → 排队取号(2人)', '앱에 남은 팀 수가 보임. 차례 가까워지면 매장으로', '이 지점은 새벽 3시까지 영업(고덕). 대기가 길면 번호표를 받아 두고 바에 먼저 다녀와도 됨'] },
+            { h: '팁', li: ['자동으로 도는 숯불 그릴에 꼬치를 올려 구워 먹는 방식', '2인 소식이면 양꼬치 10개 + 채소·빵 꼬치 몇 개로 시작'] },
           ],
-          altsTitle: '근처 대안', alts: [A.jazzbar, A.roof] },
+          altsTitle: '대기가 너무 길면', alts: [A.zhuangshi, A.zuoting_dawan] },
+        { t: '22:30', place: 'luminous', title: '칵테일: Luminous Ocean', note: '민영님 리스트의 신상 바 · 일요일 02:00까지 · 남경동로에서 디디 15분',
+          detail: [
+            { h: '왜 여기', li: ['리스트에 있던 바 중 일요일 밤 늦게까지 열고 남경동로에서 가까운 곳', '심해·수족관을 테마로 한 조명 공간. 2026 가이드에서 ‘상하이 최신 핫플’로 소개', '고덕 기준 금–일 18:00–02:00(월–목은 01:00까지)'] },
+            { h: '다른 선택', li: ['피곤하면 호텔에서 가장 가까운 Punch Room(예약제)', '아르데코 칵테일 펍이 좋으면 CARTER(일요일 01:30까지)', '라이브 재즈는 JZ Club(일요일 00:30까지라 22:30 도착이면 짧음)'] },
+          ],
+          altsTitle: '바 대안', alts: [A.punch, A.carter, A.jzclub] },
       ],
     },
     {
-      date: '2026-11-23', w: '월', title: '푸동 → 디즈니 → Bar Leone', sub: '디즈니 겨울 축제 기간',
+      date: '2026-11-23', w: '월', title: '푸동 → 디즈니 → Bar Leone', sub: '아침은 늦잠 · 점심 훠궈 · 밤 털게 야식',
       items: [
-        { t: '09:00', place: 'diandoude', title: '브런치: 점도덕 딤섬', note: '10호선 신천지역 · 위위안에서 2정거장',
-          detail: [
-            { h: '추천 메뉴', li: ['金牌虾饺皇(새우 하가우)', '金莎海虾红米肠(바삭 새우 창펀) — 시그니처', '招牌烧卖 또는 蜜汁叉烧包', '디저트 香芒夹心椰汁糕(망고 코코넛 푸딩)'] },
-            { h: '팁', li: ['2인 소식이면 4접시 정도. 1인 약 ¥100', '종이 메뉴에 체크하거나 테이블 QR로 주문'] },
-          ],
-          alts: [A.taotaoju, A.tangge, A.leigarden] },
-        { t: '10:30', place: 'duoyun', title: '상하이타워 52층 다원서점', note: '무료 · 위챗 사전 예약 · 118층 전망대와 별개',
+        { t: '10:30', place: 'duoyun', title: '상하이타워 52층 다원서점', note: '오픈 시간 맞춰 · 무료 · 위챗 사전 예약 · 118층 전망대와 별개',
           detail: [
             { h: '예약·입장', li: ['위챗에서 "世纪朵云" 공식 계정 → 미니프로그램으로 날짜·시간 예약(며칠 전 권장)', '1층 로비 안내 데스크에 "朵云书院"이라고 말하면 안내해 줌', '로비에서 인원 제한(최대 350명) — 예약 QR 준비'] },
             { h: '즐기는 법', li: ['서점 카페에서 음료를 사서 창가 좌석에서 루자쭈이 뷰(창가 최소 소비 약 ¥100이라는 정보)', '360° 야경이 목적이면 118층 전망대(약 ¥180)는 따로'] },
           ] },
-        { t: '12:00', place: 'disney', title: '루자쭈이 → 디즈니', cat: 'move', extra: null, cn: '滴滴 35–45분', note: '디디 35–45분 · 약 ¥100–150' },
-        { t: '13:00', place: 'disney', title: '상하이 디즈니랜드', cat: 'castle', note: '여권 필수 · 폐장 20:30 가정(전날 공식 앱 확인)',
+        { t: '11:45', place: 'zuoting', title: '점심: 좌정우원 생소고기 훠궈', note: '상하이타워에서 디디 5분 · 浦东南路 · 10:30부터 영업',
+          detail: [
+            { h: '이런 곳', li: ['당일 도축한 생소고기를 부위별로 데쳐 먹는 차오산식 훠궈 체인', '탕: 우골 맑은 탕·토마토·마라. 반반(鸳鸯锅) 추천'] },
+            { h: '줄서기', li: ['따종띠엔핑·위챗 원격 줄서기 가능한 체인. 다원서점에 있을 때 번호표 받기', '월요일 점심이라 비교적 여유 예상'] },
+          ],
+          altsTitle: '다른 지점·대안', alts: [A.zuoting_x, A.taotaoju] },
+        { t: '12:45', place: 'disney', title: '루자쭈이 → 디즈니', cat: 'move', extra: null, cn: '滴滴 35–45분', note: '디디 35–45분 · 약 ¥100–150' },
+        { t: '13:30', place: 'disney', title: '상하이 디즈니랜드', cat: 'castle', note: '여권 필수 · 폐장 20:30 가정(전날 공식 앱 확인)',
           detail: [
             { h: '운영시간·시즌', li: ['11월 운영시간 공식 미확인. 11/2부터 08:30–20:30이라는 보도 → 전날 앱 확인', '겨울 축제 Winter Frostival 기간(11/19~). 미키 크리스마스 의상은 12/1부터라 이번엔 스키 테마 겨울 의상', '미키 애비뉴 인공 눈, 산타 구피, 캐릭터 눈 조각상, 이매지네이션 가든 대형 트리'] },
             { h: '입장 전 준비', li: ['공식 앱 "上海迪士尼度假区" 한국에서 설치·가입, 티켓 연결', '여권 필수(실명 입장권). 가방 보안검색', '음식은 조리·보온이 필요한 것, 냄새 강한 것만 금지. 물·음료 가능. 주류·유리병 금지', '저녁엔 쌀쌀하니 한 겹 더, 앉을 깔개 있으면 퍼레이드 때 편함'] },
@@ -287,6 +305,12 @@ window.TRIP_DATA = (() => {
             { h: '줄 서기', li: ['예약 안 받음. 입구 번호표 시스템이 있다는 정보', '평일 늦은 밤이라 주말보다 짧을 가능성. 01:00 마감이라 21:30 전 도착 목표', '대기가 길면 같은 거리 COA·Speak Low로'] },
           ],
           altsTitle: '같은 거리 대안', alts: [A.coa, A.speaklow, A.ponyup] },
+        { t: '23:00', place: 'hotel', title: '호텔 야식: 털게찜 배달', cat: 'food', extra: 'crab', cn: '熟大闸蟹 外卖', note: '11월 하순은 수컷(公蟹) 제철',
+          detail: [
+            { h: '주문 순서', li: ['알리페이 → "饿了么" 미니프로그램, 또는 위챗 → "美团外卖" 미니프로그램 (우상단 ··· 번역)', '검색어: 熟大闸蟹 / 现蒸大闸蟹 (쪄서 배달). 生·活蟹는 호텔에서 못 찌니 제외', '주소: 上海市黄浦区人民路388号 上海外滩智选假日酒店 + 객실번호', '판매량·리뷰 많은 가게, 蟹醋·생강차 포함 여부 확인', '배달은 보통 로비까지 → 내려가서 받기'] },
+            { h: '고르는 법', li: ['11/11 이후 수컷 제철: 배딱지가 뾰족한 尖脐 = 수컷', '"公蟹 4两"처럼 무게로 검색. 1마리 ¥30–60대가 보통'] },
+            { h: '막히면', li: ['외국 번호·카드로 결제가 안 되면 호텔 프런트에 대리 주문 부탁 (회화 탭 호텔 문장)'] },
+          ] },
         { t: '밤', place: 'hotel', title: '호텔에서 양즈깐루·과일 배달', cat: 'dessert', extra: 'mango', cn: '杨枝甘露 · 鲜切水果',
           detail: [
             { h: '주문', li: ['검색어: 杨枝甘露 / 水果捞 / 鲜切水果', '늦은 밤엔 "营业中" 필터 + 배달 예상시간 확인. 로비에서 수령', '홍콩식 디저트 체인 满记甜品이 배달용으로 무난'] },
@@ -332,7 +356,7 @@ window.TRIP_DATA = (() => {
       { icon: 'money', title: '결제·환전', summary: '알리페이가 기본 · 현금은 소액',
         detail: [
           { h: '알리페이', li: ['여권 인증 → 해외 카드(Visa·Master) 직접 등록 → 한국에서 소액 결제 테스트', '위챗페이도 예비로 등록', '200위안 초과 결제 시 해외 카드 수수료 3%가 붙을 수 있음(카드마다 다름)', '출국 전 카드사 해외결제 차단 해제'] },
-          { h: '현금', li: ['비상용 소액만. 라이라이 샤오롱바오, 아침 노점용으로 작은 단위 위주', '트래블로그·SOL트래블 같은 트래블카드를 알리페이에 등록해 쓰는 경우가 많음'] },
+          { h: '현금', li: ['비상용 소액만. 장스푸 같은 아침 노점용으로 작은 단위 위주', '트래블로그·SOL트래블 같은 트래블카드를 알리페이에 등록해 쓰는 경우가 많음'] },
         ] },
       { icon: 'move', title: '교통', summary: '지하철 알리페이 QR · 디디',
         detail: [
@@ -378,8 +402,9 @@ window.TRIP_DATA = (() => {
     '르메르 우캉로 위챗 예약 (11/22 16:30 전후)',
     '다원서점 위챗 예약 (11/23 10:30)',
     '런허관 전화 예약 021-6266-8003 (11/22 12:30)',
-    'Punch Room OpenTable 예약 (11/22 22:00)',
-    '위안화 소액 현금',
+    '헌저우이치엔 원격 줄서기 방법 확인 (11/22 17시쯤 번호표)',
+    '사계민복·좌정우원 원격 줄서기용 따종띠엔핑 로그인 확인',
+    '위안화 소액 현금 (아침 노점용)',
     '로밍 또는 eSIM',
     '3C 마크 보조배터리 · 멀티어댑터',
     '카드사 해외결제 차단 해제',
