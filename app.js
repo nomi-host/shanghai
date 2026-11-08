@@ -158,12 +158,18 @@
       const diff = Math.round((Date.parse(start) - Date.parse(now.date)) / 86400000);
       return `<div class="trip-top"><div class="trip-big">D-${diff}</div><div class="trip-info"><div class="trip-k">출발까지</div><div class="trip-s">${esc(TRIP.flightOut)}</div></div></div>`;
     }
-    if (todayIdx < 0) return '<div class="trip-top"><div class="trip-info"><div class="trip-k">여행 끝</div><div class="trip-s">즐거웠어요</div></div></div>';
+    const top = (big, k, rest) => `<div class="trip-top">${big ? `<div class="trip-big">${big}</div>` : ''}<div class="trip-info"><div class="trip-k">${k}</div>${rest}</div></div>`;
+    const lastIdx = DAYS.length - 1;
+    const tripEnd = '<div class="trip-top"><div class="trip-info"><div class="trip-k">여행 끝</div><div class="trip-s">즐거웠어요</div></div></div>';
+    if (todayIdx < 0 || (todayIdx === lastIdx && now.hm >= '12:00')) return tripEnd;
+    const dayNo = `Day ${todayIdx + 1}`;
+    // 마지막 날 오전: 공항 도착 시각 + 귀국편
+    if (todayIdx === lastIdx) return top(dayNo, `홍차오 공항 T1 ${esc(TRIP.airportBy)}까지`, `<div class="trip-s">${esc(TRIP.flightBack)}</div>`);
     const d = DAYS[todayIdx];
     const next = d.items.find((it) => /^\d/.test(it.t) && it.t > now.hm);
-    if (!next) return `<div class="trip-top"><div class="trip-info"><div class="trip-k">오늘 일정 끝</div><div class="trip-s">푹 쉬기</div></div></div>`;
+    if (!next) return top(dayNo, '오늘 일정 끝', '<div class="trip-s">푹 쉬기</div>');
     const p = next.place ? PLACES[next.place] : null;
-    return `<div class="trip-top"><div class="trip-big">${esc(next.t)}</div><div class="trip-info"><div class="trip-k">다음 일정</div><div class="trip-s trip-strong">${esc(next.title || (p && p.name))}</div>${p ? `<div class="trip-s" lang="zh-CN">${esc(p.cn)}</div>` : ''}</div></div>`;
+    return top(dayNo, `다음 일정 · ${esc(next.t)}`, `<div class="trip-s trip-strong">${esc(next.title || (p && p.name))}</div>${p ? `<div class="trip-s" lang="zh-CN">${esc(p.cn)}</div>` : ''}`);
   }
 
 

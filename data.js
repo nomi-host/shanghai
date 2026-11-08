@@ -6,6 +6,7 @@ window.TRIP_DATA = (() => {
     sub: '11월 21일 – 24일 · JIJI & MY',
     asOf: '2026-11-08',
     flightOut: 'KE2057 김포 08:25 → 홍차오 09:45',
+    flightBack: 'KE2058 홍차오 10:55 → 김포 14:00', airportBy: '08:00',
   };
 
   const PLACES = {
