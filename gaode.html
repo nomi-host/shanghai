@@ -29,7 +29,8 @@
       <li>고덕 앱에서 즐겨찾기 폴더 <b>상해여행</b>을 먼저 만들어 두세요.</li>
       <li>아래 장소를 누르면 고덕 앱이 그 장소를 검색해요.</li>
       <li>맞는 지점을 골라 ☆(收藏)를 누르고 이 화면으로 돌아오세요.</li>
-      <li>누른 곳은 자동으로 체크돼요. 검색이 안 되면 <b>복사</b>를 눌러 고덕 검색창에 붙여넣으세요.</li>
+      <li>누른 곳은 자동으로 체크돼요. 검색이 안 되면 <b>검색어</b>를 복사해 고덕 검색창에 붙여넣으세요.</li>
+      <li>고덕 앱 즐겨찾기 장소의 备注(메모) 칸에 <b>메모</b>를 복사해 붙여넣으면 설명이 남아요. 고덕 웹에는 메모 칸이 없어요.</li>
     </ol>
   </div>
   <p class="progress" id="progress" style="margin-top:18px"></p>
@@ -46,6 +47,9 @@
   const url = (p) => p.lng && p.lat
     ? `https://uri.amap.com/marker?position=${p.lng},${p.lat}&name=${encodeURIComponent(p.cn)}&src=sh26trip&coordinate=gaode&callnative=1`
     : `https://uri.amap.com/search?keyword=${encodeURIComponent(p.q || p.cn)}&city=310000&src=sh26trip&callnative=1`;
+  const CAT = { food: '식당', dessert: '디저트', tea: '차', shop: '숍', sight: '명소', architecture: '건축', street: '거리', bar: '바', stay: '숙소', move: '이동' };
+  // 고덕 즐겨찾기 메모(备注)에 붙여넣을 한 줄 설명
+  const memo = (p) => [p.name, CAT[p.cat], p.status === 'planned' ? '일정' : '후보', p.hours, p.memo].filter(Boolean).join(' · ');
   let f = 'planned';
   function render() {
     const done = get();
@@ -60,14 +64,17 @@
           <span class="row-zh" lang="zh-CN" style="display:block">${esc(p.q || p.cn)}</span>
           ${p.addr ? `<span class="row-note" lang="zh-CN" style="display:block">${esc(p.addr)}</span>` : ''}
         </a>
-        <button class="copy" data-copy="${esc(p.q || p.cn)}">복사</button>
+        <span style="display:flex;flex-direction:column;align-items:flex-end">
+          <button class="copy" data-copy="${esc(p.q || p.cn)}" data-label="검색어">검색어</button>
+          <button class="copy" data-copy="${esc(memo(p))}" data-label="메모">메모</button>
+        </span>
       </div>`).join('')}</div>`;
   }
   document.addEventListener('click', (e) => {
     const a = e.target.closest('[data-k]');
     if (a) { const d = get(); d[a.dataset.k] = true; put(d); setTimeout(render, 300); return; }
     const c = e.target.closest('[data-copy]');
-    if (c) { navigator.clipboard?.writeText(c.dataset.copy).then(() => { c.textContent = '복사됨'; setTimeout(() => (c.textContent = '복사'), 1500); }); return; }
+    if (c) { navigator.clipboard?.writeText(c.dataset.copy).then(() => { c.textContent = '복사됨'; setTimeout(() => (c.textContent = c.dataset.label), 1500); }); return; }
     const s = e.target.closest('[data-f]');
     if (s) { f = s.dataset.f; document.querySelectorAll('[data-f]').forEach((b) => b.setAttribute('aria-pressed', String(b === s))); render(); }
   });

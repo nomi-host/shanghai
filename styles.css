@@ -101,7 +101,7 @@ button.row:active, a.row:active { background: var(--card-pressed); }
 .row-zh { font-size: 15px; color: var(--label2); margin-top: 1px; }
 .row-note { font-size: 13px; color: var(--label2); margin-top: 3px; line-height: 1.4; }
 .row-time { width: 46px; flex: none; font-size: 15px; color: var(--label2); padding-top: 4px; font-variant-numeric: tabular-nums; }
-.chev { flex: none; width: 9px; height: 15px; margin-top: 8px; color: var(--label3); transition: transform .25s ease; }
+.chev { flex: none; }
 .row[aria-expanded="true"] .chev { transform: rotate(90deg); }
 .row.is-now { background: linear-gradient(90deg, color-mix(in srgb, var(--tint) 10%, transparent), transparent 60%); }
 .row.is-now .row-time { color: var(--tint); font-weight: 600; }
@@ -225,3 +225,58 @@ button.row:active, a.row:active { background: var(--card-pressed); }
 .ico.plane { background: var(--blue); } .ico.castle { background: var(--tint); }
 .ico.weather { background: #32ADE6; } .ico.passport { background: #5856D6; } .ico.money { background: #34C759; }
 .ico.plug { background: #FF9500; } .ico.wifi { background: var(--blue); } .ico.apps { background: #8E8E93; } .ico.sos { background: var(--tint); }
+
+/* ---------- Material Symbols ---------- */
+.ms {
+  font-family: 'Material Symbols Rounded';
+  font-weight: 400; font-style: normal; font-size: 20px; line-height: 1;
+  letter-spacing: normal; text-transform: none; white-space: nowrap; direction: ltr;
+  display: inline-block; flex: none;
+  -webkit-font-feature-settings: 'liga'; font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  overflow: hidden; width: 1em;
+}
+.ms.fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.ico .ms { font-size: 19px; color: #fff; }
+.ms.chev { width: auto; font-size: 22px; color: var(--label3); margin-top: 5px; transition: transform .25s ease; }
+.tab .ms { font-size: 27px; height: 28px; }
+.tab.is-active .ms { font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24; }
+.pill .ms { font-size: 17px; }
+.speak { width: 44px; height: 44px; }
+.speak .ms { font-size: 22px; }
+.search .ms { font-size: 19px; color: var(--label2); }
+.pill { min-height: 40px; }
+
+/* 카테고리·상황 칩 (애플 지도 필터 캡슐 느낌) */
+.chipbar { display: flex; gap: 8px; overflow-x: auto; margin: 4px -16px 12px; padding: 2px 16px; scrollbar-width: none; scroll-snap-type: x proximity; }
+.chipbar::-webkit-scrollbar { display: none; }
+.chip { flex: none; display: inline-flex; align-items: center; gap: 5px; min-height: 36px; padding: 0 14px 0 11px; border-radius: 999px; background: var(--card); color: var(--label); font-size: 15px; font-weight: 500; scroll-snap-align: start; box-shadow: 0 0 0 .5px var(--sep); }
+.chip .ms { font-size: 18px; color: var(--label2); }
+.chip[aria-pressed="true"] { background: var(--label); color: var(--bg); box-shadow: none; }
+.chip[aria-pressed="true"] .ms { color: var(--bg); }
+@media (min-width: 600px) { .chipbar { margin-left: -24px; margin-right: -24px; padding: 2px 24px; } }
+
+/* 상세: 대표 사진 · Must-do · 대표 메뉴 */
+.hero { margin: 4px 0 6px; border-radius: 12px; overflow: hidden; background: var(--fill); position: relative; aspect-ratio: 16 / 10; }
+.hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero figcaption { position: absolute; right: 6px; bottom: 6px; font-size: 10px; color: #fff; background: rgba(0,0,0,.45); padding: 2px 6px; border-radius: 6px; max-width: 90%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.detail ul.must { list-style: none; padding: 0; }
+.must li { display: flex; gap: 8px; align-items: flex-start; }
+.must .ms { color: #FFCC00; font-size: 18px; margin-top: 1px; }
+.menu { display: grid; gap: 6px; }
+.menu-item { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; padding: 9px 12px; border-radius: 10px; background: var(--fill); }
+button.menu-item:active { background: var(--card-pressed); }
+.menu-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.menu-zh { font-size: 17px; font-weight: 600; }
+.menu-ko { font-size: 13px; color: var(--label2); }
+.menu-item .menu-ko:only-child { font-size: 15px; color: var(--label); }
+.menu-tag { flex: none; font-size: 12px; font-weight: 600; color: var(--tint); background: color-mix(in srgb, var(--tint) 12%, transparent); padding: 3px 8px; border-radius: 999px; }
+.menu-hint { font-size: 12px !important; color: var(--label2); margin-top: 6px !important; }
+
+/* 리스트 링크는 본문색, 상세는 넓게 */
+a.row { color: inherit; }
+@media (max-width: 599px) {
+  .detail-pad { padding-left: 16px; }
+  .detail-pad[style] { padding-left: 16px !important; }
+}

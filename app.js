@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const { PLACES, DAYS, INFO, CHECKLIST, PHRASES, TRIP } = window.TRIP_DATA;
+  const { PLACES, DAYS, INFO, CHECKLIST, PHRASES, TRIP, EXTRA = {} } = window.TRIP_DATA;
   const $ = (s, el = document) => el.querySelector(s);
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const store = {
@@ -8,33 +8,18 @@
     set(k, v) { try { localStorage.setItem('sh26:' + k, JSON.stringify(v)); } catch { /* 저장 불가 환경 */ } },
   };
 
-  /* ---------- 아이콘 ---------- */
-  const ICON = {
-    food: '<path d="M7 3v7a2 2 0 0 0 2 2v9M11 3v7a2 2 0 0 1-2 2M9 3v6M16.5 21V3c-2 1-3 3.5-3 7v3h3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
-    dessert: '<path d="M7 11h10l-1.5 10h-7ZM6.5 11a5.5 5.5 0 0 1 11 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 5.5V3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
-    tea: '<path d="M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5ZM16 10.5h1.5a2.5 2.5 0 0 1 0 5H16M8 3.5c0 1.5 1.5 1.5 1.5 3M12 3.5c0 1.5 1.5 1.5 1.5 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
-    shop: '<path d="M5.5 8h13l-1 13h-11ZM9 10V6.5a3 3 0 0 1 6 0V10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>',
-    sight: '<path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.6" fill="currentColor"/>',
-    architecture: '<path d="M3.5 20.5h17M5 20.5V10l7-5 7 5v10.5M9 20.5v-6h6v6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>',
-    street: '<path d="M8 3 5 21M16 3l3 18M12 4v3M12 10.5v3M12 17v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
-    bar: '<path d="M5 4h14l-7 8ZM12 12v8M8 20.5h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>',
-    move: '<rect x="6" y="3.5" width="12" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M6 11h12M8.5 21l1.5-3.5M15.5 21 14 17.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="9.5" cy="14.3" r="1" fill="currentColor"/><circle cx="14.5" cy="14.3" r="1" fill="currentColor"/>',
-    plane: '<path d="M10.5 4.5c0-1 .7-1.8 1.5-1.8s1.5.8 1.5 1.8v5l7 4v2l-7-2v4.5l2.2 1.6V21L12 20l-3.7 1v-1.4l2.2-1.6V13.5l-7 2v-2l7-4Z" fill="currentColor"/>',
-    stay: '<path d="M3 18.5V7M3 14h18v4.5M21 14v-2.5a3 3 0 0 0-3-3h-7V14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/><circle cx="7" cy="11" r="1.8" fill="currentColor"/>',
-    info: '<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.8" r="1.2" fill="currentColor"/>',
-    weather: '<circle cx="9" cy="9" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9 2.5v1.3M2.5 9h1.3M4.4 4.4l.9.9M13.6 4.4l-.9.9M8 20h9.5a3.5 3.5 0 0 0 0-7 5 5 0 0 0-9.4 1.6A2.7 2.7 0 0 0 8 20Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
-    passport: '<rect x="5" y="3" width="14" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10.5" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 17h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
-    money: '<rect x="3" y="6" width="18" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/>',
-    plug: '<path d="M9 3v5M15 3v5M6.5 8h11v3.5a5.5 5.5 0 0 1-11 0ZM12 17v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
-    wifi: '<path d="M3 9.5a13 13 0 0 1 18 0M6 13a8.5 8.5 0 0 1 12 0M9 16.5a4 4 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="19.5" r="1.3" fill="currentColor"/>',
-    apps: '<rect x="4" y="4" width="7" height="7" rx="2" fill="currentColor"/><rect x="13" y="4" width="7" height="7" rx="2" fill="currentColor"/><rect x="4" y="13" width="7" height="7" rx="2" fill="currentColor"/><rect x="13" y="13" width="7" height="7" rx="2" fill="currentColor"/>',
-    sos: '<path d="M12 3.5 21 19.5H3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.1" fill="currentColor"/>',
-    castle: '<path d="M4 21V11l2-2 2 2v-4l2-3 2 3 2-3 2 3v4l2-2 2 2v10ZM10 21v-4a2 2 0 0 1 4 0v4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>',
+  /* ---------- 아이콘: Google Material Symbols Rounded ---------- */
+  const MS = {
+    food: 'restaurant', dessert: 'icecream', tea: 'emoji_food_beverage', shop: 'shopping_bag', sight: 'photo_camera',
+    architecture: 'villa', street: 'directions_walk', bar: 'local_bar', move: 'directions_subway', plane: 'flight',
+    stay: 'hotel', info: 'info', weather: 'partly_cloudy_day', passport: 'badge', money: 'payments', plug: 'power',
+    wifi: 'wifi', apps: 'apps', sos: 'sos', castle: 'castle',
   };
-  const icon = (cat) => `<span class="ico ${esc(cat)}" aria-hidden="true"><svg viewBox="0 0 24 24">${ICON[cat] || ICON.info}</svg></span>`;
-  const CHEV = '<svg class="chev" viewBox="0 0 9 15" aria-hidden="true"><path d="M1.5 1.5 7.5 7.5l-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  const PIN = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 15s5-4.6 5-8.5a5 5 0 0 0-10 0C3 10.4 8 15 8 15Z" fill="currentColor"/><circle cx="8" cy="6.5" r="1.8" fill="var(--card)"/></svg>';
-  const SPK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4Z" fill="currentColor"/><path d="M15.5 9a4.5 4.5 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+  const ms = (name, cls = '') => `<span class="ms ${cls}" aria-hidden="true">${name}</span>`;
+  const icon = (cat) => `<span class="ico ${esc(cat)}" aria-hidden="true">${ms(MS[cat] || 'info', 'fill')}</span>`;
+  const CHEV = ms('chevron_right', 'chev');
+  const PIN = ms('location_on', 'fill');
+  const SPK = ms('volume_up', 'fill');
   const CAT_KO = { food: '식당', dessert: '디저트', tea: '차', shop: '편집샵·숍', sight: '명소', architecture: '건축', street: '거리', bar: '바', stay: '숙소', move: '이동' };
 
   /* ---------- 고덕지도 링크 ---------- */
@@ -62,8 +47,30 @@
   let dayIdx = todayIdx >= 0 ? todayIdx : store.get('day', 0);
   if (!(dayIdx >= 0 && dayIdx < DAYS.length)) dayIdx = 0;
 
+  function extraHtml(ex) {
+    if (!ex) return '';
+    let h = '';
+    if (ex.photo) {
+      h += `<figure class="hero"><img src="${esc(ex.photo)}" alt="${esc(ex.alt || '')}" loading="lazy" decoding="async">${ex.credit ? `<figcaption>${esc(ex.credit)}</figcaption>` : ''}</figure>`;
+    }
+    if (ex.must && ex.must.length) {
+      h += `<h4>Must-do</h4><ul class="must">${ex.must.map((x) => `<li>${ms('star', 'fill')}<span>${esc(x)}</span></li>`).join('')}</ul>`;
+    }
+    if (ex.menu && ex.menu.length) {
+      h += `<h4>대표 메뉴</h4><div class="menu">${ex.menu.map(([zh, ko, tag]) => {
+        const body = `<span class="menu-main">${zh ? `<span class="menu-zh" lang="zh-CN">${esc(zh)}</span>` : ''}<span class="menu-ko">${esc(ko)}</span></span>${tag ? `<span class="menu-tag">${esc(tag)}</span>` : ''}`;
+        return zh && /[一-鿿]/.test(zh)
+          ? `<button class="menu-item" data-show-ko="${esc(ko)}" data-show-zh="${esc(zh)}" aria-label="${esc(ko)} 크게 보여주기">${body}</button>`
+          : `<div class="menu-item">${body}</div>`;
+      }).join('')}</div><p class="menu-hint">중국어 메뉴명을 누르면 크게 보여줘요. 직원에게 그대로 보여주세요.</p>`;
+    }
+    return h;
+  }
+
   function detailHtml(it, p) {
     let h = '';
+    const exKey = it.extra !== undefined ? it.extra : it.place;
+    h += extraHtml(exKey ? EXTRA[exKey] : null);
     if (it.warn) h += `<div class="warn">${esc(it.warn)}</div>`;
     (it.detail || []).forEach((s) => {
       h += `<h4>${esc(s.h)}</h4>`;
@@ -97,7 +104,7 @@
       const cat = it.cat || (p && p.cat) || 'move';
       const title = it.title || (p && p.name) || '';
       const zh = it.cn !== undefined ? it.cn : p ? p.cn : '';
-      const hasDetail = !!(it.detail || it.alts || it.warn || p);
+      const hasDetail = !!(it.detail || it.alts || it.warn || p || EXTRA[it.extra]);
       const id = `d${dayIdx}-${i}`;
       const inner = `<span class="row-time">${esc(it.t)}</span>${icon(cat)}<span class="row-main"><span class="row-title" style="display:block">${esc(title)}${it.warn ? ' <span style="color:var(--warn)" aria-label="주의">•</span>' : ''}</span>${zh ? `<span class="row-zh" lang="zh-CN" style="display:block">${esc(zh)}</span>` : ''}${it.note ? `<span class="row-note" style="display:block">${esc(it.note)}</span>` : ''}</span>`;
       if (hasDetail) {
@@ -130,19 +137,31 @@
   /* ---------- 장소 ---------- */
   let placeFilter = 'all';
   let placeQuery = '';
+  let placeCat = 'all';
   const CAT_ORDER = ['food', 'dessert', 'tea', 'shop', 'architecture', 'street', 'sight', 'bar', 'stay', 'move'];
+  /* 칩은 비슷한 카테고리를 묶어서 보여줌 */
+  const CAT_CHIPS = [
+    ['all', '전체', 'apps'], ['food', '식당', 'restaurant', ['food']], ['sweet', '디저트·차', 'icecream', ['dessert', 'tea']],
+    ['shop', '숍', 'shopping_bag', ['shop']], ['see', '건축·명소', 'villa', ['architecture', 'street', 'sight']],
+    ['bar', '바', 'local_bar', ['bar']], ['etc', '숙소·이동', 'hotel', ['stay', 'move']],
+  ];
+  const chipBar = (attr, items, cur, label) => `<div class="chipbar" role="group" aria-label="${label}">${items.map(([k, t, ic]) =>
+    `<button class="chip" data-${attr}="${esc(k)}" aria-pressed="${k === cur}">${ic ? ms(ic, 'fill') : ''}${esc(t)}</button>`).join('')}</div>`;
   function renderPlaces() {
     const el = $('#screen-places');
     if (!el.dataset.built) {
       el.innerHTML = `<h1 class="large-title">장소</h1><p class="subhead">누르면 고덕지도 앱에서 열려요. 앱에서 ☆를 눌러 저장하세요.</p>
-      <label class="search"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m11 11 3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="placeQ" placeholder="이름, 중국어, 지역 검색" aria-label="장소 검색"></label>
+      ${chipBar('pc', CAT_CHIPS, placeCat, '카테고리')}
+      <label class="search">${ms('search')}<input type="search" id="placeQ" placeholder="이름, 중국어, 지역 검색" aria-label="장소 검색"></label>
       <div class="seg" role="group" aria-label="장소 필터"><button data-pf="all" aria-pressed="true">전체</button><button data-pf="planned" aria-pressed="false">일정</button><button data-pf="backup" aria-pressed="false">후보</button></div>
       <div id="placeList"></div>
       <p class="group-f" style="margin-top:20px">한 번에 저장하려면 <a href="gaode.html">고덕지도 빠른 저장 목록</a>을 쓰세요.</p>`;
       el.dataset.built = '1';
     }
     const q = placeQuery.trim().toLowerCase();
+    const catSet = (CAT_CHIPS.find((c) => c[0] === placeCat) || [])[3];
     const items = Object.entries(PLACES).filter(([, p]) => (placeFilter === 'all' || p.status === placeFilter) &&
+      (!catSet || catSet.includes(p.cat)) &&
       (!q || [p.name, p.cn, p.area, p.addr, CAT_KO[p.cat]].join(' ').toLowerCase().includes(q)));
     let h = '';
     CAT_ORDER.forEach((c) => {
@@ -206,11 +225,14 @@
     const p = document.createElement('p'); p.className = 'warn'; p.textContent = msg;
     $('#screen-talk').prepend(p); setTimeout(() => p.remove(), 3500);
   }
+  let talkGroup = 'all';
+  const TALK_ICON = { '기본': 'waving_hand', '식당': 'restaurant', '바·디저트': 'local_bar', '쇼핑': 'shopping_bag', '교통·길': 'local_taxi', '호텔': 'hotel', '급할 때': 'sos' };
   function renderTalk() {
     const el = $('#screen-talk');
     let h = `<h1 class="large-title">회화</h1><p class="subhead">스피커를 누르면 중국어로 읽어줘요. 문장을 누르면 크게 보여줘요.</p>`;
+    h += chipBar('tg', [['all', '전체', 'apps'], ...PHRASES.map((g) => [g.group, g.group, TALK_ICON[g.group]])], talkGroup, '상황');
     h += `<div class="seg" role="group" aria-label="읽는 속도"><button data-speed="0" aria-pressed="${!slow}">보통 속도</button><button data-speed="1" aria-pressed="${slow}">천천히</button></div>`;
-    PHRASES.forEach((g) => {
+    PHRASES.filter((g) => talkGroup === 'all' || g.group === talkGroup).forEach((g) => {
       h += `<h3 class="group-h">${esc(g.group)}</h3><div class="list">`;
       g.items.forEach(([ko, zh, py]) => {
         h += `<div class="phrase"><button class="phrase-open" data-show-ko="${esc(ko)}" data-show-zh="${esc(zh)}" data-show-py="${esc(py)}"><div class="phrase-ko">${esc(ko)}</div><div class="phrase-zh" lang="zh-CN">${esc(zh)}</div><div class="phrase-py">${esc(py)}</div></button><button class="speak" data-say="${esc(zh)}" aria-label="${esc(ko)} 중국어로 듣기">${SPK}</button></div>`;
@@ -273,6 +295,14 @@
     if (say && say.id !== 'showSpeak') { speak(say.dataset.say, say); return; }
     const show = e.target.closest('[data-show-zh]');
     if (show) { openShow(show.dataset.showKo, show.dataset.showZh, show.dataset.showPy); return; }
+    const pc = e.target.closest('[data-pc]');
+    if (pc) {
+      placeCat = pc.dataset.pc;
+      document.querySelectorAll('[data-pc]').forEach((b) => b.setAttribute('aria-pressed', String(b === pc)));
+      renderPlaces(); return;
+    }
+    const tg = e.target.closest('[data-tg]');
+    if (tg) { talkGroup = tg.dataset.tg; renderTalk(); return; }
     const pf = e.target.closest('[data-pf]');
     if (pf) {
       placeFilter = pf.dataset.pf;
