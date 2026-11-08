@@ -400,3 +400,4 @@ main { padding-top: calc(10px + env(safe-area-inset-top)); }
 .gallery-dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--label3); transition: background .2s, width .2s; }
 .gallery-dots i.on { background: var(--tint); width: 16px; border-radius: 3px; }
 .ico.receipt { background: #E0902A; }
+.ms.has-photo { font-size: 15px; color: var(--label3); vertical-align: -2px; width: auto; }

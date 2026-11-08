@@ -181,7 +181,7 @@
   function renderPlaces() {
     const el = $('#screen-places');
     if (!el.dataset.built) {
-      el.innerHTML = `<div class="title-row"><h1 class="large-title">Places</h1><button class="refresh refresh-inline" data-refresh aria-label="새로고침"><span class="ms" aria-hidden="true">refresh</span></button></div><p class="subhead">누르면 고덕지도 앱에서 열려요. 주요 장소는 고덕 즐겨찾기(food·shopping·place)에 저장돼 있어요.</p>
+      el.innerHTML = `<div class="title-row"><h1 class="large-title">Places</h1><button class="refresh refresh-inline" data-refresh aria-label="새로고침"><span class="ms" aria-hidden="true">refresh</span></button></div><p class="subhead">누르면 사진·주소와 고덕지도·구글맵 버튼이 펼쳐져요. 주요 장소는 고덕 즐겨찾기에 저장돼 있어요.</p>
       ${chipBar('pc', CAT_CHIPS, placeCat, '카테고리')}
       <label class="search">${ms('search')}<input type="search" id="placeQ" placeholder="이름, 중국어, 지역 검색" aria-label="장소 검색"></label>
       <div class="seg" role="group" aria-label="장소 필터"><button data-pf="all" aria-pressed="true">전체</button><button data-pf="planned" aria-pressed="false">일정</button><button data-pf="backup" aria-pressed="false">후보</button></div>
@@ -199,8 +199,15 @@
       const g = items.filter(([, p]) => p.cat === c);
       if (!g.length) return;
       h += `<h3 class="group-h">${esc(CAT_KO[c])}</h3><div class="list">`;
-      g.forEach(([, p]) => {
-        h += `<a class="row" style="--inset:57px" href="${amapUrl(p)}" target="_blank" rel="noopener">${icon(p.cat)}<span class="row-main"><span class="row-title" style="display:block">${esc(p.name)}${p.status === 'planned' ? '' : ' <span style="font-size:13px;color:var(--label2)">후보</span>'}</span><span class="row-zh" lang="zh-CN" style="display:block">${esc(p.cn)}</span><span class="row-note" style="display:block">${esc([p.area, p.hours, p.memo].filter(Boolean).join(' · '))}</span></span>${CHEV}</a>`;
+      g.forEach(([k, p]) => {
+        // 장소를 누르면 펼쳐서 사진·주소·지도 버튼
+        const id = `pl-${k}`;
+        const ex = EXTRA[k];
+        const body = `<span class="row-main"><span class="row-title" style="display:block">${esc(p.name)}${p.status === 'planned' ? '' : ' <span style="font-size:13px;color:var(--label2)">후보</span>'}${ex && ex.photos && ex.photos.length ? ' <span class="ms has-photo" aria-label="사진 있음">photo_library</span>' : ''}</span><span class="row-zh" lang="zh-CN" style="display:block">${esc(p.cn)}</span><span class="row-note" style="display:block">${esc([p.area, p.hours, p.memo].filter(Boolean).join(' · '))}</span></span>`;
+        const chips = [mapPill(p, '고덕지도'), gmapPill(p, '구글맵')];
+        if (p.addr) chips.push(showPill(p.name, `${p.cn}\n${p.addr}`));
+        h += `<button class="row" style="--inset:57px" aria-expanded="false" aria-controls="${id}" data-toggle="${id}">${icon(p.cat)}${body}${CHEV}</button>`;
+        h += `<div class="detail" id="${id}"><div class="detail-inner"><div class="detail-pad">${extraHtml(ex ? { photos: ex.photos, must: ex.must, menu: ex.menu } : null)}${p.addr ? `<p lang="zh-CN" style="color:var(--label2)">${esc(p.addr)}</p>` : ''}<div class="chips">${chips.join('')}</div></div></div></div>`;
       });
       h += `</div>`;
     });
