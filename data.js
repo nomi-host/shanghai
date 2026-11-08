@@ -324,10 +324,10 @@ window.TRIP_DATA = (() => {
   });
 
   /* 따종띠엔핑 후기 사진(실제 가게) — 있는 곳은 참고 이미지 대신 이걸로 */
-  const DP = { notelab: '향 실험실 칵테일', sijiminfu: '베이징덕', zuoting: '생소고기 훠궈', henjiu: '양꼬치', libaixie: '게알 요리', renheguan: '런허관 요리', zhangshifu: '상하이식 아침', diandoude: '딤섬', kaisha: 'KAISHA', fever: 'Fever Bar', noras: "Nora's", sloppygin: 'Sloppy Gin', basao: 'BASAO', onheon: 'onheon', softserve: 'Soft Serve', jaja: 'jajainthemoment', habiter: 'HABITER', zamani: 'ZAMANI', viandn: 'Via NDN' };
+  const DP = { notelab: '향 실험실 칵테일', sijiminfu: '베이징덕', zuoting: '생소고기 훠궈', henjiu: '양꼬치', libaixie: '게알 요리', renheguan: '런허관 요리', zhangshifu: '상하이식 아침', diandoude: '딤섬', kaisha: 'KAISHA', fever: 'Fever Bar', noras: "Nora's", sloppygin: 'Sloppy Gin', basao: 'BASAO', onheon: 'onheon', softserve: 'Soft Serve', jaja: 'jajainthemoment', habiter: 'HABITER', zamani: 'ZAMANI', viandn: 'Via NDN', qiansu: '천수 1000 Trees', psa: 'PSA 상하이 당대예술박물관', rockbund: '와이탄 미술관', yuyuan: '위위안 야경' };
   Object.entries(DP).forEach(([k, what]) => {
     EXTRA[k] = EXTRA[k] || {};
-    EXTRA[k].photos = [1, 2, 3, 4].map((n) => ({ src: `img/${k}-dp${n}.jpg`, alt: `${what} — 따종띠엔핑 후기 사진`, credit: '' }));
+    EXTRA[k].photos = [1, 2, 3, 4].map((n) => ({ src: `img/${k}-dp${n}.jpg`, alt: what, credit: '' }));
   });
 
   const DAYS = [
