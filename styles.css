@@ -402,3 +402,17 @@ main { padding-top: calc(10px + env(safe-area-inset-top)); }
 .ico.receipt { background: #E0902A; }
 .ms.has-photo { font-size: 15px; color: var(--label3); vertical-align: -2px; width: auto; }
 .alt.alt-pick { background: color-mix(in srgb, var(--tint) 10%, var(--card)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tint) 35%, transparent); }
+
+/* 날짜별 날씨 카드 */
+.wx-card { background: var(--card); border-radius: 14px; padding: 12px 14px; margin: 0 0 14px; }
+.wx-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+.wx-cell { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.wx-l { font-size: 11px; color: var(--label2); font-weight: 600; }
+.wx-v { font-size: 20px; font-weight: 600; }
+.wx-v small { font-size: 12px; font-weight: 500; margin-left: 1px; }
+.wx-wet { color: #3C6E9E; }
+.wx-outfit { display: flex; gap: 6px; align-items: center; margin-top: 10px; padding-top: 10px; border-top: .5px solid var(--sep); font-size: 15px; }
+.wx-outfit .ms { color: var(--tint); font-size: 20px; }
+.wx-src { font-size: 11px; color: var(--label3); margin-top: 6px; }
+.wx-empty { display: flex; gap: 8px; align-items: center; font-size: 14px; color: var(--label2); }
+.wx-empty .ms { color: var(--label2); }

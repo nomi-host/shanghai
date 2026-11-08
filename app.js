@@ -131,19 +131,20 @@
       h += `<p class="group-f" style="margin:0 4px 6px">모든 일정이 펼쳐져 있어요. 길게 눌러 글자를 선택하고 복사할 수 있어요.</p>`;
       DAYS.forEach((d, dIdx) => {
         const nowI = dIdx === todayIdx ? d.items.reduce((acc, it, i) => (/^\d/.test(it.t) && it.t <= now.hm ? i : acc), -1) : -1;
-        h += `<div class="day-head" style="margin-top:26px"><h2>${Number(d.date.slice(5, 7))}/${Number(d.date.slice(8))}(${esc(d.w)}) ${esc(d.title)}</h2>${d.sub ? `<p>${esc(d.sub)}</p>` : ''}</div>`;
+        h += `<div class="day-head" style="margin-top:26px"><h2>${Number(d.date.slice(5, 7))}/${Number(d.date.slice(8))}(${esc(d.w)}) ${esc(d.title)}</h2>${d.sub ? `<p>${esc(d.sub)}</p>` : ''}</div><div data-wx="${d.date}"></div>`;
         h += `<div class="list selectable">${d.items.map((it, i) => itemHtml(it, i, dIdx, nowI, true)).join('')}</div>`;
         if (d.foot) h += `<p class="group-f">${esc(d.foot)}</p>`;
       });
     } else {
       const d = DAYS[dayIdx];
-      h += `<div class="day-head"><h2>${esc(d.title)}</h2>${d.sub ? `<p>${esc(d.sub)}</p>` : ''}</div>`;
+      h += `<div data-wx="${d.date}"></div><div class="day-head"><h2>${esc(d.title)}</h2>${d.sub ? `<p>${esc(d.sub)}</p>` : ''}</div>`;
       const nowI = dayIdx === todayIdx ? d.items.reduce((acc, it, i) => (/^\d/.test(it.t) && it.t <= now.hm ? i : acc), -1) : -1;
       h += `<div class="list">${d.items.map((it, i) => itemHtml(it, i, dayIdx, nowI, false)).join('')}</div>`;
       if (d.foot) h += `<p class="group-f">${esc(d.foot)}</p>`;
     }
     h += `<p class="foot">조사 기준 ${esc(TRIP.asOf)} · 출발 전 영업시간 재확인</p>`;
     el.innerHTML = h;
+    fillWx(el);
   }
 
   function nowCard() {
@@ -158,6 +159,54 @@
     if (!next) return `<div class="trip-top"><div class="trip-info"><div class="trip-k">오늘 일정 끝</div><div class="trip-s">푹 쉬기</div></div></div>`;
     const p = next.place ? PLACES[next.place] : null;
     return `<div class="trip-top"><div class="trip-big">${esc(next.t)}</div><div class="trip-info"><div class="trip-k">다음 일정</div><div class="trip-s trip-strong">${esc(next.title || (p && p.name))}</div>${p ? `<div class="trip-s" lang="zh-CN">${esc(p.cn)}</div>` : ''}</div></div>`;
+  }
+
+
+  /* ---------- 날씨: Open-Meteo(오픈소스, 키 없음) 시간별 예보 · 3시간 캐시 ---------- */
+  const WX_URL = 'https://api.open-meteo.com/v1/forecast?latitude=31.23&longitude=121.47&hourly=temperature_2m,precipitation_probability,precipitation&timezone=Asia%2FShanghai&forecast_days=16';
+  let wxData = store.get('wx', null);
+  let wxLoading = null;
+  function loadWx() {
+    if (wxData && Date.now() - wxData.at < 3 * 3600e3) return Promise.resolve(wxData);
+    if (!wxLoading) {
+      wxLoading = fetch(WX_URL).then((r) => r.json()).then((j) => {
+        wxData = { at: Date.now(), h: j.hourly }; store.set('wx', wxData); return wxData;
+      }).catch(() => wxData).finally(() => { wxLoading = null; });
+    }
+    return wxLoading;
+  }
+  function outfit(lo, hi, wet) {
+    let o = hi >= 20 ? '얇은 니트·셔츠 + 가벼운 겉옷' : hi >= 15 ? '니트·맨투맨 + 트렌치·바람막이' : hi >= 10 ? '니트 + 경량 패딩이나 코트' : '코트·패딩 + 머플러';
+    if (lo < 8) o += ' · 밤엔 한 겹 더';
+    if (wet) o += ' · 우산 챙기기';
+    return o;
+  }
+  function wxHtml(date) {
+    if (!wxData || !wxData.h) return '<div class="wx-card wx-empty">날씨를 불러오지 못했어요. 인터넷 연결 후 새로고침해 주세요.</div>';
+    const h = wxData.h; const idx = h.time.map((t, i) => (t.startsWith(date) ? i : -1)).filter((i) => i >= 0);
+    if (!idx.length) {
+      const days = Math.round((Date.parse(date) - Date.now()) / 86400000) - 15;
+      return `<div class="wx-card wx-empty">${ms('partly_cloudy_day', 'fill')}<span>아직 예보 범위 밖이에요. ${days > 0 ? `${days}일 뒤부터` : '곧'} 나와요. 11월 하순 평년: 최저 5–12°C · 최고 13–18°C</span></div>`;
+    }
+    const at = (hr) => { const i = idx.find((k) => h.time[k].endsWith(`${String(hr).padStart(2, '0')}:00`)); return i == null ? null : Math.round(h.temperature_2m[i]); };
+    const day = idx.filter((k) => { const hr = +h.time[k].slice(11, 13); return hr >= 8 && hr <= 23; });
+    const temps = day.map((k) => h.temperature_2m[k]);
+    const lo = Math.round(Math.min(...temps)); const hi = Math.round(Math.max(...temps));
+    const pop = Math.max(...day.map((k) => h.precipitation_probability[k] ?? 0));
+    const mm = Math.round(day.reduce((s, k) => s + (h.precipitation[k] || 0), 0) * 10) / 10;
+    const wet = pop >= 50 || mm >= 1;
+    const cell = (label, v) => `<div class="wx-cell"><span class="wx-l">${label}</span><span class="wx-v num">${v == null ? '–' : v + '°'}</span></div>`;
+    return `<div class="wx-card">
+      <div class="wx-row">${cell('아침 8시', at(8))}${cell('낮 2시', at(14))}${cell('밤 9시', at(21))}
+        <div class="wx-cell"><span class="wx-l">강수확률</span><span class="wx-v num${wet ? ' wx-wet' : ''}">${pop}%</span></div>
+        <div class="wx-cell"><span class="wx-l">강수량</span><span class="wx-v num">${mm}<small>mm</small></span></div></div>
+      <div class="wx-outfit">${ms('checkroom', 'fill')}<span>${esc(outfit(lo, hi, wet))}</span></div>
+      <div class="wx-src">Open-Meteo 예보 · 08–23시 기준 · 앱 열 때마다 갱신(3시간 캐시)</div></div>`;
+  }
+  function fillWx(root) {
+    const slots = root.querySelectorAll('[data-wx]');
+    if (!slots.length) return;
+    loadWx().then(() => slots.forEach((el) => { el.innerHTML = wxHtml(el.dataset.wx); }));
   }
 
   /* ---------- 장소 ---------- */
@@ -225,7 +274,7 @@
       g.rows.forEach((r, i) => {
         const id = `info-${esc(g.group)}-${i}`.replace(/\s/g, '');
         h += `<button class="row" style="--inset:57px" aria-expanded="false" aria-controls="${id}" data-toggle="${id}">${icon(r.icon)}<span class="row-main"><span class="row-title" style="display:block">${esc(r.title)}</span>${r.summary ? `<span class="row-sub" style="display:block">${esc(r.summary)}</span>` : ''}</span>${CHEV}</button>`;
-        h += `<div class="detail" id="${id}"><div class="detail-inner"><div class="detail-pad" style="padding-left:57px">${detailHtml(r, null)}${r.show ? `<div class="chips">${showPill(r.show[0], r.show[1])}</div>` : ''}</div></div></div>`;
+        h += `<div class="detail" id="${id}"><div class="detail-inner"><div class="detail-pad" style="padding-left:57px">${detailHtml(r, null)}${(r.show || r.links) ? `<div class="chips">${(r.links || []).map(([t, u]) => `<a class="pill" href="${esc(u)}" target="_blank" rel="noopener">${ms('open_in_new')}${esc(t)}</a>`).join('')}${r.show ? showPill(r.show[0], r.show[1]) : ''}</div>` : ''}</div></div></div>`;
       });
       h += `</div>`;
       if (g.foot) h += `<p class="group-f">${esc(g.foot)}</p>`;

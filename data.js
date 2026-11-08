@@ -43,6 +43,7 @@ window.TRIP_DATA = (() => {
     psa: { name: 'PSA 상하이 당대예술박물관', cn: '上海当代艺术博物馆', cat: 'architecture', area: '황푸 강변', addr: '黄浦区花园港路200号', hours: '화–일 11:00–19:00 · 입장 18:00까지 · 월 휴관', q: '上海当代艺术博物馆', status: 'planned', memo: '옛 발전소 리노베이션 · 류자쿤 「明月构想」 11/14–2027/2/28' },
     rockbund: { name: '와이탄 미술관 (Rockbund)', cn: '上海外滩美术馆', cat: 'architecture', area: '와이탄', addr: '黄浦区虎丘路20号', hours: '수–일 11:00–18:00 · 입장 17:30까지 · 월·화 휴관', q: '上海外滩美术馆', status: 'planned', memo: '1930년대 아르데코 건물 · 요타 몸바사 전시 ~2027/2/21 · 호텔에서 가까움' },
     yuyuan: { name: '위위안 · 성황묘 야경', cn: '豫园商城 · 城隍庙', cat: 'sight', area: '황푸', addr: '黄浦区方浜中路 豫园商城', hours: '상가 조명 밤 22시 전후까지(추정)', q: '豫园商城', status: 'planned', memo: '호텔 바로 앞 · 처마 끝 조명이 켜진 옛 상가 거리 · 九曲桥' },
+    map_pudong: { name: '푸동미술관 (장 누벨)', cn: '浦东美术馆', cat: 'architecture', area: '루자쭈이', addr: '浦东新区滨江大道2777号', hours: '매일 10:00–21:00 · 월요일도 엶', q: '浦东美术馆', status: 'backup', memo: '장 누벨 설계 · 다원서점 근처 · 위챗 예약' },
     bund: { name: '와이탄', cn: '外滩', cat: 'sight', area: '와이탄', q: '外滩观景平台', status: 'planned', memo: '야경' },
 
     punchroom: { name: 'Punch Room', cn: '上海艾迪逊酒店 Punch Room', cat: 'bar', area: '남경동로', addr: '黄浦区南京东路199号 上海艾迪逊酒店', hours: '17:30–02:00', q: '上海艾迪逊酒店', status: 'backup', memo: '예약제 · 스마트 캐주얼' },
@@ -79,7 +80,6 @@ window.TRIP_DATA = (() => {
     jaja: { name: 'jajainthemoment 허둥 옛집점', cn: 'jajainthemoment 何东旧居店', cat: 'shop', area: '징안', addr: '静安区陕西北路457号W幢2层201室', hours: '10:00–21:00', q: 'jajainthemoment', status: 'backup', memo: '편집샵 · 何东旧居 안' },
     habiter: { name: 'HABITER 빈티지 가구', cn: 'HABITER中古家居', cat: 'shop', area: '헝푸', addr: '徐汇区复兴西路201弄10号1层', hours: '11:00–18:00', q: 'HABITER 中古家居', status: 'backup', memo: '중고·빈티지 가구' },
     zamani: { name: 'ZAMANI COLLECTION', cn: 'ZAMANI COLLECTION', cat: 'shop', area: '징안', addr: '静安区延平路425号2号楼4楼', hours: '10:00–18:00', q: 'ZAMANI 延平路', status: 'backup', memo: '수제 러그 · Sloppy Gin과 같은 단지' },
-    shanye: { name: '샨예 갤러리 (위치 미확인)', cn: '山野 Gallery', cat: 'shop', area: '', q: '山野 画廊 上海', status: 'backup', memo: '따종띠엔핑·고덕 모두 검색 안 됨' },
     viandn: { name: 'Via NDN', cn: 'Via NDN', cat: 'shop', area: '창닝', addr: '长宁区江苏路878号 1层', hours: '10:00–19:00', q: 'Via NDN 江苏路', status: 'backup', memo: '아트 바이어숍 · 위위안로 근처' },
     ambelie: { name: 'Ambelie Gallery', cn: 'Ambelie', cat: 'shop', area: '헝푸', addr: '徐汇区康平路21号', hours: '10:00–20:00', q: 'Ambelie 康平路', status: 'backup', memo: '앤티크·미드센추리' },
 
@@ -102,11 +102,11 @@ window.TRIP_DATA = (() => {
     notelab: { name: 'Nótelab 감각 실험실', cn: 'NOTE LAB·感官实验室', cat: 'bar', area: '징안·신천지 사이', addr: '黄浦区陕西南路15号2楼', hours: '19:00 오픈', q: '陕西南路15号', status: 'planned', memo: '향 실험실 콘셉트 칵테일 · 1층 옷가게 안쪽 오른쪽 계단으로 2층 · 1인 약 ¥121 · 2026년 10월 정식 오픈' },
     carter: { name: 'CARTER', cn: 'CARTER', cat: 'bar', area: '징안', addr: '静安区奉贤路50号', hours: '일–수 18:30–01:30 · 목–토 –02:00', q: 'CARTER 奉贤路', status: 'backup', memo: '아르데코 영국식 칵테일 펍' },
     joker: { name: 'Joker & Joker', cn: 'Joker & Joker', cat: 'bar', area: '징안', addr: '静安区武定路968号2F', q: 'Joker Joker 武定路', status: 'backup' },
-    darlin: { name: 'Darlin (위치 미확인)', cn: 'Darlin', cat: 'bar', area: '', q: 'Darlin bar 上海', status: 'backup', memo: '따종띠엔핑·고덕 모두 검색 안 됨' },
   };
 
   /* 대안 식당 (지도 버튼은 q로 검색) */
   const A = {
+    map_pudong: { name: '푸동미술관 (장 누벨)', cn: '浦东美术馆', q: '浦东美术馆', meta: '滨江大道2777号 · 월요일도 10:00–21:00 · 다원서점에서 걸어서 10분 · 시간 되면' },
     notelab_opt: { name: 'Nótelab 감각 실험실', cn: 'NOTE LAB·感官实验室', q: '陕西南路15号', meta: '陕西南路15号 2층 · 19:00 오픈 · 향 실험실 콘셉트 · 1인 약 ¥121' },
     fever: { name: 'Fever Bar', cn: 'Fever Bar 陕西北路', q: 'Fever Bar 陕西北路', meta: '陕西北路600-11号 · 15:30–01:30 · 칵테일 · Nótelab에서 디디 5–10분' },
     kaisha: { name: 'KAISHA 會社', cn: 'KAISHA會社', q: 'KAISHA會社 康定路', meta: '康定路358号 · 일–목 18:00–01:00 · 칵테일 · Nótelab에서 디디 10분' },
@@ -426,7 +426,8 @@ window.TRIP_DATA = (() => {
           detail: [
             { h: '예약·입장', li: ['위챗에서 "世纪朵云" 공식 계정 → 미니프로그램으로 날짜·시간 예약(며칠 전 권장)', '1층 로비 안내 데스크에 "朵云书院"이라고 말하면 안내해 줌', '로비에서 인원 제한(최대 350명) — 예약 QR 준비'] },
             { h: '즐기는 법', li: ['서점 카페에서 음료를 사서 창가 좌석에서 루자쭈이 뷰(창가 최소 소비 약 ¥100이라는 정보)', '360° 야경이 목적이면 118층 전망대(약 ¥180)는 따로'] },
-          ] },
+          ],
+          altsTitle: '근처 후보', alts: [A.map_pudong] },
         { t: '11:45', place: 'zuoting', title: '점심: 좌정우원 생소고기 훠궈', note: '상하이타워에서 디디 5분 · 浦东南路 · 10:30부터 영업',
           detail: [
             { h: '웨이팅 플랜', li: ['평일 점심이라 대기 짧을 가능성', '번호표: 11:00쯤 다원서점에서 원격 줄서기', '밀리면: 디즈니 입장이 15–30분 늦어질 뿐'] },
@@ -514,9 +515,10 @@ window.TRIP_DATA = (() => {
       { icon: 'passport', title: '입국심사', summary: '무비자 30일 · 온라인 입국신고 QR',
         detail: [
           { h: '무비자', li: ['한국 일반여권 무비자 입국은 2026-12-31까지 유효, 최대 30일', '여권 유효기간 6개월 이상, 귀국 항공권·호텔 예약 캡처 준비'] },
-          { h: '온라인 입국신고 (출발 전)', li: ['NIA 웹(s.nia.gov.cn), NIA 12367 앱, 알리페이·위챗 미니프로그램 중 하나', '인적사항, 항공편 KE2057, 숙소 주소 上海市黄浦区人民路388号, 여권 사진면 입력', '발급된 QR 캡처 → 입국심사 때 제시. 못 했으면 공항에서 작성 가능'] },
+          { h: '온라인 입국신고 (출발 전)', li: ['아래 ‘온라인 입국신고’ 버튼(NIA 웹), NIA 12367 앱, 알리페이·위챗 미니프로그램 중 하나', '인적사항, 항공편 KE2057, 숙소 주소 上海市黄浦区人民路388号, 여권 사진면 입력', '발급된 QR 캡처 → 입국심사 때 제시. 못 했으면 공항에서 작성 가능'] },
           { h: '공항에서', li: ['14–70세 외국인은 지문 채취. 심사 전 셀프 지문 등록기 이용', '시차: 한국보다 1시간 느림'] },
         ],
+        links: [['온라인 입국신고 (NIA)', 'https://s.nia.gov.cn/ArrivalCardFillingPC/']],
         show: ['숙소 주소', '上海外滩智选假日酒店\n上海市黄浦区人民路388号'] },
       { icon: 'luggage', title: '반입 주의·보조배터리', summary: '3C 마크 · 1인 2개',
         detail: [
@@ -597,7 +599,7 @@ window.TRIP_DATA = (() => {
 
   const CHECKLIST = [
     { group: '출발 전', items: [
-      '온라인 입국신고 → QR 캡처',
+      '온라인 입국신고 → QR 캡처 (정보 › 입국심사의 링크)',
       '카드사 해외결제 차단 해제',
       '알리페이 가입·여권 인증·해외카드 연결·소액 결제 테스트',
       '디디: 알리페이 미니프로그램 확인 또는 단독 앱 가입',
