@@ -57,7 +57,7 @@
     let h = '';
     const ph = ex.photos || [];
     if (ph.length) {
-      const figs = ph.map((p, i) => `<figure class="hero"><img src="${esc(p.src)}" alt="${esc(p.alt)}" loading="lazy" decoding="async">${p.credit ? `<figcaption>${esc(p.credit)}</figcaption>` : ''}${ph.length > 1 ? `<span class="hero-count">${i + 1}/${ph.length}</span>` : ''}</figure>`).join('');
+      const figs = ph.map((p, i) => `<figure class="hero"><img src="${esc(p.src)}" alt="${esc(p.alt)}" loading="lazy" decoding="async">${ph.length > 1 ? `<span class="hero-count">${i + 1}/${ph.length}</span>` : ''}</figure>`).join('');
       h += ph.length > 1
         ? `<div class="gallery" aria-label="사진 ${ph.length}장, 옆으로 넘겨 보기"><div class="gallery-track">${figs}</div><div class="gallery-dots" aria-hidden="true">${ph.map((_, i) => `<i${i ? '' : ' class="on"'}></i>`).join('')}</div></div>`
         : figs;
@@ -227,7 +227,6 @@
       h += `<label class="check"><input type="checkbox" data-check="${i}"${done[i] ? ' checked' : ''}><span>${esc(c)}</span></label>`;
     });
     h += `</div><p class="group-f">체크 상태는 이 기기에만 저장돼요.</p>`;
-    h += creditsHtml();
     h += `<p class="foot">조사 기준 ${esc(TRIP.asOf)}</p>`;
     el.innerHTML = h;
   }
