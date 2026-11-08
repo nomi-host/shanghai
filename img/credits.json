@@ -159,5 +159,19 @@
   "license": "CC BY 3.0",
   "page": "https://commons.wikimedia.org/wiki/File:MangoPomeloSago_1.jpg",
   "subject": "杨枝甘露(망고 포멜로 사고) 일반 사진"
+ },
+ "sijiminfu": {
+  "src": "pixabay",
+  "author": "FuReal",
+  "license": "Pixabay Content License",
+  "page": "https://pixabay.com/photos/peking-duck-duck-roast-duck-2629784/",
+  "subject": "베이징덕 일반 사진"
+ },
+ "luminous": {
+  "src": "pixabay",
+  "author": "riitou",
+  "license": "Pixabay Content License",
+  "page": "https://pixabay.com/photos/drink-cocktail-prost-candle-yummy-2404636/",
+  "subject": "칵테일 바 분위기 일반 사진"
  }
 }

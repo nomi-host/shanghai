@@ -184,6 +184,7 @@ window.TRIP_DATA = (() => {
     duoyun: { author: 'Stefan Fussan', license: 'CC BY-SA 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Shanghai_-_Shanghai_Tower_-_0003(cropped).jpg', alt: '상하이타워 외관 (다원서점은 52층)' },
     disney: { author: 'Riku Lu', license: 'CC0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Enchanted_Storybook_Castle_(125424).jpg', alt: '상하이 디즈니랜드 마법 동화 성' },
     bund: { author: 'Ernest Jourdier', license: 'CC BY 4.0', src: 'commons', page: 'https://commons.wikimedia.org/wiki/File:Bund_at_night_Shanghai.jpg', alt: '와이탄 야경' },
+    sijiminfu: { author: 'FuReal', license: 'Pixabay Content License', src: 'pixabay', page: 'https://pixabay.com/photos/peking-duck-duck-roast-duck-2629784/', alt: '베이징덕(저민 오리구이·전병·파·소스) — 참고 이미지, 이 식당 사진 아님' },
     luminous: { author: 'riitou', license: 'Pixabay Content License', src: 'pixabay', page: 'https://pixabay.com/photos/drink-cocktail-prost-candle-yummy-2404636/', alt: '칵테일 바 분위기 — 참고 이미지, 이 바 사진 아님' },
     punchroom: { author: 'riitou', license: 'Pixabay Content License', src: 'pixabay', page: 'https://pixabay.com/photos/drink-cocktail-prost-candle-yummy-2404636/', alt: '촛불 켠 바의 칵테일 — 참고 이미지, 이 바 사진 아님' },
     barleone: { author: 'Briam-Cute', license: 'Pixabay Content License', src: 'pixabay', page: 'https://pixabay.com/photos/martini-cocktail-glass-5542599/', alt: '올리브 마티니 — 참고 이미지, 이 바 사진 아님' },
