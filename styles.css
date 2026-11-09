@@ -559,3 +559,8 @@ main { padding-top: calc(18px + env(safe-area-inset-top)); }
 .dmap-box::after { content: ""; position: absolute; inset: 0; border-radius: inherit; border: .5px solid rgba(60,60,67,.22); pointer-events: none; z-index: 3; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .dmap-box::after { border-color: rgba(235,235,245,.16); } }
 :root[data-theme="dark"] .dmap-box::after { border-color: rgba(235,235,245,.16); }
+
+/* 일정 줄: 꺾쇠를 오른쪽 위에 띄우고, 설명글은 꺾쇠 아래까지 넓게 */
+.row:has(.row-lead) { padding-right: 12px; }
+.row:has(.row-lead) .ms.chev { position: absolute; right: 10px; top: 11px; }
+.row:has(.row-lead) .row-title { padding-right: 22px; }
