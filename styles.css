@@ -564,3 +564,4 @@ main { padding-top: calc(18px + env(safe-area-inset-top)); }
 .row:has(.row-lead) { padding-right: 12px; }
 .row:has(.row-lead) .ms.chev { position: absolute; right: 10px; top: 11px; }
 .row:has(.row-lead) .row-title { padding-right: 22px; }
+.nseg { display: inline-block; max-width: 100%; word-break: keep-all; overflow-wrap: anywhere; }

@@ -104,6 +104,8 @@
   }
 
   let planMode = store.get('planMode', 'day');
+  // 설명글: ' · ' 로 나눈 덩어리를 한 묶음으로 → 줄이 넘어가면 덩어리 사이(· 뒤)에서 바꿈
+  const noteHtml = (t) => String(t).split(' · ').map((x, i, a) => `<span class="nseg">${esc(x)}${i < a.length - 1 ? ' ·' : ''}</span>`).join(' ');
   function itemHtml(it, i, dIdx, nowI, open, nums = {}) {
     const p = it.place ? PLACES[it.place] : null;
     const pn = it.place && nums[it.place] && it.cat !== 'move' ? `<span class="row-n" aria-label="지도 ${nums[it.place]}번">${nums[it.place]}</span>` : '';
@@ -113,7 +115,7 @@
     const hasDetail = !!(it.detail || it.alts || it.altGroups || it.warn || p || EXTRA[it.extra]);
     const id = `d${dIdx}-${i}`;
     const nowCls = i === nowI ? ' is-now' : '';
-    const inner = `<span class="row-lead"><span class="row-time">${esc(it.t)}</span>${icon(cat)}</span><span class="row-main"><span class="row-title" style="display:block">${pn}${esc(title)}${it.warn ? ' <span style="color:var(--warn)" aria-label="주의">•</span>' : ''}</span>${zh ? `<span class="row-zh" lang="zh-CN" style="display:block">${esc(zh)}</span>` : ''}${it.note ? `<span class="row-note" style="display:block">${esc(it.note)}</span>` : ''}</span>`;
+    const inner = `<span class="row-lead"><span class="row-time">${esc(it.t)}</span>${icon(cat)}</span><span class="row-main"><span class="row-title" style="display:block">${pn}${esc(title)}${it.warn ? ' <span style="color:var(--warn)" aria-label="주의">•</span>' : ''}</span>${zh ? `<span class="row-zh" lang="zh-CN" style="display:block">${esc(zh)}</span>` : ''}${it.note ? `<span class="row-note" style="display:block">${noteHtml(it.note)}</span>` : ''}</span>`;
     const rid = ` id="r${dIdx}-${i}"`;
     if (!hasDetail) return `<div class="row${nowCls}"${rid} style="--inset:16px">${inner}</div>`;
     if (open) {
