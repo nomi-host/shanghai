@@ -104,21 +104,235 @@
   }
 
   let planMode = store.get('planMode', 'day');
-  function itemHtml(it, i, dIdx, nowI, open) {
+  function itemHtml(it, i, dIdx, nowI, open, nums = {}) {
     const p = it.place ? PLACES[it.place] : null;
+    const pn = it.place && nums[it.place] && it.cat !== 'move' ? `<span class="row-n" aria-label="지도 ${nums[it.place]}번">${nums[it.place]}</span>` : '';
     const cat = it.cat || (p && p.cat) || 'move';
     const title = it.title || (p && p.name) || '';
     const zh = it.cn !== undefined ? it.cn : p ? p.cn : '';
     const hasDetail = !!(it.detail || it.alts || it.altGroups || it.warn || p || EXTRA[it.extra]);
     const id = `d${dIdx}-${i}`;
     const nowCls = i === nowI ? ' is-now' : '';
-    const inner = `<span class="row-time">${esc(it.t)}</span>${icon(cat)}<span class="row-main"><span class="row-title" style="display:block">${esc(title)}${it.warn ? ' <span style="color:var(--warn)" aria-label="주의">•</span>' : ''}</span>${zh ? `<span class="row-zh" lang="zh-CN" style="display:block">${esc(zh)}</span>` : ''}${it.note ? `<span class="row-note" style="display:block">${esc(it.note)}</span>` : ''}</span>`;
-    if (!hasDetail) return `<div class="row${nowCls}" style="--inset:74px">${inner}</div>`;
+    const inner = `<span class="row-time">${esc(it.t)}</span>${icon(cat)}<span class="row-main"><span class="row-title" style="display:block">${pn}${esc(title)}${it.warn ? ' <span style="color:var(--warn)" aria-label="주의">•</span>' : ''}</span>${zh ? `<span class="row-zh" lang="zh-CN" style="display:block">${esc(zh)}</span>` : ''}${it.note ? `<span class="row-note" style="display:block">${esc(it.note)}</span>` : ''}</span>`;
+    const rid = ` id="r${dIdx}-${i}"`;
+    if (!hasDetail) return `<div class="row${nowCls}"${rid} style="--inset:74px">${inner}</div>`;
     if (open) {
       // 전체 보기: 버튼이 아닌 일반 블록이라 글자 선택·복사가 됨
-      return `<div class="row${nowCls}" style="--inset:74px">${inner}</div><div class="detail is-open"><div class="detail-inner"><div class="detail-pad">${detailHtml(it, p)}</div></div></div>`;
+      return `<div class="row${nowCls}"${rid} style="--inset:74px">${inner}</div><div class="detail is-open"><div class="detail-inner"><div class="detail-pad">${detailHtml(it, p)}</div></div></div>`;
     }
-    return `<button class="row${nowCls}" style="--inset:74px" aria-expanded="false" aria-controls="${id}" data-toggle="${id}">${inner}${CHEV}</button><div class="detail" id="${id}"><div class="detail-inner"><div class="detail-pad">${detailHtml(it, p)}</div></div></div>`;
+    return `<button class="row${nowCls}"${rid} style="--inset:74px" aria-expanded="false" aria-controls="${id}" data-toggle="${id}">${inner}${CHEV}</button><div class="detail" id="${id}"><div class="detail-inner"><div class="detail-pad">${detailHtml(it, p)}</div></div></div>`;
+  }
+
+  /* ---------- 날짜별 동선 지도 (tools/build_maps.py 가 만든 이미지 + 핀) ---------- */
+  const MAPS = window.TRIP_MAPS || {};
+  function pinNums(dIdx) {
+    // 일정 줄 번호 표시용: place → 핀 번호(호텔은 0)
+    const m = MAPS[dIdx]; const o = {};
+    if (m) m.pins.forEach((p) => { o[p.p] = p.n; });
+    return o;
+  }
+  function mapHtml(dIdx) {
+    const m = MAPS[dIdx];
+    if (!m) return '';
+    const d = DAYS[dIdx];
+    const lines = m.pins.filter((p) => p.dx !== undefined).map((p) => `<line x1="${p.x}" y1="${p.y}" x2="${p.dx}" y2="${p.dy}"/>`).join('');
+    const dots = m.pins.filter((p) => p.dx !== undefined).map((p) => `<i class="dmap-dot" style="left:${p.x}%;top:${p.y}%"></i>`).join('');
+    const pins = m.pins.map((p) => {
+      const pl = PLACES[p.p] || {};
+      // 이동 줄(예: 루자쭈이 → 디즈니)이 아닌 실제 방문 줄을 가리키게
+      const vi = d.items.findIndex((x) => x.place === p.p && x.cat !== 'move');
+      if (vi >= 0 && p.n) p = { ...p, i: vi };
+      const it = p.i != null ? d.items[p.i] : null;
+      const name = (it && it.title) || pl.name || '';
+      const x = p.dx !== undefined ? p.dx : p.x, y = p.dx !== undefined ? p.dy : p.y;
+      const label = p.n ? `${p.n}. ${name}` : `호텔: ${pl.name || ''}`;
+      const pc = (it && it.cat) || pl.cat || 'move';
+      return `<button class="dmap-pin c-${esc(pc)}${p.n ? '' : ' is-home'}" style="left:${x}%;top:${y}%" ${p.i != null ? `data-goto="r${dIdx}-${p.i}"` : 'disabled'} aria-label="${esc(label)}">${p.n ? p.n : ms('hotel', 'fill')}</button>`;
+    }).join('');
+    const km = (v) => (v >= 10 ? Math.round(v) : v.toFixed(1));
+    const z = m.zoom;
+    let zoomH = '';
+    if (z) {
+      // 동네 확대 지도(예: 디즈니 승차 위치). 핀은 아이콘 + 이름표, 누르면 그 일정으로
+      const gi = d.items.findIndex((x, i) => i >= (z.goto || 0) && x.place === d.items[z.goto]?.place && x.cat !== 'move');
+      const target = gi >= 0 ? gi : z.goto;
+      const zl = z.pins.filter((p) => p.dx !== undefined).map((p) => `<line x1="${p.x}" y1="${p.y}" x2="${p.dx}" y2="${p.dy}"/>`).join('');
+      const zd = z.pins.filter((p) => p.dx !== undefined).map((p) => `<i class="dmap-dot" style="left:${p.x}%;top:${p.y}%"></i>`).join('');
+      const zp = z.pins.map((p) => {
+        const x = p.dx !== undefined ? p.dx : p.x, y = p.dx !== undefined ? p.dy : p.y;
+        const pl = PLACES[p.p] || {};
+        return `<button class="dmap-pin dmap-tag c-${esc(p.cat)}" style="left:${x}%;top:${y}%" ${target != null ? `data-goto="r${dIdx}-${target}"` : 'disabled'} aria-label="${esc(pl.name || p.label)}">${ms(p.ic, 'fill')}<span>${esc(p.label)}</span></button>`;
+      }).join('');
+      zoomH = `<figure class="dmap dmap-zoom"><figcaption class="dmap-title">${esc(z.title)}</figcaption><div class="dmap-box" style="aspect-ratio:${z.w}/${z.h}"><div class="dmap-layer" ${projAttr(z)}><img src="${z.img}" alt="${esc(z.title)}" width="${z.w}" height="${z.h}" draggable="false"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${zl}</svg>${zd}${zp}<i class="dmap-me" hidden></i></div>${GPS_BTN}<button class="dmap-reset" data-map-reset aria-label="지도 원래 크기로" hidden>${ms('zoom_out_map')}</button></div></figure>`;
+    }
+    return `<figure class="dmap"><div class="dmap-box" style="aspect-ratio:${m.w}/${m.h}"><div class="dmap-layer" ${projAttr(m)}><img src="${m.img}" alt="${esc(d.title)} 동선 지도" width="${m.w}" height="${m.h}" draggable="false"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${lines}</svg>${dots}${pins}<i class="dmap-me" hidden></i></div>${GPS_BTN}<button class="dmap-reset" data-map-reset aria-label="지도 원래 크기로" hidden>${ms('zoom_out_map')}</button></div><figcaption><span><b>차</b> 약 ${km(m.car)}km <i class="dmap-dash is-solid" aria-hidden="true"></i></span><span><b>걷기</b> 약 ${km(m.walk)}km <i class="dmap-dash" aria-hidden="true"></i></span></figcaption></figure>${zoomH}`;
+  }
+
+  /* ---------- 내 위치(GPS) ----------
+     휴대폰 GPS는 WGS-84, 중국 지도(구글·고덕)는 GCJ-02라 변환해서 찍는다. */
+  const projAttr = (m) => `data-proj="${m.proj.z},${m.proj.left},${m.proj.top},${m.proj.f},${m.w},${m.h}"`;
+  const GPS_BTN = `<button class="dmap-gps" data-gps aria-label="내 위치 보기" aria-pressed="false">${ms('my_location', 'fill')}</button><span class="dmap-gpsmsg" hidden></span>`;
+  function wgs2gcj(lat, lng) {
+    const A = 6378245.0, EE = 0.00669342162296594323, PI = Math.PI;
+    const x = lng - 105, y = lat - 35;
+    let dLat = -100 + 2 * x + 3 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.sqrt(Math.abs(x));
+    dLat += (20 * Math.sin(6 * x * PI) + 20 * Math.sin(2 * x * PI)) * 2 / 3;
+    dLat += (20 * Math.sin(y * PI) + 40 * Math.sin(y / 3 * PI)) * 2 / 3;
+    dLat += (160 * Math.sin(y / 12 * PI) + 320 * Math.sin(y * PI / 30)) * 2 / 3;
+    let dLng = 300 + x + 2 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.sqrt(Math.abs(x));
+    dLng += (20 * Math.sin(6 * x * PI) + 20 * Math.sin(2 * x * PI)) * 2 / 3;
+    dLng += (20 * Math.sin(x * PI) + 40 * Math.sin(x / 3 * PI)) * 2 / 3;
+    dLng += (150 * Math.sin(x / 12 * PI) + 300 * Math.sin(x / 30 * PI)) * 2 / 3;
+    const rl = lat / 180 * PI; const mm = 1 - EE * Math.sin(rl) ** 2; const sm = Math.sqrt(mm);
+    return [lat + dLat * 180 / ((A * (1 - EE)) / (mm * sm) * PI), lng + dLng * 180 / (A / sm * Math.cos(rl) * PI)];
+  }
+  let gpsWatch = null, gpsFix = null, gpsErr = '';
+  function drawMe() {
+    document.querySelectorAll('.dmap-layer[data-proj]').forEach((layer) => {
+      const box = layer.closest('.dmap-box');
+      const me = layer.querySelector('.dmap-me'), msg = box.querySelector('.dmap-gpsmsg'), btn = box.querySelector('[data-gps]');
+      btn.setAttribute('aria-pressed', String(gpsWatch !== null));
+      let text = '';
+      if (gpsWatch === null) { me.hidden = true; }
+      else if (!gpsFix) { me.hidden = true; text = gpsErr || '위치 찾는 중…'; }
+      else {
+        const [z, left, top, f, w, h] = layer.dataset.proj.split(',').map(Number);
+        const [lat, lng] = wgs2gcj(gpsFix.lat, gpsFix.lng);
+        const n = 256 * 2 ** z, sn = Math.sin(lat * Math.PI / 180);
+        const x = ((lng + 180) / 360 * n - left) * f / w * 100;
+        const y = ((0.5 - Math.log((1 + sn) / (1 - sn)) / (4 * Math.PI)) * n - top) * f / h * 100;
+        const inside = x >= 0 && x <= 100 && y >= 0 && y <= 100;
+        me.hidden = !inside;
+        if (inside) { me.style.left = `${x}%`; me.style.top = `${y}%`; } else text = '지금 위치는 이 지도 밖이에요';
+      }
+      msg.hidden = !text; msg.textContent = text;
+    });
+  }
+  /* 바라보는 방향(나침반): 아이폰은 webkitCompassHeading, 안드로이드는 deviceorientationabsolute */
+  let heading = null, hdOn = false, hdRaf = 0;
+  function onOrient(e) {
+    let h = null;
+    if (typeof e.webkitCompassHeading === 'number' && !Number.isNaN(e.webkitCompassHeading)) h = e.webkitCompassHeading;
+    else if (e.absolute && typeof e.alpha === 'number') h = 360 - e.alpha;
+    if (h === null) return;
+    const so = (screen.orientation && screen.orientation.angle) || window.orientation || 0;  // 가로로 돌렸을 때 보정
+    heading = (h + so + 360) % 360;
+    if (!hdRaf) hdRaf = requestAnimationFrame(() => { hdRaf = 0; drawHeading(); });
+  }
+  function drawHeading() {
+    document.querySelectorAll('.dmap-me').forEach((me) => {
+      if (heading === null) { me.removeAttribute('data-hd'); return; }
+      me.setAttribute('data-hd', ''); me.style.setProperty('--hd', `${heading}deg`);
+    });
+  }
+  function headingStart() {
+    if (hdOn) return;
+    const add = () => {
+      hdOn = true;
+      if ('ondeviceorientationabsolute' in window) window.addEventListener('deviceorientationabsolute', onOrient);
+      else window.addEventListener('deviceorientation', onOrient);
+    };
+    const DOE = window.DeviceOrientationEvent;
+    if (DOE && typeof DOE.requestPermission === 'function') {
+      // 아이폰: 탭(사용자 동작) 안에서만 권한 요청 가능
+      DOE.requestPermission().then((r) => { if (r === 'granted') add(); }).catch(() => {});
+    } else if (DOE) add();
+  }
+  function headingStop() {
+    window.removeEventListener('deviceorientationabsolute', onOrient); window.removeEventListener('deviceorientation', onOrient);
+    hdOn = false; heading = null; drawHeading();
+  }
+
+  function gpsStart(fromTap = true) {
+    if (!('geolocation' in navigator)) { gpsErr = '이 브라우저는 위치를 못 써요'; return; }
+    if (fromTap) headingStart();
+    else document.addEventListener('click', headingStart, { once: true });   // 자동으로 켰을 땐 다음 탭에서 방향 권한
+    gpsErr = ''; store.set('gps', true);
+    gpsWatch = navigator.geolocation.watchPosition(
+      (p) => { gpsFix = { lat: p.coords.latitude, lng: p.coords.longitude }; gpsErr = ''; drawMe(); },
+      (e) => {
+        gpsErr = e.code === 1 ? '위치 권한이 꺼져 있어요 (설정 › 개인정보 › 위치)' : '위치를 못 찾았어요';
+        if (e.code === 1) { gpsStop(); gpsErr = ''; store.set('gps', false); alertMap('위치 권한이 꺼져 있어요 (설정 › 개인정보 보호 › 위치 서비스)'); return; }
+        drawMe();
+      },
+      { enableHighAccuracy: true, maximumAge: 10000, timeout: 20000 });
+    drawMe();
+  }
+  function gpsStop() { if (gpsWatch !== null) navigator.geolocation.clearWatch(gpsWatch); gpsWatch = null; gpsFix = null; store.set('gps', false); headingStop(); drawMe(); }
+  function alertMap(t) { document.querySelectorAll('.dmap-gpsmsg').forEach((m) => { m.hidden = false; m.textContent = t; setTimeout(() => { m.hidden = true; }, 4000); }); }
+
+  /* 지도 확대: 두 손가락 핀치·두 번 탭, 확대된 상태에서 한 손가락으로 이동 */
+  function initMapZoom(root) {
+    root.querySelectorAll('.dmap-box').forEach((box) => {
+      const layer = box.querySelector('.dmap-layer');
+      const reset = box.querySelector('.dmap-reset');
+      let k = 1, tx = 0, ty = 0;
+      const pts = new Map();
+      let start = null, lastTap = 0;
+      const MAXK = 4;
+      function clamp() {
+        const w = box.clientWidth, h = box.clientHeight;
+        k = Math.min(MAXK, Math.max(1, k));
+        tx = Math.min(0, Math.max(w - w * k, tx));
+        ty = Math.min(0, Math.max(h - h * k, ty));
+      }
+      function apply(anim) {
+        clamp();
+        layer.style.transition = anim ? 'transform .25s ease' : 'none';
+        layer.style.transform = `translate(${tx}px, ${ty}px) scale(${k})`;
+        layer.style.setProperty('--k', k);
+        box.classList.toggle('is-zoomed', k > 1.01);
+        reset.hidden = k <= 1.01;
+      }
+      function zoomAt(nk, cx, cy, anim) {
+        nk = Math.min(MAXK, Math.max(1, nk));
+        tx = cx - (cx - tx) * (nk / k); ty = cy - (cy - ty) * (nk / k); k = nk; apply(anim);
+      }
+      const local = (e) => { const r = box.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+      box.addEventListener('pointerdown', (e) => {
+        if (e.target.closest('.dmap-reset, .dmap-gps')) return;
+        pts.set(e.pointerId, local(e));
+        box.dataset.moved = '0';
+        if (pts.size === 2) {
+          const [a, b] = [...pts.values()];
+          start = { d: Math.hypot(a[0] - b[0], a[1] - b[1]), k, tx, ty, c: [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2] };
+        } else if (pts.size === 1) {
+          start = { p: local(e), tx, ty };
+        }
+        if (k > 1.01 || pts.size === 2) box.setPointerCapture?.(e.pointerId);
+      });
+      box.addEventListener('pointermove', (e) => {
+        if (!pts.has(e.pointerId) || !start) return;
+        pts.set(e.pointerId, local(e));
+        if (pts.size === 2 && start.d) {
+          const [a, b] = [...pts.values()];
+          const d = Math.hypot(a[0] - b[0], a[1] - b[1]);
+          const c = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+          const nk = Math.min(MAXK, Math.max(1, start.k * d / start.d));
+          tx = c[0] - (start.c[0] - start.tx) * (nk / start.k); ty = c[1] - (start.c[1] - start.ty) * (nk / start.k); k = nk;
+          box.dataset.moved = '1'; apply(false);
+        } else if (pts.size === 1 && k > 1.01 && start.p) {
+          const p = local(e);
+          if (Math.hypot(p[0] - start.p[0], p[1] - start.p[1]) > 6) box.dataset.moved = '1';
+          tx = start.tx + p[0] - start.p[0]; ty = start.ty + p[1] - start.p[1]; apply(false);
+        }
+      });
+      const end = (e) => {
+        if (!pts.has(e.pointerId)) return;
+        pts.delete(e.pointerId);
+        if (pts.size === 1) { const p = [...pts.values()][0]; start = { p, tx, ty }; } else if (!pts.size) start = null;
+        if (e.type === 'pointerup' && !pts.size && box.dataset.moved !== '1' && !e.target.closest('.dmap-pin, .dmap-reset, .dmap-gps')) {
+          const now2 = Date.now();
+          if (now2 - lastTap < 300) { const [cx, cy] = local(e); k > 1.01 ? zoomAt(1, cx, cy, true) : zoomAt(2.5, cx, cy, true); lastTap = 0; } else lastTap = now2;
+        }
+      };
+      box.addEventListener('pointerup', end);
+      box.addEventListener('pointercancel', end);
+      reset.addEventListener('click', (e) => { e.stopPropagation(); k = 1; tx = 0; ty = 0; apply(true); });
+      // iOS 사파리: 지도 위 핀치가 페이지 확대로 새지 않게
+      box.addEventListener('gesturestart', (e) => e.preventDefault());
+      box.addEventListener('touchmove', (e) => { if (e.touches.length > 1 || k > 1.01) e.preventDefault(); }, { passive: false });
+    });
   }
 
   function renderPlan() {
@@ -140,8 +354,10 @@
     } else {
       const d = DAYS[dayIdx];
       h += `<div class="day-head"><h2>${esc(d.title)}</h2>${d.sub ? `<p>${esc(d.sub)}</p>` : ''}</div>`;
+      h += mapHtml(dayIdx);
       const nowI = dayIdx === todayIdx ? d.items.reduce((acc, it, i) => (/^\d/.test(it.t) && it.t <= now.hm ? i : acc), -1) : -1;
-      h += `<div class="list">${d.items.map((it, i) => itemHtml(it, i, dayIdx, nowI, false)).join('')}</div>`;
+      const nums = pinNums(dayIdx);
+      h += `<div class="list">${d.items.map((it, i) => itemHtml(it, i, dayIdx, nowI, false, nums)).join('')}</div>`;
       if (d.foot) h += `<p class="group-f">${esc(d.foot)}</p>`;
     }
     h += `<p class="foot">조사 기준 ${esc(TRIP.asOf)} · 출발 전 영업시간 재확인</p>`;
@@ -150,6 +366,8 @@
     if (!body) { el.innerHTML = `${head}<div id="plan-body"></div>`; body = el.querySelector('#plan-body'); }
     body.innerHTML = h;
     fillWx(body);
+    initMapZoom(body);
+    drawMe(); drawHeading();
   }
 
   function nowCard() {
@@ -405,6 +623,19 @@
   document.querySelectorAll('.tab').forEach((b) => b.addEventListener('click', () => setTab(b.dataset.tab)));
 
   document.addEventListener('click', (e) => {
+    const gb = e.target.closest('[data-gps]');
+    if (gb) { gpsWatch === null ? gpsStart() : gpsStop(); return; }
+    const go = e.target.closest('[data-goto]');
+    if (go) {
+      if (go.closest('.dmap-box')?.dataset.moved === '1') return;   // 끌어서 옮긴 건 탭이 아님
+      const row = document.getElementById(go.dataset.goto);
+      if (!row) return;
+      if (row.hasAttribute('data-toggle')) { row.setAttribute('aria-expanded', 'true'); document.getElementById(row.dataset.toggle)?.classList.add('is-open'); }
+      const y = row.getBoundingClientRect().top + window.scrollY - (navbar.offsetHeight + 12);
+      window.scrollTo({ top: y, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      row.classList.remove('is-flash'); void row.offsetWidth; row.classList.add('is-flash');
+      return;
+    }
     const wt = e.target.closest('[data-wx-toggle]');
     if (wt) { const dr = wt.closest('.wx-drawer'); const open = !dr.classList.contains('is-open'); dr.classList.toggle('is-open', open); store.set('wxOpen', open); return; }
     const t = e.target.closest('[data-toggle]');
@@ -482,6 +713,7 @@
   window.addEventListener('scroll', onScroll, { passive: true });
 
   setTab(tab);
+  if (store.get('gps', false)) gpsStart(false);   // 지난번에 켜 뒀으면 이어서
   if ('serviceWorker' in navigator && location.protocol === 'https:') {
     navigator.serviceWorker.register('sw.js').catch(() => {});
   }

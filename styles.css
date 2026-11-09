@@ -72,6 +72,9 @@ a { color: var(--blue); text-decoration: none; }
   background: transparent;
   transition: background .2s, box-shadow .2s;
 }
+/* 상태바 영역은 처음부터 배경색으로 채움: 비워 두면 iOS가 그 아래 콘텐츠(마스코트·제목)를 흐리게 덮음 */
+.navbar::before { content: ""; position: absolute; inset: 0 0 auto 0; height: env(safe-area-inset-top); background: var(--bg); transition: opacity .2s; }
+.navbar.is-solid::before { opacity: 0; }
 .navbar.is-solid {
   background: var(--bar);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
@@ -476,3 +479,71 @@ main { padding-top: calc(10px + env(safe-area-inset-top)); }
 .row.is-now { background: linear-gradient(90deg, var(--tint-soft), transparent 70%); }
 .warn { background: var(--warn-bg); color: var(--warn); }
 .wx-wet { color: var(--info); }
+
+/* ---------- 날짜별 동선 지도 ---------- */
+.dmap { margin: 0 0 14px; }
+.dmap-box { position: relative; overflow: hidden; border-radius: 10px; background: var(--card); touch-action: pan-y; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+.dmap-box.is-zoomed { touch-action: none; }
+.dmap-layer { position: absolute; inset: 0; transform-origin: 0 0; --k: 1; }
+.dmap-layer img { display: block; width: 100%; height: 100%; pointer-events: none; }
+.dmap-layer svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.dmap-layer svg line { stroke: #1C1C1E; stroke-width: 1; vector-effect: non-scaling-stroke; }
+/* 핀·점은 지도를 확대해도 같은 크기로 */
+.dmap-pin, .dmap-dot { position: absolute; transform: translate(-50%, -50%) scale(calc(1 / var(--k))); }
+.dmap-dot { width: 6px; height: 6px; border-radius: 50%; background: #1C1C1E; box-shadow: 0 0 0 1.5px #fff; }
+.dmap-pin {
+  width: 20px; height: 20px; padding: 0; border: 1.5px solid #fff; border-radius: 50%;
+  background: #7B726D; color: #fff; font: 700 11px/1 -apple-system, system-ui, sans-serif; font-variant-numeric: tabular-nums;
+  display: grid; place-items: center; box-shadow: 0 1px 3px rgba(0,0,0,.35); cursor: pointer;
+}
+.dmap-pin::after { content: ""; position: absolute; inset: -8px; border-radius: 50%; } /* 누르기 쉽게 */
+/* 핀 색 = 일정 아이콘의 카테고리 색 */
+.dmap-pin.c-food { background: #E0902A; } .dmap-pin.c-dessert { background: #D24F6E; } .dmap-pin.c-tea { background: #2E8A6B; }
+.dmap-pin.c-shop { background: #0E7A8A; } .dmap-pin.c-architecture { background: #B0832E; } .dmap-pin.c-sight { background: #3C6E9E; }
+.dmap-pin.c-street { background: #7C8B4E; } .dmap-pin.c-bar { background: #7B2D5B; } .dmap-pin.c-castle { background: #CC0000; }
+.dmap-pin.c-stay, .dmap-pin.is-home { background: #2E5C4F; }
+.dmap-pin .ms { font-size: 13px; }
+.dmap-pin:active { filter: brightness(.85); }
+.dmap-reset { position: absolute; right: 8px; top: 8px; width: 32px; height: 32px; border: 0; border-radius: 50%; background: rgba(255,255,255,.92); color: #000; display: grid; place-items: center; box-shadow: 0 1px 4px rgba(0,0,0,.25); }
+.dmap-reset .ms { font-size: 20px; }
+.dmap-reset[hidden] { display: none; }
+.dmap figcaption { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; margin: 7px 4px 0; font-size: 13px; color: var(--label2); }
+.dmap figcaption b { font-weight: 600; color: var(--label); }
+.dmap-dash { display: inline-block; width: 16px; height: 0; border-top: 2px dashed var(--label); vertical-align: middle; margin-left: 4px; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .dmap-layer img { filter: brightness(.82); } }
+:root[data-theme="dark"] .dmap-layer img { filter: brightness(.82); }
+
+/* 일정 줄의 지도 번호: 제목 앞 ❶ (같은 크기, 검정) */
+.row-n {
+  /* 원 지름 ≈ 제목 글자 크기(1.06em), 안의 숫자는 작게 */
+  display: inline-grid; place-items: center; font-size: .64em; width: 1.66em; height: 1.66em; border-radius: 50%;
+  margin-right: 6px; vertical-align: .14em;
+  background: var(--label); color: var(--card); font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -.03em;
+}
+.row.is-flash { animation: rowflash 1.4s ease-out; }
+@keyframes rowflash { 0%, 30% { background: var(--tint-soft-2); } 100% { background: transparent; } }
+.dmap-dash.is-solid { border-top-style: solid; }
+/* 확대 지도 핀: 아이콘 + 이름표 */
+.dmap-title { margin: 0 4px 7px; font-size: 13px; font-weight: 600; color: var(--label2); }
+.dmap-pin.dmap-tag { width: auto; height: 22px; padding: 0 8px 0 5px; border-radius: 11px; gap: 3px; display: inline-flex; align-items: center; white-space: nowrap; font: 600 12px/1 -apple-system, system-ui, sans-serif; }
+.dmap-pin.dmap-tag .ms { font-size: 14px; }
+.dmap-pin.dmap-tag::after { border-radius: 14px; }
+
+/* 내 위치(GPS) */
+.dmap-me { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: #1A73E8; border: 2.5px solid #fff; box-shadow: 0 0 0 6px rgba(26,115,232,.22), 0 1px 3px rgba(0,0,0,.35); transform: translate(-50%, -50%) scale(calc(1 / var(--k))); pointer-events: none; z-index: 2; }
+.dmap-me[hidden] { display: none; }
+.dmap-gps { position: absolute; right: 8px; bottom: 8px; width: 32px; height: 32px; border: 0; border-radius: 50%; background: rgba(255,255,255,.92); color: #3C3C43; display: grid; place-items: center; box-shadow: 0 1px 4px rgba(0,0,0,.25); }
+.dmap-gps .ms { font-size: 19px; }
+.dmap-gps[aria-pressed="true"] { color: #1A73E8; }
+.dmap-gpsmsg { position: absolute; right: 46px; bottom: 12px; max-width: calc(100% - 60px); padding: 4px 9px; border-radius: 12px; background: rgba(0,0,0,.72); color: #fff; font-size: 12px; line-height: 1.3; pointer-events: none; }
+.dmap-gpsmsg[hidden] { display: none; }
+/* 바라보는 방향: 점 위에 부채꼴(레이더) */
+.dmap-me::before {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 70px; height: 70px; border-radius: 50%;
+  background: conic-gradient(from -32deg, rgba(26,115,232,.55) 0deg, rgba(26,115,232,.55) 64deg, transparent 64deg);
+  -webkit-mask: radial-gradient(circle, #000 18%, rgba(0,0,0,.6) 45%, transparent 70%);
+  mask: radial-gradient(circle, #000 18%, rgba(0,0,0,.6) 45%, transparent 70%);
+  transform: translate(-50%, -50%) rotate(var(--hd, 0deg)); display: none; pointer-events: none;
+}
+.dmap-me[data-hd]::before { display: block; }
+.dmap-me::after { content: ""; position: absolute; inset: -2.5px; border-radius: 50%; background: #1A73E8; border: 2.5px solid #fff; } /* 점이 부채꼴 위로 */
