@@ -395,7 +395,7 @@ a.row { color: inherit; }
 .ico.ticket { background: #D24F6E; } .ico.pin { background: #0E7A8A; } .ico.luggage { background: #B0832E; }
 
 /* 위 여백 줄이기: 첫 화면 제목이 상태바 바로 아래에서 시작 */
-main { padding-top: calc(10px + env(safe-area-inset-top)); }
+main { padding-top: calc(18px + env(safe-area-inset-top)); }
 .large-title { margin-top: 0; }
 
 /* 스크롤 때 위 바 제목도 포인트 빨강 */
@@ -547,3 +547,8 @@ main { padding-top: calc(10px + env(safe-area-inset-top)); }
 }
 .dmap-me[data-hd]::before { display: block; }
 .dmap-me::after { content: ""; position: absolute; inset: -2.5px; border-radius: 50%; background: #1A73E8; border: 2.5px solid #fff; } /* 점이 부채꼴 위로 */
+
+/* 일정 줄: 아이콘을 시간 밑으로 → 제목·설명 폭 넓게 */
+.row-lead { flex: none; width: 46px; display: flex; flex-direction: column; align-items: flex-start; gap: 7px; }
+.row-lead .row-time { width: auto; }
+.row-lead .ico { margin-top: 0; }

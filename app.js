@@ -113,7 +113,7 @@
     const hasDetail = !!(it.detail || it.alts || it.altGroups || it.warn || p || EXTRA[it.extra]);
     const id = `d${dIdx}-${i}`;
     const nowCls = i === nowI ? ' is-now' : '';
-    const inner = `<span class="row-time">${esc(it.t)}</span>${icon(cat)}<span class="row-main"><span class="row-title" style="display:block">${pn}${esc(title)}${it.warn ? ' <span style="color:var(--warn)" aria-label="주의">•</span>' : ''}</span>${zh ? `<span class="row-zh" lang="zh-CN" style="display:block">${esc(zh)}</span>` : ''}${it.note ? `<span class="row-note" style="display:block">${esc(it.note)}</span>` : ''}</span>`;
+    const inner = `<span class="row-lead"><span class="row-time">${esc(it.t)}</span>${icon(cat)}</span><span class="row-main"><span class="row-title" style="display:block">${pn}${esc(title)}${it.warn ? ' <span style="color:var(--warn)" aria-label="주의">•</span>' : ''}</span>${zh ? `<span class="row-zh" lang="zh-CN" style="display:block">${esc(zh)}</span>` : ''}${it.note ? `<span class="row-note" style="display:block">${esc(it.note)}</span>` : ''}</span>`;
     const rid = ` id="r${dIdx}-${i}"`;
     if (!hasDetail) return `<div class="row${nowCls}"${rid} style="--inset:74px">${inner}</div>`;
     if (open) {
@@ -713,7 +713,11 @@
   window.addEventListener('scroll', onScroll, { passive: true });
 
   setTab(tab);
-  if (store.get('gps', false)) gpsStart(false);   // 지난번에 켜 뒀으면 이어서
+  if (store.get('gps', false)) gpsStart(false);
+  /* iOS 홈 화면 앱: 처음 열 때 상단이 흐리게 그려지고 스크롤하면 풀리는 현상 → 열자마자 1px 스크롤로 다시 그리게 */
+  const nudge = () => { if (window.scrollY === 0) { window.scrollTo(0, 1); requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, 0))); } };
+  if (document.readyState === 'complete') setTimeout(nudge, 60); else window.addEventListener('load', () => setTimeout(nudge, 60));
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') setTimeout(nudge, 60); });   // 지난번에 켜 뒀으면 이어서
   if ('serviceWorker' in navigator && location.protocol === 'https:') {
     navigator.serviceWorker.register('sw.js').catch(() => {});
   }
