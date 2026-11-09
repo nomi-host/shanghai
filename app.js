@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const { PLACES, DAYS, INFO, CHECKLIST, PHRASES, TRIP, EXTRA = {}, CREDITS = {} } = window.TRIP_DATA;
+  const { PLACES, DAYS, INFO, CHECKLIST, PHRASES, TRIP, EXTRA = {}, CREDITS = {}, WEB_CREDITS = [] } = window.TRIP_DATA;
   const $ = (s, el = document) => el.querySelector(s);
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const store = {
@@ -539,8 +539,8 @@
       const name = c.label || (PLACES[k] && PLACES[k].name) || k;
       const src = c.src === 'pixabay' ? 'Pixabay' : 'Wikimedia Commons';
       return `<li><span class="credit-name">${esc(name)}</span><span class="credit-meta">${esc(c.author)} · ${link(LICENSE_URL[c.license], c.license)} · ${link(c.page, src + ' 원본')}</span></li>`;
-    }).join('');
-    return `<h3 class="group-h">사진 출처</h3><div class="list"><button class="row" style="--inset:57px" aria-expanded="false" aria-controls="info-credits" data-toggle="info-credits">${icon('photo')}<span class="row-main"><span class="row-title" style="display:block">사진 출처</span><span class="row-sub" style="display:block">대표 사진 ${list.length}장 · 저작자·라이선스·원본</span></span>${CHEV}</button><div class="detail" id="info-credits"><div class="detail-inner"><div class="detail-pad" style="padding-left:57px"><p>상세 화면의 대표 사진은 위키미디어 공용·Pixabay의 자유 이용 사진이에요. ‘참고 이미지’는 그 가게 실물이 아닌 일반 사진이에요. 사진은 원본에서 잘라 썼어요.</p><ul class="credits">${items}</ul></div></div></div></div>`;
+    }).join('') + WEB_CREDITS.map(([k, by]) => `<li><span class="credit-name">${esc((PLACES[k] && PLACES[k].name) || k)}</span><span class="credit-meta">${esc(by)}</span></li>`).join('');
+    return `<h3 class="group-h">사진 출처</h3><div class="list"><button class="row" style="--inset:57px" aria-expanded="false" aria-controls="info-credits" data-toggle="info-credits">${icon('photo')}<span class="row-main"><span class="row-title" style="display:block">사진 출처</span><span class="row-sub" style="display:block">장소별 사진 출처</span></span>${CHEV}</button><div class="detail" id="info-credits"><div class="detail-inner"><div class="detail-pad" style="padding-left:57px"><p>상세 화면 사진은 그 장소의 실제 모습이에요. 공식 사이트·여행 매체·기사·따종띠엔핑 후기 사진과 위키미디어 공용 사진을 개인 여행용으로 모았어요.</p><ul class="credits">${items}</ul></div></div></div></div>`;
   }
 
   /* ---------- 회화 ---------- */
