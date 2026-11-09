@@ -19,6 +19,8 @@ window.TRIP_DATA = (() => {
     zhangshifu: { name: '장스푸 상하이식 아침', cn: '张师傅早餐店', cat: 'food', area: '징안', addr: '静安区石门二路487号', hours: '05:00–13:00', q: '张师傅早餐店 石门二路', status: 'planned', memo: '알리페이 QR 결제' },
     renheguan: { name: '런허관 징안점', cn: '人和馆 愚园路店', cat: 'food', area: '징안', addr: '静安区愚园路142-146号3楼', hours: '주말 11:00–21:30', q: '人和馆 愚园路', status: 'planned', memo: '전화 예약 · 미슐랭 1스타는 본점' },
     diandoude: { name: '점도덕 환우회점', cn: '点都德 环宇荟店', cat: 'food', area: '신천지', addr: '黄浦区黄陂南路838弄 环宇荟B1', hours: '09:00–21:30', q: '点都德 环宇荟', status: 'planned' },
+    spiceman: { name: 'Spiceman 젤라또', cn: 'Spiceman辣男 gelato', cat: 'dessert', area: '징안', addr: '静安区富民路205号', q: 'Spiceman gelato 富民路', status: 'backup', memo: '레이블후드 바로 앞 · 思南路22号에도 매장(2026) · 영업시간 고덕 확인' },
+    lilian: { name: '릴리안 에그타르트 신세계성점', cn: '莉莲蛋挞 新世界城', cat: 'dessert', area: '인민광장', addr: '黄浦区南京西路2-68号 新世界城B1', q: '莉莲蛋挞 新世界城', status: 'backup', memo: '포르투갈식 에그타르트 · 양꼬치집(第一百货) 바로 옆 · 지점 여럿' },
     bakerspice: { name: 'Baker & Spice 안푸로점', cn: 'Baker&Spice 安福路', cat: 'dessert', area: '헝푸', addr: '徐汇区安福路195号', hours: '09:00–21:00', q: 'Baker&Spice 安福路', status: 'backup' },
 
     dongliang: { name: '메종 동량', cn: '栋梁之家', cat: 'shop', area: '창닝', addr: '长宁区武夷路168号 翡悦里174号别墅', hours: '11:00–20:00', q: '栋梁之家 武夷路', status: 'planned' },
@@ -118,6 +120,8 @@ window.TRIP_DATA = (() => {
     d_mickey: { name: '미키 애비뉴 — 쇼 보고 바로 나가기', cn: '米奇大街', q: '上海 米奇大街', meta: '출구 쪽 메인 거리라 쇼 직후 탈출이 빠름' },
     d_metro: { name: '지하철 11호선 디즈니역', cn: '迪士尼站', q: '迪士尼 地铁站 11号线', meta: '막차 약 22:30 · 디디가 안 잡힐 때' },
     siji_bund: { name: '사계민복 외백도교점', cn: '四季民福 外白渡桥店', q: '四季民福 外白渡桥', meta: '虹口 吴淞路130号 3층 · 와이탄 북쪽 끝, 호텔과 가까움 · 예약 불필요 후기' },
+    spiceman: { name: 'Spiceman 젤라또', cn: 'Spiceman辣男 gelato', q: 'Spiceman gelato 富民路', gq: 'Spiceman gelato 上海', meta: '富民路205号 · 레이블후드 길 건너 · 창의적인 맛 젤라또 · 영업시간 고덕 확인' },
+    lilian: { name: '릴리안 에그타르트', cn: '莉莲蛋挞 新世界城', q: '莉莲蛋挞 新世界城', gq: 'Lillian Bakery Shanghai', meta: '新世界城 B1(南京西路2-68号) · 양꼬치 줄 기다리며 하나씩 · 몰 영업시간 안' },
     zuoting_dawan: { name: '좌정우원 신세계다마루점', cn: '左庭右院 新世界大丸', q: '左庭右院 新世界大丸', meta: '南京东路228号 B2 · 10:00–23:00 · 같은 남경동로' },
     zuoting_xinmei: { name: '좌정우원 신메이광장점', cn: '左庭右院 新梅广场', q: '左庭右院 新梅广场', meta: '浦东南路999号 4층 · 10:30–02:00' },
     luminous: { name: 'Luminous Ocean', cn: '环海 Luminous Ocean', q: 'Luminous Ocean 香山路', meta: '香山路15号 · 일 02:00까지 · 심해·수족관 콘셉트 · Nótelab에서 디디 5분' },
@@ -343,7 +347,7 @@ window.TRIP_DATA = (() => {
     miniso: 'MINISO LAND Shanghai Nanjing East Road', henjiu: '很久以前羊肉串 南京东路', basao: 'BASAO 香港路',
     coucou: '凑凑火锅 淮海中路', dahuchun: '大壶春 四川中路', diandoude: '点都德 黄陂南路', sijiminfu: '四季民福烤鸭店 南京西路',
     sijiminfu_bund: '四季民福烤鸭店 吴淞路', xiding: '喜鼎海胆水饺 长宁路', zhuangshi: '庄氏隆兴 浙江中路', zuoting: '左庭右院 浦东南路',
-    manji: '满记甜品 南京东路', disney: 'Shanghai Disneyland', disney_taxi: 'Shanghai Disneyland', disney_garden: 'Shanghai Disneyland',
+    manji: '满记甜品 南京东路', spiceman: 'Spiceman gelato 上海', lilian: 'Lillian Bakery Shanghai', disney: 'Shanghai Disneyland', disney_taxi: 'Shanghai Disneyland', disney_garden: 'Shanghai Disneyland',
     disney_mickey: 'Shanghai Disneyland', disney_castle: 'Shanghai Disneyland', disney_metro: 'Disney Resort Station Shanghai Metro',
     // 대안(A)
     barleone2: 'Bar Leone 思南公馆', d_garden: 'Shanghai Disneyland', d_mickey: 'Shanghai Disneyland', d_taxi: 'Shanghai Disneyland',
@@ -409,7 +413,8 @@ window.TRIP_DATA = (() => {
           alts: [A.nanyang, A.zhenyuan, A.congyoubing] },
         { t: '09:40', place: 'zhangyuan', title: '장위안 산책', note: '석고문 골목 리테일 단지 · 상점은 10시부터' },
         { t: '10:30', place: 'qiansu', note: '장위안에서 디디 10분 · 외관 위주 30–40분 · 몰도 열려 있음' },
-        { t: '11:30', place: 'labelhood', note: '중국 디자이너 편집샵 · 천수에서 디디 15분 · 런허관까지 디디 10분' },
+        { t: '11:30', place: 'labelhood', note: '중국 디자이너 편집샵 · 천수에서 디디 15분 · 런허관까지 디디 10분 · 길 건너 Spiceman 젤라또',
+          altsTitle: '바로 앞 간식', alts: [A.spiceman] },
         { t: '12:30', place: 'renheguan', title: '점심: 런허관 게살비빔밥 + 홍소육', note: '예약 필수 · 미슐랭 1스타는 본점',
           detail: [
             { h: '웨이팅 플랜', li: ['전화 예약(021-6266-8003)하면 대기 없음', '예약 실패 시: 11:00 오픈에 맞춰 워크인 → 천수·레이블후드 순서를 점심 뒤로'] },
@@ -426,14 +431,14 @@ window.TRIP_DATA = (() => {
         { t: '19:00', place: 'chiikawa', note: 'PSA에서 디디 15분 · 내륙 첫 공식 플래그십 · 예약 없이 입장' },
         { t: '19:45', place: 'miniso', note: '3층 IP 굿즈 플래그십 · 21:30까지' },
         { t: '20:20', place: 'hotel', title: '호텔에 쇼핑백 놓고 잠깐 쉬기', cat: 'stay', extra: null, note: '미니소에서 디디 10분 · 20분 휴식' },
-        { t: '20:45', place: 'henjiu', title: '저녁: 헌저우이치엔 양꼬치 (가볍게)', note: '호텔에서 디디 10분 · 양꼬치 10개 + 채소 꼬치 정도 · 원격 줄서기 필수',
+        { t: '20:45', place: 'henjiu', title: '저녁: 헌저우이치엔 양꼬치 (가볍게)', note: '호텔에서 디디 10분 · 양꼬치 10개 + 채소 꼬치 정도 · 원격 줄서기 필수 · 바로 옆 신세계성 B1 릴리안 에그타르트',
           warn: '일요일 저녁은 200–300팀, 2–3시간 대기 후기가 있어요. 16시 반쯤 미리 번호표를 받아 두세요.',
           detail: [
             { h: '웨이팅 플랜', li: ['예상 대기: 일요일 저녁 2–3시간', '번호표: 16:30쯤 우캉로에서 위챗·알리페이 미니프로그램 → 20시 반 전후 차례 목표', '일찍 부르면 치이카와·미니소를 줄이고, 늦으면 바를 먼저 갔다가 와도 됨(03:00까지 영업)', '번호를 놓치지 않게 차례가 10팀 남았을 때 출발'] },
             { h: '원격 줄서기', li: ['위챗 또는 알리페이에서 "很久以前羊肉串" 검색 → 미니프로그램 → 上海 → 南京路第一百货店 → 排队取号(2人)', '앱에 남은 팀 수가 보임. 차례 가까워지면 매장으로', '이 지점은 새벽 3시까지 영업(고덕). 대기가 길면 번호표를 받아 두고 바에 먼저 다녀와도 됨'] },
             { h: '팁', li: ['자동으로 도는 숯불 그릴에 꼬치를 올려 구워 먹는 방식', '2인 소식이면 양꼬치 10개 + 채소·빵 꼬치 몇 개로 시작'] },
           ],
-          altsTitle: '대기가 너무 길면', alts: [A.zhuangshi, A.zuoting_dawan] },
+          altGroups: [{ title: '대기가 너무 길면', items: [A.zhuangshi, A.zuoting_dawan] }, { title: '기다리는 동안 바로 옆', items: [A.lilian] }] },
         { t: '22:30', place: 'notelab', title: '바: Nótelab 또는 Bar Leone', note: '남경동로에서 디디 15분 · 1층 옷가게 안쪽 오른쪽 계단으로 2층',
           detail: [
             { h: '옵션 1 · Nótelab', li: ['향(감각) 실험실 콘셉트 칵테일 바 — 잔 옆 향 장치, ‘향수를 마시는 느낌’이라는 리뷰', '2026년 10월 중순 정식 오픈한 신상 · 따종띠엔핑 4.7점 · 1인 약 ¥121', '19:00 오픈(마감 시간은 따종띠엔핑 앱에서 확인)'] },
