@@ -159,8 +159,10 @@ def render(points, legs, out, pad=PAD, padx=None):
             base.paste(tile(tx, ty, z), (int((tx*256-left)*TS), int((ty*256-top)*TS)))
     img = base.resize((W*S, h*S), Image.LANCZOS)
     # 모노톤: 흑백으로 바꾸고 살짝 밝게 → 빨간 동선만 눈에 띄게
+    # 앱 회색(iOS 쿨그레이 #3C3C43 계열)으로 물들이고 밝게: 페이지 배경(#F2F2F7)보다 밝아 지도 영역이 떠 보이게
     g = ImageOps.grayscale(img)
-    img = Image.blend(g.convert('RGB'), Image.new('RGB', g.size, (255, 255, 255)), 0.18)
+    img = ImageOps.colorize(g, black=(56, 59, 70), white=(251, 252, 255), mid=(201, 204, 215))
+    img = Image.blend(img, Image.new('RGB', g.size, (250, 251, 255)), 0.22)
     SS = S*2   # 경로는 2배로 그려 줄여서 매끈하게
     ov = Image.new('RGBA', (W*SS, h*SS), (0, 0, 0, 0)); dr = ImageDraw.Draw(ov)
     def px(p):

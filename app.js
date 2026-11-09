@@ -115,12 +115,12 @@
     const nowCls = i === nowI ? ' is-now' : '';
     const inner = `<span class="row-lead"><span class="row-time">${esc(it.t)}</span>${icon(cat)}</span><span class="row-main"><span class="row-title" style="display:block">${pn}${esc(title)}${it.warn ? ' <span style="color:var(--warn)" aria-label="주의">•</span>' : ''}</span>${zh ? `<span class="row-zh" lang="zh-CN" style="display:block">${esc(zh)}</span>` : ''}${it.note ? `<span class="row-note" style="display:block">${esc(it.note)}</span>` : ''}</span>`;
     const rid = ` id="r${dIdx}-${i}"`;
-    if (!hasDetail) return `<div class="row${nowCls}"${rid} style="--inset:74px">${inner}</div>`;
+    if (!hasDetail) return `<div class="row${nowCls}"${rid} style="--inset:16px">${inner}</div>`;
     if (open) {
       // 전체 보기: 버튼이 아닌 일반 블록이라 글자 선택·복사가 됨
-      return `<div class="row${nowCls}"${rid} style="--inset:74px">${inner}</div><div class="detail is-open"><div class="detail-inner"><div class="detail-pad">${detailHtml(it, p)}</div></div></div>`;
+      return `<div class="row${nowCls}"${rid} style="--inset:16px">${inner}</div><div class="detail is-open"><div class="detail-inner"><div class="detail-pad">${detailHtml(it, p)}</div></div></div>`;
     }
-    return `<button class="row${nowCls}"${rid} style="--inset:74px" aria-expanded="false" aria-controls="${id}" data-toggle="${id}">${inner}${CHEV}</button><div class="detail" id="${id}"><div class="detail-inner"><div class="detail-pad">${detailHtml(it, p)}</div></div></div>`;
+    return `<button class="row${nowCls}"${rid} style="--inset:16px" aria-expanded="false" aria-controls="${id}" data-toggle="${id}">${inner}${CHEV}</button><div class="detail" id="${id}"><div class="detail-inner"><div class="detail-pad">${detailHtml(it, p)}</div></div></div>`;
   }
 
   /* ---------- 날짜별 동선 지도 (tools/build_maps.py 가 만든 이미지 + 핀) ---------- */
@@ -347,13 +347,13 @@
       h += `<p class="group-f" style="margin:0 4px 6px">모든 일정이 펼쳐져 있어요. 길게 눌러 글자를 선택하고 복사할 수 있어요.</p>`;
       DAYS.forEach((d, dIdx) => {
         const nowI = dIdx === todayIdx ? d.items.reduce((acc, it, i) => (/^\d/.test(it.t) && it.t <= now.hm ? i : acc), -1) : -1;
-        h += `<div class="day-head" style="margin-top:26px"><h2>${Number(d.date.slice(5, 7))}/${Number(d.date.slice(8))}(${esc(d.w)}) ${esc(d.title)}</h2>${d.sub ? `<p>${esc(d.sub)}</p>` : ''}</div><div data-wx="${d.date}"></div>`;
+        h += `<div class="day-head" style="margin-top:26px"><h2><span class="day-no">Day ${dIdx + 1}.</span> ${Number(d.date.slice(5, 7))}/${Number(d.date.slice(8))}(${esc(d.w)}) ${esc(d.title)}</h2>${d.sub ? `<p>${esc(d.sub)}</p>` : ''}</div><div data-wx="${d.date}"></div>`;
         h += `<div class="list selectable">${d.items.map((it, i) => itemHtml(it, i, dIdx, nowI, true)).join('')}</div>`;
         if (d.foot) h += `<p class="group-f">${esc(d.foot)}</p>`;
       });
     } else {
       const d = DAYS[dayIdx];
-      h += `<div class="day-head"><h2>${esc(d.title)}</h2>${d.sub ? `<p>${esc(d.sub)}</p>` : ''}</div>`;
+      h += `<div class="day-head"><h2><span class="day-no">Day ${dayIdx + 1}.</span> ${esc(d.title)}</h2>${d.sub ? `<p>${esc(d.sub)}</p>` : ''}</div>`;
       h += mapHtml(dayIdx);
       const nowI = dayIdx === todayIdx ? d.items.reduce((acc, it, i) => (/^\d/.test(it.t) && it.t <= now.hm ? i : acc), -1) : -1;
       const nums = pinNums(dayIdx);
