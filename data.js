@@ -256,6 +256,11 @@ window.TRIP_DATA = (() => {
   });
   /* 웹 사진(공식·여행 매체·기사): 2026-11-10 전수 점검, 실제 그 장소가 아닌 사진을 교체 */
   const WEB = {
+    zhangyuan: ['장위안', [['zhangyuan-w1', '上观新闻 2026.2'], ['zhangyuan-w2', '上海市文旅局'], ['zhangyuan-w3', '澎湃新闻'], ['zhangyuan-w4', '新浪 2026.2']]],
+    qiansu: ['천수 1000 Trees (헤더윅)', [['qiansu-w1', '따종띠엔핑'], ['qiansu-w2', 'damanwoo'], ['qiansu-w3', 'Shanghai Daily'], ['qiansu-w4', '上观新闻 2026.9']]],
+    bund: ['와이탄', [['bund-w1', '搜狐'], ['bund-w2', 'Ernest Jourdier · CC BY 4.0'], ['bund-w3', 'Shanghai Daily'], ['bund-w4', '人民网 2026.6'], ['bund-w5', '人民网 2026.6']]],
+    yuyuan: ['위위안 · 성황묘 야경', [['yuyuan-w1', '따종띠엔핑'], ['yuyuan-w2', '新华网 2026.1'], ['yuyuan-w3', 'ourchinastory'], ['yuyuan-w4', '汇图网'], ['yuyuan-w5', 'shanghai-zine']]],
+    disney: ['상하이 디즈니랜드', [['disney-w1', 'Frank Septillion · CC0'], ['disney-w2', '凤凰网'], ['disney-w3', '상하이 디즈니 공식'], ['disney-w4', 'Shanghai Daily 2026.11'], ['disney-w5', '네이버 블로그'], ['disney-w6', 'Wikimedia Commons · CC BY 2.0']]],
     forlong: ['FOR LONG 마카롱', [['forlong-w1', '네이버 블로그 express_pandemonium'], ['forlong-w2', '네이버 블로그 express_pandemonium'], ['forlong-w3', '네이버 블로그 express_pandemonium'], ['forlong-w4', '네이버 블로그 express_pandemonium']]],
     huangshiyi: ['황씨이핀후이 물소우유 디저트', [['huangshiyi-w1', '따종띠엔핑'], ['huangshiyi-w2', '네이버 블로그 010_g'], ['huangshiyi-w3', '黄氏壹品汇 공식'], ['huangshiyi-w4', '따종띠엔핑']]],
     guershu: ['구얼수 요거트 르웨광점', [['guershu-w1', '네이버 블로그 lucys0626'], ['guershu-w2', '따종띠엔핑'], ['guershu-w3', '顾二叔 공식'], ['guershu-w4', '따종띠엔핑']]],
@@ -332,9 +337,6 @@ window.TRIP_DATA = (() => {
   /* 일부만 틀린 곳: n번째 사진 교체 */
   const PATCH = {
     psa: { 4: ['psa-w1', 'PSA 터빈홀', 'PSA 공식'] },
-    wukang: { 4: ['wukang-w1', '우캉맨션 발코니', '上观新闻'] },
-    zhangyuan: { 3: ['zhangyuan-w1', '張園 간판이 걸린 장위안 건물', '上观新闻'], 4: ['zhangyuan-w2', '장위안 야경', '上观新闻'] },
-    bund: { 3: ['bund-w1', '와이바이두교와 브로드웨이 맨션 야경', 'Tripadvisor'] },
   };
   Object.entries(PATCH).forEach(([k, m]) => Object.entries(m).forEach(([n, [f, alt, by]]) => {
     if (EXTRA[k] && EXTRA[k].photos && EXTRA[k].photos[n - 1]) EXTRA[k].photos[n - 1] = { src: `img/${f}.jpg`, alt, credit: `사진: ${by}` };
