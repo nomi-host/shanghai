@@ -256,6 +256,9 @@ window.TRIP_DATA = (() => {
   });
   /* 웹 사진(공식·여행 매체·기사): 2026-11-10 전수 점검, 실제 그 장소가 아닌 사진을 교체 */
   const WEB = {
+    huangshiyi: ['황씨이핀후이 물소우유 디저트', [['huangshiyi-w1', '따종띠엔핑'], ['huangshiyi-w2', '黄氏壹品汇 공식'], ['huangshiyi-w3', '따종띠엔핑'], ['huangshiyi-w4', '黄氏壹品汇 공식']]],
+    guershu: ['구얼수 요거트 르웨광점', [['guershu-w1', '따종띠엔핑'], ['guershu-w2', '顾二叔 공식'], ['guershu-w3', '顾二叔 공식'], ['guershu-w4', '따종띠엔핑']]],
+    mollytea: ['Molly Tea', [['mollytea-w1', '따종띠엔핑'], ['mollytea-w2', 'szgor.com'], ['mollytea-w3', '香港商报'], ['mollytea-w4', '新京报']]],
     notelab: ['Nótelab 감각 실험실', [['notelab-w1', '따종띠엔핑(기존)'], ['notelab-w2', '따종띠엔핑(기존)'], ['notelab-w3', '따종띠엔핑(기존)'], ['notelab-w4', '따종띠엔핑(기존)']]],
     onheon: ['온허온 onheon', [['onheon-w1', '네이버 블로그 hiiyonii'], ['onheon-w2', '네이버 블로그 hiiyonii'], ['onheon-w3', '네이버 블로그 hiiyonii'], ['onheon-w4', '네이버 블로그 ttorang520']]],
     henjiu: ['헌저우이치엔 양꼬치 남경로점', [['henjiu-w1', '네이버 블로그 jisoool'], ['henjiu-w2', '네이버 블로그 jisoool'], ['henjiu-w3', '네이버 블로그 jisoool'], ['henjiu-w4', '네이버 블로그 su_dding']]],
