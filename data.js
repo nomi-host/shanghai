@@ -256,6 +256,8 @@ window.TRIP_DATA = (() => {
   });
   /* 웹 사진(공식·여행 매체·기사): 2026-11-10 전수 점검, 실제 그 장소가 아닌 사진을 교체 */
   const WEB = {
+    rockbund: ['와이탄 미술관 (Rockbund)', [['rockbund-w1', '따종띠엔핑'], ['rockbund-w2', '네이버 블로그 rsn99'], ['rockbund-w3', '네이버 블로그 rsn99'], ['rockbund-w4', '네이버 블로그 rsn99'], ['rockbund-w5', '네이버 블로그 yeilen']]],
+    wukang: ['우캉맨션', [['wukang-w1', 'N509FZ · CC BY-SA 4.0'], ['wukang-w2', '네이버 블로그 dimdeepblue'], ['wukang-w3', '네이버 블로그 dailylife_yh_'], ['wukang-w4', '源義信 · CC BY 4.0']]],
     zhangyuan: ['장위안', [['zhangyuan-w1', '上观新闻 2026.2'], ['zhangyuan-w2', '上海市文旅局'], ['zhangyuan-w3', '澎湃新闻'], ['zhangyuan-w4', '新浪 2026.2']]],
     qiansu: ['천수 1000 Trees (헤더윅)', [['qiansu-w1', '따종띠엔핑'], ['qiansu-w2', 'damanwoo'], ['qiansu-w3', 'Shanghai Daily'], ['qiansu-w4', '上观新闻 2026.9']]],
     bund: ['와이탄', [['bund-w1', '搜狐'], ['bund-w2', 'Ernest Jourdier · CC BY 4.0'], ['bund-w3', 'Shanghai Daily'], ['bund-w4', '人民网 2026.6'], ['bund-w5', '人民网 2026.6']]],
@@ -275,9 +277,9 @@ window.TRIP_DATA = (() => {
     renheguan: ['런허관 징안점', [['renheguan-w1', '네이버 블로그 travelw0 (2025.9)'], ['renheguan-w2', '네이버 블로그 travelw0 (2025.9)'], ['renheguan-w3', '네이버 블로그 travelw0 (2025.9)'], ['renheguan-w4', 'Trip.com 모먼츠']]],
     zhangshifu: ['장스푸 상하이식 아침', [['zhangshifu-w1', '따종띠엔핑(기존)'], ['zhangshifu-w2', '따종띠엔핑(기존)'], ['zhangshifu-w3', '따종띠엔핑'], ['zhangshifu-w4', 'Trip.com 모먼츠']]],
     libaixie: ['리바이시에 와이탄점', [['libaixie-w1', 'starsofheavens 2026-06'], ['libaixie-w2', 'starsofheavens 2026-06'], ['libaixie-w3', 'Trip.com'], ['libaixie-w4', 'starsofheavens 2026-06']]],
-    sugarplum: ['Sugar Plum', [['sugarplum-w1', '따종띠엔핑 merchant photo, shop 963699920 ’Sugar Plum Cocktail Bar·Cafe(东湖路店)’']]],
+    sugarplum: ['Sugar Plum', [['sugarplum-w1', '네이버 블로그 shanghaiturtle'], ['sugarplum-w2', '네이버 블로그 shanghaiturtle'], ['sugarplum-w3', '따종띠엔핑'], ['sugarplum-w4', '네이버 블로그 shanghaiturtle']]],
     xiaoshen: ['샤오선화위안 신세계점', [['xiaoshen-w1', '따종띠엔핑 小申花园(新世界城店) shop 1016363052473490'], ['xiaoshen-w2', '따종띠엔핑 新世界城店 page']]],
-    sijiminfu_bund: ['사계민복 외백도교점', [['sijiminfu_bund-w1', 'Ctrip 四季民福(外滩外白渡桥店) page'], ['sijiminfu_bund-w2', 'Ctrip 外白渡桥店 page'], ['sijiminfu_bund-w3', 'Ctrip 外白渡桥店 page'], ['sijiminfu_bund-w4', 'starsofheavens.com 2026-06 (Waibaidu Bridge store post)']]],
+    sijiminfu_bund: ['사계민복 외백도교점', [['sijiminfu_bund-w1', '네이버 블로그 lindberg'], ['sijiminfu_bund-w2', '네이버 블로그 lindberg'], ['sijiminfu_bund-w3', '네이버 블로그 lindberg'], ['sijiminfu_bund-w4', '네이버 블로그 lindberg']]],
     jazzbar: ['평화호텔 재즈바', [['jazzbar-w1', 'SmartShanghai venue 5651 (Peace Hotel Jazz Bar)'], ['jazzbar-w2', 'Rachel Gouk / Nomfluence 2025'], ['jazzbar-w3', 'SmartShanghai venue 5651'], ['jazzbar-w4', 'Rachel Gouk / Nomfluence 2025']]],
     viandn: ['Via NDN', [['viandn-w1', '따종띠엔핑'], ['viandn-w2', '따종띠엔핑'], ['viandn-w3', '따종띠엔핑'], ['viandn-w4', '따종띠엔핑']]],
     zamani: ['ZAMANI COLLECTION', [['zamani-w1', '따종띠엔핑'], ['zamani-w2', '따종띠엔핑'], ['zamani-w3', '따종띠엔핑'], ['zamani-w4', '따종띠엔핑']]],
@@ -288,14 +290,14 @@ window.TRIP_DATA = (() => {
     sloppygin: ['Sloppy Gin 베이커리', [['sloppygin-w1', '따종띠엔핑'], ['sloppygin-w2', '따종띠엔핑'], ['sloppygin-w3', '따종띠엔핑'], ['sloppygin-w4', '따종띠엔핑']]],
     kaisha: ['KAISHA 會社', [['kaisha-w1', '따종띠엔핑'], ['kaisha-w2', '따종띠엔핑'], ['kaisha-w3', '따종띠엔핑'], ['kaisha-w4', '따종띠엔핑']]],
     fever: ['Fever Bar', [['fever-w1', '따종띠엔핑'], ['fever-w2', '따종띠엔핑'], ['fever-w3', '따종띠엔핑'], ['fever-w4', '따종띠엔핑']]],
-    noras: ['Nora\'s 와인바', [['noras-w1', '따종띠엔핑'], ['noras-w2', '따종띠엔핑'], ['noras-w3', '따종띠엔핑'], ['noras-w4', '따종띠엔핑']]],
-    ambelie: ['Ambelie Gallery', [['ambelie-w1', 'current']]],
+    noras: ['Nora\'s 와인바', [['noras-w1', '네이버 블로그 rosa9126'], ['noras-w2', '네이버 블로그 rosa9126'], ['noras-w3', '네이버 블로그 rosa9126'], ['noras-w4', '네이버 블로그 rosa9126']]],
+    ambelie: ['Ambelie Gallery', [['ambelie-w1', '따종띠엔핑'], ['ambelie-w2', '네이버 블로그 rei002'], ['ambelie-w3', '네이버 블로그 rei002'], ['ambelie-w4', '네이버 블로그 rei002']]],
     carter: ['CARTER', [['carter-w1', 'SmartShanghai 2022'], ['carter-w2', 'SmartShanghai'], ['carter-w3', 'Trip.com'], ['carter-w4', 'SmartShanghai']]],
     chenglong: ['청룽싱 게요리', [['chenglong-w1', 'current'], ['chenglong-w2', 'current'], ['chenglong-w3', 'current'], ['chenglong-w4', 'current']]],
     chillmore: ['chillmore', [['chillmore-w1', 'current'], ['chillmore-w2', 'current'], ['chillmore-w3', 'current'], ['chillmore-w4', 'current']]],
     chizaiji: ['지짜이지 창펀왕', [['chizaiji-w1', 'Trip.com'], ['chizaiji-w2', 'Trip.com'], ['chizaiji-w3', 'Trip.com'], ['chizaiji-w4', 'Trip.com']]],
     coa: ['COA', [['coa-w1', 'current (Amap user photo 2025)'], ['coa-w2', 'Rachel Gouk 2024 COA article'], ['coa-w3', 'SmartShanghai 2024'], ['coa-w4', 'Rachel Gouk 2024 COA article']]],
-    coucou: ['Coucou 훠궈 환마오점', [['coucou-w1', 'Trip.com'], ['coucou-w2', 'Trip.com (iapm)'], ['coucou-w3', 'Trip.com'], ['coucou-w4', 'Trip.com (iapm)']]],
+    coucou: ['Coucou 훠궈 환마오점', [['coucou-w1', '네이버 블로그 sunnyasz94'], ['coucou-w2', '네이버 블로그 sunnyasz94'], ['coucou-w3', '네이버 블로그 sunnyasz94'], ['coucou-w4', '네이버 블로그 sunnyasz94']]],
     dahuchun: ['다후춘 생지엔', [['dahuchun-w1', 'current'], ['dahuchun-w2', 'current'], ['dahuchun-w3', 'current'], ['dahuchun-w4', 'current']]],
     dayin: ['다인서점', [['dayin-w1', '赢商网'], ['dayin-w2', '赢商网']]],
     heytea: ['헤이티', [['heytea-w1', 'TRVLOGUE 2026'], ['heytea-w2', 'TRVLOGUE 2026'], ['heytea-w3', 'TRVLOGUE 2026'], ['heytea-w4', 'TRVLOGUE 2026']]],
@@ -328,7 +330,7 @@ window.TRIP_DATA = (() => {
     foty: ['FOTY 퀸아망', [['foty-w1', 'Rachel Gouk / Nomfluence 2023'], ['foty-w2', 'Rachel Gouk / Nomfluence 2023'], ['foty-w3', 'Sophie Serves Up 2024'], ['foty-w4', 'Rachel Gouk / Nomfluence 2023']]],
     spiceman: ['Spiceman 젤라또', [['spiceman-w1', 'Lemon8 review (near Changshu Lu metro)'], ['spiceman-w2', 'Rachel Gouk / Nomfluence listing ’Spiceman Gelato (Wulumuqi Road)’'], ['spiceman-w3', 'Lemon8 review (near Changshu Lu metro)']]],
     lilian: ['릴리안 에그타르트 신세계성점', [['lilian-w1', 'TRVLOGUE 2026'], ['lilian-w2', 'TRVLOGUE 2026'], ['lilian-w3', 'TRVLOGUE 2026'], ['lilian-w4', 'Trip.com 莉莲蛋挞(新世界店)']]],
-    luminous: ['Luminous Ocean', [['luminous-w1', '따종띠엔핑 merchant photo'], ['luminous-w2', 'Trip.com'], ['luminous-w3', 'Trip.com']]],
+    luminous: ['Luminous Ocean', [['luminous-w1', '네이버 블로그 h___j___e___da'], ['luminous-w2', '따종띠엔핑'], ['luminous-w3', 'Trip.com'], ['luminous-w4', 'Trip.com']]],
   };
   Object.entries(WEB).forEach(([k, [what, list]]) => {
     EXTRA[k] = EXTRA[k] || {};
