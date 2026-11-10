@@ -256,6 +256,7 @@ window.TRIP_DATA = (() => {
   });
   /* 웹 사진(공식·여행 매체·기사): 2026-11-10 전수 점검, 실제 그 장소가 아닌 사진을 교체 */
   const WEB = {
+    hotel: ['홀리데이인 익스프레스 와이탄', [['hotel-w1', '네이버 블로그 annie6023'], ['hotel-w2', '네이버 블로그 annie6023'], ['hotel-w3', '네이버 블로그 annie6023'], ['hotel-w4', '네이버 블로그 annie6023']]],
     rockbund: ['와이탄 미술관 (Rockbund)', [['rockbund-w1', '따종띠엔핑'], ['rockbund-w2', '네이버 블로그 rsn99'], ['rockbund-w3', '네이버 블로그 rsn99'], ['rockbund-w4', '네이버 블로그 rsn99'], ['rockbund-w5', '네이버 블로그 yeilen']]],
     wukang: ['우캉맨션', [['wukang-w1', 'N509FZ · CC BY-SA 4.0'], ['wukang-w2', '네이버 블로그 dimdeepblue'], ['wukang-w3', '네이버 블로그 dailylife_yh_'], ['wukang-w4', '源義信 · CC BY 4.0']]],
     zhangyuan: ['장위안', [['zhangyuan-w1', '上观新闻 2026.2'], ['zhangyuan-w2', '上海市文旅局'], ['zhangyuan-w3', '澎湃新闻'], ['zhangyuan-w4', '新浪 2026.2']]],
@@ -270,7 +271,7 @@ window.TRIP_DATA = (() => {
     notelab: ['Nótelab 감각 실험실', [['notelab-w1', '따종띠엔핑(기존)'], ['notelab-w2', '따종띠엔핑(기존)'], ['notelab-w3', '따종띠엔핑(기존)'], ['notelab-w4', '따종띠엔핑(기존)']]],
     onheon: ['온허온 onheon', [['onheon-w1', '네이버 블로그 hiiyonii'], ['onheon-w2', '네이버 블로그 hiiyonii'], ['onheon-w3', '네이버 블로그 hiiyonii'], ['onheon-w4', '네이버 블로그 ttorang520']]],
     henjiu: ['헌저우이치엔 양꼬치 남경로점', [['henjiu-w1', '네이버 블로그 jisoool'], ['henjiu-w2', '네이버 블로그 jisoool'], ['henjiu-w3', '네이버 블로그 jisoool'], ['henjiu-w4', '네이버 블로그 su_dding']]],
-    zuoting: ['좌정우원 신메이광장점', [['zuoting-w1', '新梅联合广场 공식 사이트'], ['zuoting-w2', '네이버 블로그 every_myday'], ['zuoting-w3', '네이버 블로그 every_myday'], ['zuoting-w4', '네이버 블로그 every_myday']]],
+    zuoting: ['좌정우원 신메이광장점', [['zuoting-w1', '네이버 블로그 ttaforest'], ['zuoting-w2', '네이버 블로그 every_myday'], ['zuoting-w3', '네이버 블로그 every_myday'], ['zuoting-w4', '네이버 블로그 every_myday']]],
     sijiminfu: ['사계민복 베이징덕 중신태부점', [['sijiminfu-w1', '네이버 블로그 utan66'], ['sijiminfu-w2', '네이버 블로그 kendi_'], ['sijiminfu-w3', '네이버 블로그 kendi_'], ['sijiminfu-w4', '네이버 블로그 kendi_']]],
     dongliang: ['메종 동량', [['dongliang-w1', '네이버 블로그 minimi8215'], ['dongliang-w2', '네이버 블로그 minimi8215'], ['dongliang-w3', '네이버 블로그 minimi8215'], ['dongliang-w4', '기존(따종띠엔핑)']]],
     diandoude: ['점도덕 환우회점', [['diandoude-w1', '네이버 블로그 honey_210'], ['diandoude-w2', '네이버 블로그 honey_210'], ['diandoude-w3', '네이버 블로그 honey_210'], ['diandoude-w4', '네이버 블로그 honey_210']]],
