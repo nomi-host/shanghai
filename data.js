@@ -257,7 +257,7 @@ window.TRIP_DATA = (() => {
   });
   /* 웹 사진(공식·여행 매체·기사): 2026-11-10 전수 점검, 실제 그 장소가 아닌 사진을 교체 */
   const WEB = {
-    huaihai: ['화이하이중루', [['huaihai-w1', '네이버 블로그 chinawalker'], ['huaihai-w2', '네이버 블로그 brother1121'], ['huaihai-w3', '네이버 블로그 brother1121'], ['huaihai-w4', '네이버 블로그 brother1121']]],
+    huaihai: ['화이하이중루', [['huaihai-w1', '네이버 블로그 chinawalker'], ['huaihai-w2', '네이버 블로그 ajises · HAI550'], ['huaihai-w3', '네이버 블로그 ajises · HAI550'], ['huaihai-w4', '네이버 블로그 brother1121 · matcha Wang'], ['huaihai-w5', '네이버 블로그 brother1121 · matcha Wang']]],
     hotel: ['홀리데이인 익스프레스 와이탄', [['hotel-w1', '네이버 블로그 annie6023'], ['hotel-w2', '네이버 블로그 annie6023'], ['hotel-w3', '네이버 블로그 annie6023'], ['hotel-w4', '네이버 블로그 annie6023']]],
     rockbund: ['와이탄 미술관 (Rockbund)', [['rockbund-w1', '따종띠엔핑'], ['rockbund-w2', '네이버 블로그 rsn99'], ['rockbund-w3', '네이버 블로그 rsn99'], ['rockbund-w4', '네이버 블로그 rsn99'], ['rockbund-w5', '네이버 블로그 yeilen']]],
     wukang: ['우캉맨션', [['wukang-w1', 'N509FZ · CC BY-SA 4.0'], ['wukang-w2', '네이버 블로그 dimdeepblue'], ['wukang-w3', '네이버 블로그 dailylife_yh_'], ['wukang-w4', '源義信 · CC BY 4.0']]],
@@ -300,7 +300,7 @@ window.TRIP_DATA = (() => {
     chillmore: ['chillmore', [['chillmore-w1', 'current'], ['chillmore-w2', 'current'], ['chillmore-w3', 'current'], ['chillmore-w4', 'current']]],
     chizaiji: ['지짜이지 창펀왕', [['chizaiji-w1', 'Trip.com'], ['chizaiji-w2', 'Trip.com'], ['chizaiji-w3', 'Trip.com'], ['chizaiji-w4', 'Trip.com']]],
     coa: ['COA', [['coa-w1', 'current (Amap user photo 2025)'], ['coa-w2', 'Rachel Gouk 2024 COA article'], ['coa-w3', 'SmartShanghai 2024'], ['coa-w4', 'Rachel Gouk 2024 COA article']]],
-    coucou: ['Coucou 훠궈 환마오점', [['coucou-w1', '네이버 블로그 sunnyasz94'], ['coucou-w2', '네이버 블로그 sunnyasz94'], ['coucou-w3', '네이버 블로그 sunnyasz94'], ['coucou-w4', '네이버 블로그 sunnyasz94']]],
+    coucou: ['Coucou 훠궈 환마오점', [['coucou-w1', '네이버 블로그 hyeahlog · iapm점 2026.10'], ['coucou-w2', '네이버 블로그 irene_16_ · iapm점'], ['coucou-w3', '네이버 블로그 hyeahlog · iapm점 2026.10'], ['coucou-w4', '네이버 블로그 sunnyasz94 · 체인 공통 메뉴판']]],
     dahuchun: ['다후춘 생지엔', [['dahuchun-w1', 'current'], ['dahuchun-w2', 'current'], ['dahuchun-w3', 'current'], ['dahuchun-w4', 'current']]],
     dayin: ['다인서점', [['dayin-w1', '赢商网'], ['dayin-w2', '赢商网']]],
     heytea: ['헤이티', [['heytea-w1', 'TRVLOGUE 2026'], ['heytea-w2', 'TRVLOGUE 2026'], ['heytea-w3', 'TRVLOGUE 2026'], ['heytea-w4', 'TRVLOGUE 2026']]],
