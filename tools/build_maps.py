@@ -33,7 +33,7 @@ COORDS = {
     'qiansu': (31.24901, 121.44550),     # OSM 天安千树 → GCJ
     'charlietown': (31.24880, 121.44585), # 天安千树 1期 L층 W07 (같은 건물)
     'labelhood': (31.21806, 121.45168),
-    'renheguan': (31.22436, 121.44497),  # 愚园路142号
+    'renheguan': (31.20176, 121.45832),  # 본점 肇嘉浜路407号 (OSM → GCJ)
     'iccf': (31.20899, 121.44959),       # 衡山路2号
     'lemaire': (31.21242, 121.44028),    # 武康路40弄
     'onheon': (31.21140, 121.44220),     # 复兴西路49弄, 르메르에서 걸어서 3분
@@ -44,7 +44,7 @@ COORDS = {
     'notelab': (31.22173, 121.45710),    # 陕西南路15号
     'duoyun': (31.23352, 121.50562),
     'huaihai': (31.22082, 121.46841),    # HAI550 (OSM Matcha Wang → GCJ), 여기서 서쪽 iapm까지 걷기
-    'zuoting': (31.22971, 121.51569),    # 浦东南路999号
+    'zuoting': (31.23503, 121.47364),    # 新世界城 南京西路2-68号 (OSM → GCJ)
     'disney': (31.14340, 121.65787),
 }
 # 확대 지도: 그날 지도 밑에 붙는 작은 동네 지도 (승차장·출구 같은 실용 위치)
@@ -66,7 +66,7 @@ WALK_KM = 1.3            # 이보다 가까우면 걸어서 (아래 MODE 가 우
 # 일정 메모 기준으로 정한 구간별 이동 수단
 MODE = {
     ('rockbund', 'hotel'): 'foot', ('libaixie', 'bund'): 'foot', ('bund', 'yuyuan'): 'foot', ('yuyuan', 'hotel'): 'foot',
-    ('labelhood', 'renheguan'): 'car', ('iccf', 'lemaire'): 'foot', ('miniso', 'hotel'): 'car',
+    ('labelhood', 'zuoting'): 'car', ('iccf', 'lemaire'): 'foot', ('miniso', 'hotel'): 'car',
 }
 W, H_MIN, H_MAX = 360, 210, 300   # 지도 크기(논리 px), 2배로 저장
 PAD = 26
