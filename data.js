@@ -20,6 +20,7 @@ window.TRIP_DATA = (() => {
     renheguan: { name: '런허관 징안점', cn: '人和馆 愚园路店', cat: 'food', area: '징안', addr: '静安区愚园路142-146号3楼', hours: '주말 11:00–21:30', q: '人和馆 愚园路', status: 'planned', memo: '전화 예약 · 미슐랭 1스타는 본점' },
     diandoude: { name: '점도덕 환우회점', cn: '点都德 环宇荟店', cat: 'food', area: '신천지', addr: '黄浦区黄陂南路838弄 环宇荟B1', hours: '09:00–21:30', q: '点都德 环宇荟', status: 'planned' },
     foty: { name: 'FOTY 퀸아망', cn: 'FOTY', cat: 'dessert', area: '창닝', addr: '长宁区愚园路1107号A103(凤冈路 쪽)', hours: '수–일 11:00–19:00 · 월·화 휴무', q: 'FOTY 愚园路', status: 'backup', g: false, memo: '퀸아망만 파는 단일 메뉴 베이커리 · 1개 약 ¥28 · 위위안로 산책 지점 바로 옆' },
+    charlietown: { name: '찰리타운 밀크티 Charlie Town', cn: 'CHARLIETOWN红茶公司 天安千树1期店', cat: 'tea', area: '푸퉈·쑤저우허', addr: '普陀区莫干山路600号 大洋晶典·天安千树 L층 W07', hours: '10:00–21:00', q: 'CHARLIETOWN红茶公司 天安千树', status: 'planned', memo: '‘밀크티계 에르메스’라 불리는 홍차 밀크티 · 천수 건물 안 · 1인 약 ¥35' },
     spiceman: { name: 'Spiceman 젤라또', cn: 'Spiceman辣男 gelato', cat: 'dessert', area: '징안', addr: '静安区乌鲁木齐中路348号', q: 'Spiceman 乌鲁木齐中路', status: 'backup', memo: '르메르·온허온에서 걸어서 5분 · 思南路22号·延平路225号에도 매장 · 영업시간 고덕 확인' },
     lilian: { name: '릴리안 에그타르트 신세계성점', cn: '莉莲蛋挞 新世界城', cat: 'dessert', area: '인민광장', addr: '黄浦区南京西路2-68号 新世界城B1', q: '莉莲蛋挞 新世界城', status: 'backup', memo: '포르투갈식 에그타르트 · 양꼬치집(第一百货) 바로 옆 · 지점 여럿' },
     bakerspice: { name: 'Baker & Spice 안푸로점', cn: 'Baker&Spice 安福路', cat: 'dessert', area: '헝푸', addr: '徐汇区安福路195号', hours: '09:00–21:00', q: 'Baker&Spice 安福路', status: 'backup' },
@@ -145,6 +146,7 @@ window.TRIP_DATA = (() => {
     lanxin: { name: '란신', cn: '兰心餐厅', q: '兰心餐厅 进贤路', meta: '进贤路130号 · 미슐랭 빕구르망 본방차이 · 021-6253-3554 · 줄 김' },
     rongshu: { name: '룽수 황위몐', cn: '荣叔黄鱼面', q: '荣叔黄鱼面 南京西路', meta: '南京西路688号 · 빕구르망 황조기 국수 · 가볍게' },
     renhe_main: { name: '런허관 본점', cn: '人和馆 肇嘉浜路', q: '人和馆 肇嘉浜路', meta: '肇嘉浜路407号 · 실제 미슐랭 1스타 지점' },
+    charlie_ifc: { name: '찰리타운 밀크티 IFC점', cn: 'CHARLIETOWN红茶公司 上海国金IFC店', q: 'CHARLIETOWN红茶公司 国金IFC', g: false, meta: '世纪大道8号 IFC몰 LG1 · 좌정우원에서 걸어서 10–15분 · 천수점에서 못 마셨으면 여기서' },
     taotaoju: { name: '타오타오쥐 신천지', cn: '陶陶居 新天地', q: '陶陶居 新天地', meta: '광저우 노포 · 大虾饺·双皮奶 · 오픈 시간 확인' },
     tangge: { name: '탕거 (랭함 호텔)', cn: '唐阁', q: '唐阁 朗廷酒店', meta: '马当路99号 5F · 미슐랭 1스타 광둥 딤섬 · 보통 점심부터' },
     leigarden: { name: '레이가든 푸동', cn: '利苑 国金中心', q: '利苑酒家 国金中心', meta: 'IFC 3F · 미슐랭 1스타 딤섬 70종 · 예약 필수' },
@@ -366,7 +368,7 @@ window.TRIP_DATA = (() => {
     barleone2: 'Bar Leone 思南公馆', d_garden: 'Shanghai Disneyland', d_mickey: 'Shanghai Disneyland', d_taxi: 'Shanghai Disneyland',
     d_metro: 'Disney Resort Station Shanghai Metro', siji_bund: '四季民福烤鸭店 吴淞路', punch: 'The Shanghai EDITION', roof: 'The Shanghai EDITION',
   };
-  const GNO = ['libaixie', 'zhangshifu', 'chiikawa', 'notelab', 'notelab_opt', 'carter', 'coa', 'fever', 'forlong', 'guershu', 'habiter',
+  const GNO = ['charlietown', 'libaixie', 'zhangshifu', 'chiikawa', 'notelab', 'notelab_opt', 'carter', 'coa', 'fever', 'forlong', 'guershu', 'habiter',
     'huangshiyi', 'jaja', 'joker', 'kaisha', 'luminous', 'mollytea', 'noras', 'onheon', 'ponyup', 'societyhome', 'sloppygin', 'softserve',
     'sugarplum', 'viandn', 'chillmore', 'ambelie'];
   [PLACES, A].forEach((M) => {
@@ -426,6 +428,12 @@ window.TRIP_DATA = (() => {
           alts: [A.nanyang, A.zhenyuan, A.congyoubing] },
         { t: '09:40', place: 'zhangyuan', title: '장위안 산책', note: '석고문 골목 리테일 단지 · 상점은 10시부터' },
         { t: '10:30', place: 'qiansu', note: '장위안에서 디디 10분 · 외관 위주 30–40분 · 몰도 열려 있음' },
+        { t: '11:05', place: 'charlietown', title: '찰리타운 밀크티 테이크아웃', note: '천수 1기 L층 W07 · 테이크아웃해서 레이블후드 가는 디디에서 · 10:00 오픈',
+          detail: [
+            { h: '뭘 마시나', li: ['홍차 전문 밀크티. 대표는 麻薯(쫀득한 떡)·芋泥(토란 페이스트) 들어간 밀크티', '당도는 少糖(덜 달게) 추천 — 10% 당도로도 달다는 후기', '1잔 ¥28–35 · 둘이 한 잔씩, 점심이 런허관이라 작은 사이즈로'] },
+            { h: '주문', li: ['위챗 미니프로그램 ‘CHARLIETOWN红茶公司’로 미리 주문하면 대기 없이 픽업', '주말 오전이라 줄이 짧을 가능성. 길면 미니프로그램 주문'] },
+          ],
+          altsTitle: '다른 지점 (고덕 저장)', alts: [A.charlie_ifc] },
         { t: '11:30', place: 'labelhood', note: '중국 디자이너 편집샵 · 천수에서 디디 15분 · 런허관까지 디디 10분' },
         { t: '12:30', place: 'renheguan', title: '점심: 런허관 게살비빔밥 + 홍소육', note: '예약 필수 · 미슐랭 1스타는 본점',
           detail: [
