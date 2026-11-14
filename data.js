@@ -48,7 +48,7 @@ window.TRIP_DATA = (() => {
     psa: { name: 'PSA 상하이 당대예술박물관', cn: '上海当代艺术博物馆', cat: 'architecture', area: '황푸 강변', addr: '黄浦区花园港路200号', hours: '화–일 11:00–19:00 · 입장 18:00까지 · 월 휴관', q: '上海当代艺术博物馆', status: 'planned', memo: '옛 발전소 리노베이션 · 류자쿤 「明月构想」 11/14–2027/2/28' },
     rockbund: { name: '와이탄 미술관 (Rockbund)', cn: '上海外滩美术馆', cat: 'architecture', area: '와이탄', addr: '黄浦区虎丘路20号', hours: '수–일 11:00–18:00 · 입장 17:30까지 · 월·화 휴관', q: '上海外滩美术馆', status: 'planned', memo: '1930년대 아르데코 건물 · 요타 몸바사 전시 ~2027/2/21 · 호텔에서 가까움' },
     yuyuan: { name: '위위안 · 성황묘 야경', cn: '豫园商城 · 城隍庙', cat: 'sight', area: '황푸', addr: '黄浦区方浜中路 豫园商城', hours: '상가 조명 밤 22시 전후까지(추정)', q: '豫园商城', status: 'planned', memo: '호텔 바로 앞 · 처마 끝 조명이 켜진 옛 상가 거리 · 九曲桥' },
-    map_pudong: { name: '푸동미술관 (장 누벨)', cn: '浦东美术馆', cat: 'architecture', area: '루자쭈이', addr: '浦东新区滨江大道2777号', hours: '매일 10:00–21:00 · 월요일도 엶', q: '浦东美术馆', status: 'backup', memo: '장 누벨 설계 · 다원서점 근처 · 위챗 예약' },
+    map_pudong: { name: '푸동미술관 (장 누벨)', cn: '浦东美术馆', cat: 'architecture', area: '루자쭈이', addr: '浦东新区滨江大道2777号', hours: '매일 10:00–21:00 · 월요일도 엶', q: '浦东美术馆', status: 'backup', memo: '장 누벨 설계 · 루자쭈이 강변 · 위챗 예약' },
     bund: { name: '와이탄', cn: '外滩', cat: 'sight', area: '와이탄', q: '外滩观景平台', status: 'planned', memo: '야경' },
 
     punchroom: { name: 'Punch Room', cn: '上海艾迪逊酒店 Punch Room', cat: 'bar', area: '남경동로', addr: '黄浦区南京东路199号 上海艾迪逊酒店', hours: '17:30–02:00', q: '上海艾迪逊酒店', status: 'backup', memo: '예약제 · 스마트 캐주얼' },
@@ -112,7 +112,7 @@ window.TRIP_DATA = (() => {
 
   /* 대안 식당 (지도 버튼은 q로 검색) */
   const A = {
-    map_pudong: { name: '푸동미술관 (장 누벨)', cn: '浦东美术馆', q: '浦东美术馆', meta: '滨江大道2777号 · 월요일도 10:00–21:00 · 다원서점에서 걸어서 10분 · 시간 되면' },
+    map_pudong: { name: '푸동미술관 (장 누벨)', cn: '浦东美术馆', q: '浦东美术馆', meta: '滨江大道2777号 · 월요일도 10:00–21:00 · 좌정우원에서 디디 10분 · 시간 되면' },
     notelab_opt: { name: 'Nótelab 감각 실험실', cn: 'NOTE LAB·感官实验室', q: '陕西南路15号', meta: '陕西南路15号 2층 · 19:00 오픈 · 향 실험실 콘셉트 · 1인 약 ¥121' },
     fever: { name: 'Fever Bar', cn: 'Fever Bar 陕西北路', q: 'Fever Bar 陕西北路', meta: '陕西北路600-11号 · 15:30–01:30 · 칵테일 · Nótelab에서 디디 5–10분' },
     kaisha: { name: 'KAISHA 會社', cn: 'KAISHA會社', q: 'KAISHA會社 康定路', meta: '康定路358号 · 일–목 18:00–01:00 · 칵테일 · Nótelab에서 디디 10분' },
