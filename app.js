@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const { PLACES, DAYS, INFO, CHECKLIST, PHRASES, TRIP, EXTRA = {}, CREDITS = {}, WEB_CREDITS = [] } = window.TRIP_DATA;
+  const { PLACES, PARK, DAYS, INFO, CHECKLIST, PHRASES, TRIP, EXTRA = {}, CREDITS = {}, WEB_CREDITS = [] } = window.TRIP_DATA;
   const $ = (s, el = document) => el.querySelector(s);
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const store = {
@@ -167,7 +167,46 @@
       }).join('');
       zoomH = `<figure class="dmap dmap-zoom"><figcaption class="dmap-title">${esc(z.title)}</figcaption><div class="dmap-box" style="aspect-ratio:${z.w}/${z.h}"><div class="dmap-layer" ${projAttr(z)}><img src="${z.img}" alt="${esc(z.title)}" width="${z.w}" height="${z.h}" draggable="false"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${zl}</svg>${zd}${zp}<i class="dmap-me" hidden></i></div>${GPS_BTN}<button class="dmap-reset" data-map-reset aria-label="지도 원래 크기로" hidden>${ms('zoom_out_map')}</button></div></figure>`;
     }
-    return `<figure class="dmap"><div class="dmap-box" style="aspect-ratio:${m.w}/${m.h}"><div class="dmap-layer" ${projAttr(m)}><img src="${m.img}" alt="${esc(d.title)} 동선 지도" width="${m.w}" height="${m.h}" draggable="false"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${lines}</svg>${dots}${pins}<i class="dmap-me" hidden></i></div>${GPS_BTN}<button class="dmap-reset" data-map-reset aria-label="지도 원래 크기로" hidden>${ms('zoom_out_map')}</button></div><figcaption><span><b>차</b> 약 ${km(m.car)}km <i class="dmap-dash is-solid" aria-hidden="true"></i></span><span><b>걷기</b> 약 ${km(m.walk)}km <i class="dmap-dash" aria-hidden="true"></i></span></figcaption></figure>${zoomH}`;
+    return `<figure class="dmap"><div class="dmap-box" style="aspect-ratio:${m.w}/${m.h}"><div class="dmap-layer" ${projAttr(m)}><img src="${m.img}" alt="${esc(d.title)} 동선 지도" width="${m.w}" height="${m.h}" draggable="false"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${lines}</svg>${dots}${pins}<i class="dmap-me" hidden></i></div>${GPS_BTN}<button class="dmap-reset" data-map-reset aria-label="지도 원래 크기로" hidden>${ms('zoom_out_map')}</button></div><figcaption><span><b>차</b> 약 ${km(m.car)}km <i class="dmap-dash is-solid" aria-hidden="true"></i></span><span><b>걷기</b> 약 ${km(m.walk)}km <i class="dmap-dash" aria-hidden="true"></i></span></figcaption></figure>${zoomH}${parkHtml(dIdx)}`;
+  }
+
+  /* ---------- 디즈니 안 동선: 단순화 지도(SVG) — 동선 지도와 같은 회색 톤·검은 점선·번호 핀 ---------- */
+  function smoothPath(P) {
+    // 점들을 지나는 부드러운 곡선(Catmull-Rom → 베지어)
+    let d = `M${P[0][0]} ${P[0][1]}`;
+    for (let i = 0; i < P.length - 1; i++) {
+      const p0 = P[i - 1] || P[i], p1 = P[i], p2 = P[i + 1], p3 = P[i + 2] || p2;
+      const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6];
+      const c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
+      d += ` C${c1[0].toFixed(1)} ${c1[1].toFixed(1)} ${c2[0].toFixed(1)} ${c2[1].toFixed(1)} ${p2[0]} ${p2[1]}`;
+    }
+    return d;
+  }
+  function parkHtml(dIdx) {
+    if (!PARK || PARK.day !== dIdx) return '';
+    const d = DAYS[dIdx];
+    const vi = d.items.findIndex((x) => x.place === PARK.place && x.cat !== 'move');
+    const W = 360, H = 300;
+    const route = smoothPath(PARK.route);
+    // 길(공원 산책로): 동선 + 갈림길 몇 개
+    const roads = [
+      route,
+      'M178 96 A44 44 0 1 1 177.9 96',                       // 성 둘레
+      'M175 210 A30 26 0 1 1 175 210.1',                     // 정원
+      'M54 118 A56 42 0 1 1 54 118.1',                       // 판타지랜드
+      'M248 124 A48 64 0 1 1 248 124.1',                     // 보물섬·어드벤처 아일
+      'M218 160 L272 198', 'M216 118 L246 78', 'M80 214 L132 214 L176 186',
+    ].map((r) => `<path d="${r}"/>`).join('');
+    const water = '<ellipse cx="116" cy="124" rx="22" ry="11"/><path d="M276 92 C300 84 318 104 314 126 C312 150 296 166 280 156 C266 148 262 128 270 114 C262 104 266 96 276 92Z"/><ellipse cx="224" cy="224" rx="13" ry="6"/>';
+    const pins = PARK.stops.map((s) => {
+      return `<button class="dmap-pin c-castle${s.opt ? ' is-opt' : ''}" style="left:${(s.x / W * 100).toFixed(2)}%;top:${(s.y / H * 100).toFixed(2)}%" ${vi >= 0 ? `data-goto="r${dIdx}-${vi}"` : 'disabled'} aria-label="${s.n}. ${esc(s.name)}">${s.n}</button>`
+        + `<span class="pk-lbl is-${s.s || 'r'}${s.opt ? ' is-opt' : ''}" style="left:${(s.x / W * 100).toFixed(2)}%;top:${(s.y / H * 100).toFixed(2)}%">${esc(s.name)}</span>`;
+    }).join('');
+    const svg = `<svg class="pk-svg" viewBox="0 0 ${W} ${H}" aria-hidden="true"><rect width="${W}" height="${H}" class="pk-bg"/><g class="pk-water">${water}</g><g class="pk-road-o">${roads}</g><g class="pk-road">${roads}</g><path class="pk-route-o" d="${route}"/><path class="pk-route" d="${route}"/></svg>`;
+    const castle = `<span class="pk-castle" style="left:${178 / W * 100}%;top:${140 / H * 100}%">${ms('castle', 'fill')}</span>`;
+    const gate = `<span class="pk-lbl pk-gate" style="left:${280 / W * 100}%;top:${292 / H * 100}%">${ms('login')}입구·출구</span>`;
+    const list = PARK.stops.map((s) => `<li${s.opt ? ' class="is-opt"' : ''}><b>${s.n}</b><span>${esc(s.name)} <small>${esc(s.en)}</small>${s.tip ? `<em>${esc(s.tip)}</em>` : ''}</span></li>`).join('');
+    return `<figure class="dmap dmap-park"><figcaption class="dmap-title">${esc(PARK.title)}</figcaption><div class="dmap-box" style="aspect-ratio:${W}/${H}"><div class="dmap-layer">${svg}${castle}${gate}${pins}</div><button class="dmap-reset" data-map-reset aria-label="지도 원래 크기로" hidden>${ms('zoom_out_map')}</button></div><figcaption><span><b>걷기</b> 점선 순서대로 <i class="dmap-dash" aria-hidden="true"></i></span><span><i class="pk-optdot" aria-hidden="true"></i> 회색 번호는 시간 남으면</span></figcaption><details class="pk-list"><summary>순서 자세히</summary><ol>${list}</ol></details></figure>`;
   }
 
   /* ---------- 내 위치(GPS) ----------
