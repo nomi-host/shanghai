@@ -39,7 +39,9 @@ COORDS = {
     'onheon': (31.21140, 121.44220),     # 复兴西路49弄, 르메르에서 걸어서 3분
     'psa': (31.20103, 121.49832),
     'chiikawa': (31.23809, 121.48683),   # 南京东路139号
-    'miniso': (31.23551, 121.47761),     # 南京东路670号
+    'miniso': (31.23601, 121.48121),     # MINISO LAND 全球壹号店 南京东路479号 (OSM → GCJ)
+    'toptoy': (31.23585, 121.47967),     # TOP TOY 南京东路558号 (OSM → GCJ)
+    'miniso2': (31.23549, 121.47744),    # 名创优品 先施公司旧址店 南京东路660号 (OSM → GCJ)
     'henjiu': (31.23488, 121.47477),
     'notelab': (31.22173, 121.45710),    # 陕西南路15号
     'duoyun': (31.23352, 121.50562),
@@ -66,7 +68,7 @@ WALK_KM = 1.3            # 이보다 가까우면 걸어서 (아래 MODE 가 우
 # 일정 메모 기준으로 정한 구간별 이동 수단
 MODE = {
     ('rockbund', 'hotel'): 'foot', ('libaixie', 'bund'): 'foot', ('bund', 'yuyuan'): 'foot', ('yuyuan', 'hotel'): 'foot',
-    ('labelhood', 'zuoting'): 'car', ('iccf', 'lemaire'): 'foot', ('miniso', 'hotel'): 'car',
+    ('labelhood', 'zuoting'): 'car', ('iccf', 'lemaire'): 'foot', ('henjiu', 'hotel'): 'car',
 }
 W, H_MIN, H_MAX = 360, 210, 300   # 지도 크기(논리 px), 2배로 저장
 PAD = 26
