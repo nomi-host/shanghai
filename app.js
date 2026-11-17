@@ -37,7 +37,26 @@
     return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
   }
   const gmapPill = (p, label = '구글맵') => p.g === false ? '' : `<a class="pill" href="${gmapUrl(p)}" target="_blank" rel="noopener">${ms('map', 'fill')}${label}</a>`;
-  const mapPill = (p, label = '고덕지도') => `<a class="pill" href="${amapUrl(p)}" target="_blank" rel="noopener">${PIN}${label}</a>`;
+  // 폰에서는 고덕 앱을 바로 연다(iosamap:// / androidamap://). 앱이 없으면 잠시 뒤 웹 고덕으로.
+  const OS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) ? 'ios' : /Android/i.test(navigator.userAgent) ? 'android' : '';
+  function amapApp(p) {
+    if (!OS) return '';
+    const base = OS === 'ios' ? 'iosamap://' : 'androidamap://';
+    const name = encodeURIComponent(p.cn || p.name);
+    if (p.lng && p.lat) return `${base}viewMap?sourceApplication=sh26trip&poiname=${name}&lat=${p.lat}&lon=${p.lng}&dev=0`;
+    const kw = encodeURIComponent(p.q || p.cn || p.name);
+    return OS === 'ios' ? `${base}poi?sourceApplication=sh26trip&name=${kw}&dev=0` : `${base}poi?sourceApplication=sh26trip&keywords=${kw}&dev=0`;
+  }
+  const amapAttrs = (p) => { const app = amapApp(p); return app ? `href="${esc(app)}" data-amap-web="${esc(amapUrl(p))}"` : `href="${amapUrl(p)}" target="_blank" rel="noopener"`; };
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('[data-amap-web]');
+    if (!a) return;
+    const web = a.dataset.amapWeb; let left = false;
+    const gone = () => { left = true; };
+    document.addEventListener('visibilitychange', gone, { once: true }); window.addEventListener('pagehide', gone, { once: true });
+    setTimeout(() => { if (!left && !document.hidden) window.open(web, '_blank', 'noopener'); }, 1800);
+  });
+  const mapPill = (p, label = '고덕지도') => `<a class="pill" ${amapAttrs(p)}>${PIN}${label}</a>`;
   const showPill = (ko, zh) => `<button class="pill pill-gray" data-show-ko="${esc(ko)}" data-show-zh="${esc(zh)}">크게 보여주기</button>`;
 
   /* ---------- 시간 ---------- */

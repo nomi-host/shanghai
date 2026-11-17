@@ -47,6 +47,16 @@
   const url = (p) => p.lng && p.lat
     ? `https://uri.amap.com/marker?position=${p.lng},${p.lat}&name=${encodeURIComponent(p.cn)}&src=sh26trip&coordinate=gaode&callnative=1`
     : `https://uri.amap.com/search?keyword=${encodeURIComponent(p.q || p.cn)}&city=310000&src=sh26trip&callnative=1`;
+  // 폰에서는 고덕 앱을 바로 연다. 앱이 없으면 잠시 뒤 웹 고덕으로.
+  const OS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) ? 'ios' : /Android/i.test(navigator.userAgent) ? 'android' : '';
+  const appUrl = (p) => {
+    if (!OS) return '';
+    const base = OS === 'ios' ? 'iosamap://' : 'androidamap://';
+    if (p.lng && p.lat) return `${base}viewMap?sourceApplication=sh26trip&poiname=${encodeURIComponent(p.cn)}&lat=${p.lat}&lon=${p.lng}&dev=0`;
+    const kw = encodeURIComponent(p.q || p.cn);
+    return OS === 'ios' ? `${base}poi?sourceApplication=sh26trip&name=${kw}&dev=0` : `${base}poi?sourceApplication=sh26trip&keywords=${kw}&dev=0`;
+  };
+  const linkAttrs = (p) => appUrl(p) ? `href="${esc(appUrl(p))}" data-amap-web="${esc(url(p))}"` : `href="${url(p)}" target="_blank" rel="noopener"`;
   const CAT = { food: '식당', dessert: '디저트', tea: '차', shop: '숍', sight: '명소', architecture: '건축', street: '거리', bar: '바', stay: '숙소', move: '이동' };
   // 고덕 즐겨찾기 메모(备注)에 붙여넣을 한 줄 설명
   const memo = (p) => [p.name, CAT[p.cat], p.status === 'planned' ? '일정' : '후보', p.hours, p.memo].filter(Boolean).join(' · ');
@@ -59,7 +69,7 @@
     document.getElementById('list').innerHTML = `<div class="list">${items.map(([k, p]) => `
       <div class="row${done[k] ? ' is-done' : ''}" style="--inset:52px">
         <span class="done" aria-hidden="true"></span>
-        <a class="row-main" href="${url(p)}" target="_blank" rel="noopener" data-k="${k}" style="color:inherit">
+        <a class="row-main" ${linkAttrs(p)} data-k="${k}" style="color:inherit">
           <span class="row-title" style="display:block">${esc(p.name)}</span>
           <span class="row-zh" lang="zh-CN" style="display:block">${esc(p.q || p.cn)}</span>
           ${p.addr ? `<span class="row-note" lang="zh-CN" style="display:block">${esc(p.addr)}</span>` : ''}
@@ -72,7 +82,15 @@
   }
   document.addEventListener('click', (e) => {
     const a = e.target.closest('[data-k]');
-    if (a) { const d = get(); d[a.dataset.k] = true; put(d); setTimeout(render, 300); return; }
+    if (a) {
+      const d = get(); d[a.dataset.k] = true; put(d);
+      if (a.dataset.amapWeb) {
+        const web = a.dataset.amapWeb; let left = false; const gone = () => { left = true; };
+        document.addEventListener('visibilitychange', gone, { once: true }); window.addEventListener('pagehide', gone, { once: true });
+        setTimeout(() => { if (!left && !document.hidden) window.open(web, '_blank', 'noopener'); }, 1800);
+      }
+      setTimeout(render, 300); return;
+    }
     const c = e.target.closest('[data-copy]');
     if (c) { navigator.clipboard?.writeText(c.dataset.copy).then(() => { c.textContent = '복사됨'; setTimeout(() => (c.textContent = c.dataset.label), 1500); }); return; }
     const s = e.target.closest('[data-f]');
