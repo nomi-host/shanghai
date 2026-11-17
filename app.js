@@ -592,15 +592,37 @@
   }
   if ('speechSynthesis' in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
   let slow = store.get('slow', false);
+  /* 아이폰 무음(매너) 모드: 음성합성은 '주변음' 취급이라 무음 스위치에 묻힘.
+     재생 전에 무음 오디오를 <audio>로 같이 틀면 '미디어 재생'으로 바뀌어 매너모드에서도 들림. */
+  let keepAwake = null;
+  function silentWav() {
+    const n = 4000, b = new ArrayBuffer(44 + n), v = new DataView(b);
+    const w = (o, t) => [...t].forEach((c, i) => v.setUint8(o + i, c.charCodeAt(0)));
+    w(0, 'RIFF'); v.setUint32(4, 36 + n, true); w(8, 'WAVE'); w(12, 'fmt '); v.setUint32(16, 16, true);
+    v.setUint16(20, 1, true); v.setUint16(22, 1, true); v.setUint32(24, 8000, true); v.setUint32(28, 8000, true);
+    v.setUint16(32, 1, true); v.setUint16(34, 8, true); w(36, 'data'); v.setUint32(40, n, true);
+    for (let i = 0; i < n; i++) v.setUint8(44 + i, 128);
+    return URL.createObjectURL(new Blob([b], { type: 'audio/wav' }));
+  }
+  function mediaOn() {
+    try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) { /* 미지원 */ }
+    try {
+      if (!keepAwake) { keepAwake = new Audio(silentWav()); keepAwake.loop = true; keepAwake.setAttribute('playsinline', ''); }
+      const pr = keepAwake.play(); if (pr && pr.catch) pr.catch(() => {});
+    } catch (e) { /* 무시 */ }
+  }
+  function mediaOff() { if (keepAwake) keepAwake.pause(); }
   function speak(text, btn) {
     if (!('speechSynthesis' in window)) { alertLine('이 브라우저는 음성 재생을 지원하지 않아요.'); return; }
     speechSynthesis.cancel();
+    mediaOn();
     const u = new SpeechSynthesisUtterance(text.replace(/\n/g, '，'));
     u.lang = 'zh-CN';
     if (zhVoice) u.voice = zhVoice;
     u.rate = slow ? 0.6 : 0.9;
     document.querySelectorAll('.speak.is-playing').forEach((b) => b.classList.remove('is-playing'));
-    if (btn) { btn.classList.add('is-playing'); u.onend = u.onerror = () => btn.classList.remove('is-playing'); }
+    u.onend = u.onerror = () => { if (btn) btn.classList.remove('is-playing'); setTimeout(() => { if (!speechSynthesis.speaking) mediaOff(); }, 200); };
+    if (btn) btn.classList.add('is-playing');
     speechSynthesis.speak(u);
   }
   function alertLine(msg) {
@@ -608,21 +630,34 @@
     $('#screen-talk').prepend(p); setTimeout(() => p.remove(), 3500);
   }
   let talkGroup = 'all';
+  let talkQuery = '';
+  // 검색: 한국어·중국어·병음(성조 없이도) 모두
+  const plain = (t) => String(t).normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '').toLowerCase();
   const TALK_ICON = { '기본': 'waving_hand', '줄서기·예약': 'confirmation_number', '맛집 주문': 'ramen_dining', '디즈니': 'castle', '식당': 'restaurant', '바·디저트': 'local_bar', '쇼핑': 'shopping_bag', '교통·길': 'local_taxi', '호텔': 'hotel', '급할 때': 'sos' };
   function renderTalk() {
     const el = $('#screen-talk');
-    let h = `<div class="title-row"><h1 class="large-title">Phrases</h1><button class="refresh refresh-inline" data-refresh aria-label="새로고침"><span class="ms" aria-hidden="true">refresh</span></button></div><p class="subhead">스피커를 누르면 중국어로 읽어줘요. 문장을 누르면 크게 보여줘요.</p>`;
-    h += chipBar('tg', [['all', '전체', 'apps'], ...PHRASES.map((g) => [g.group, g.group, TALK_ICON[g.group]])], talkGroup, '상황');
-    h += `<div class="seg" role="group" aria-label="읽는 속도"><button data-speed="0" aria-pressed="${!slow}">보통 속도</button><button data-speed="1" aria-pressed="${slow}">천천히</button></div>`;
+    if (!el.dataset.built) {
+      el.innerHTML = `<div class="title-row"><h1 class="large-title">Phrases</h1><button class="refresh refresh-inline" data-refresh aria-label="새로고침"><span class="ms" aria-hidden="true">refresh</span></button></div><p class="subhead">스피커를 누르면 중국어로 읽어줘요. 문장을 누르면 크게 보여줘요.</p>
+      <div id="talkChips"></div>
+      <label class="search">${ms('search')}<input type="search" id="talkQ" placeholder="한국어, 중국어, 병음 검색" aria-label="문장 검색"></label>
+      <div class="seg" role="group" aria-label="읽는 속도"><button data-speed="0" aria-pressed="${!slow}">보통 속도</button><button data-speed="1" aria-pressed="${slow}">천천히</button></div>
+      <div id="talkList"></div>
+      <p class="group-f">음성은 기기에 내장된 중국어 음성을 써요. 아이폰은 설정 › 손쉬운 사용 › 읽기 및 말하기 › 음성 › 중국어에서 고음질 음성을 받아두면 더 자연스러워요.</p>`;
+      el.dataset.built = '1';
+    }
+    $('#talkChips').innerHTML = chipBar('tg', [['all', '전체', 'apps'], ...PHRASES.map((g) => [g.group, g.group, TALK_ICON[g.group]])], talkGroup, '상황');
+    const q = plain(talkQuery);
+    let h = '';
     PHRASES.filter((g) => talkGroup === 'all' || g.group === talkGroup).forEach((g) => {
+      const its = g.items.filter(([ko, zh, py]) => !q || plain(ko + zh + py).includes(q));
+      if (!its.length) return;
       h += `<h3 class="group-h">${esc(g.group)}</h3><div class="list">`;
-      g.items.forEach(([ko, zh, py]) => {
+      its.forEach(([ko, zh, py]) => {
         h += `<div class="phrase"><button class="phrase-open" data-show-ko="${esc(ko)}" data-show-zh="${esc(zh)}" data-show-py="${esc(py)}"><div class="phrase-ko">${esc(ko)}</div><div class="phrase-zh" lang="zh-CN">${esc(zh)}</div><div class="phrase-py">${esc(py)}</div></button><button class="speak" data-say="${esc(zh)}" aria-label="${esc(ko)} 중국어로 듣기">${SPK}</button></div>`;
       });
       h += `</div>`;
     });
-    h += `<p class="group-f">음성은 기기에 내장된 중국어 음성을 써요. 아이폰은 설정 › 손쉬운 사용 › 읽기 및 말하기 › 음성 › 중국어에서 고음질 음성을 받아두면 더 자연스러워요.</p>`;
-    el.innerHTML = h;
+    $('#talkList').innerHTML = h || `<p class="group-f" style="text-align:center;margin-top:30px">검색 결과가 없어요.${talkGroup !== 'all' ? ' ‘전체’에서 찾아보세요.' : ''}</p>`;
     keepChipVisible(el);
   }
 
@@ -639,7 +674,7 @@
     sheet.hidden = false;
     $('#showClose').focus();
   }
-  function closeShow() { sheet.hidden = true; if ('speechSynthesis' in window) speechSynthesis.cancel(); lastFocus && lastFocus.focus(); }
+  function closeShow() { sheet.hidden = true; if ('speechSynthesis' in window) speechSynthesis.cancel(); mediaOff(); lastFocus && lastFocus.focus(); }
   $('#showClose').addEventListener('click', closeShow);
   $('#showSpeak').addEventListener('click', (e) => speak(e.currentTarget.dataset.say));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !sheet.hidden) closeShow(); });
@@ -724,6 +759,7 @@
   });
   document.addEventListener('input', (e) => {
     if (e.target.id === 'placeQ') { placeQuery = e.target.value; renderPlaces(); }
+    if (e.target.id === 'talkQ') { talkQuery = e.target.value; renderTalk(); }
   });
   document.addEventListener('change', (e) => {
     if (e.target.dataset.check !== undefined) {
