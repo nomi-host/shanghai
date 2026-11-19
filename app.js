@@ -216,7 +216,7 @@
       'M248 124 A48 64 0 1 1 248 124.1',                     // 보물섬·어드벤처 아일
       'M218 160 L272 198', 'M216 118 L246 78', 'M80 214 L132 214 L176 186',
     ].map((r) => `<path d="${r}"/>`).join('');
-    const water = '<ellipse cx="116" cy="124" rx="22" ry="11"/><path d="M276 92 C300 84 318 104 314 126 C312 150 296 166 280 156 C266 148 262 128 270 114 C262 104 266 96 276 92Z"/><ellipse cx="224" cy="224" rx="13" ry="6"/>';
+    const water = '<ellipse cx="116" cy="124" rx="22" ry="11"/><path d="M276 92 C300 84 318 104 314 126 C312 150 296 166 280 156 C266 148 262 128 270 114 C262 104 266 96 276 92Z"/><ellipse cx="210" cy="228" rx="22" ry="7"/>';
     const pins = PARK.stops.map((s) => {
       return `<button class="dmap-pin c-castle${s.opt ? ' is-opt' : ''}" style="left:${(s.x / W * 100).toFixed(2)}%;top:${(s.y / H * 100).toFixed(2)}%" ${vi >= 0 ? `data-goto="r${dIdx}-${vi}"` : 'disabled'} aria-label="${s.n}. ${esc(s.name)}">${s.n}</button>`
         + `<span class="pk-lbl is-${s.s || 'r'}${s.opt ? ' is-opt' : ''}" style="left:${(s.x / W * 100).toFixed(2)}%;top:${(s.y / H * 100).toFixed(2)}%">${esc(s.name)}</span>`;

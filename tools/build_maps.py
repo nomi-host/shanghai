@@ -54,8 +54,8 @@ ZOOMS = {
     2: {  # 디즈니 날
         'key': 'disney', 'title': '디즈니 확대: 쇼 명당·승차 위치', 'goto': 'disney',
         'points': [
-            ('disney_garden', '쇼 명당', 'star', 'sight', (31.14265, 121.66059)),       # 奇想花园 (OSM)
-            ('disney_mickey', '미키 애비뉴', 'directions_walk', 'sight', (31.14159, 121.66182)),  # 米奇大街 (구글)
+            ('disney_garden', '쇼 명당', 'star', 'sight', (31.14180, 121.66090)),       # 奇想花园 남쪽 호숫가: 호수 건너 성 반영 (OSM 호수·길 기준)
+            # 미키 애비뉴는 쇼 명당 바로 옆이라 핀 생략(겹침)
             ('disney_pickup', '디디 승차', 'local_taxi', 'castle', (31.13769, 121.65818)),  # 停车场小型客车上下客区: 고덕 화면 기준, 申迪西路 로터리 서북쪽
             ('disney_taxi', '택시 하차점', 'local_taxi', 'move', (31.13857, 121.65816)),     # 出租车下客点: 고덕 화면 기준, 승차 구역 바로 북쪽
             ('disney_metro', '11호선 디즈니역', 'directions_subway', 'move', (31.14135, 121.66816)),  # 구글
