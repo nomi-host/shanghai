@@ -69,7 +69,7 @@ SKIP = {'sha'}           # 공항은 너무 멀어서 뺌
 WALK_KM = 1.3            # 이보다 가까우면 걸어서 (아래 MODE 가 우선)
 # 일정 메모 기준으로 정한 구간별 이동 수단
 MODE = {
-    ('rockbund', 'hotel'): 'foot', ('libaixie', 'bund'): 'foot', ('bund', 'yuyuan'): 'foot', ('yuyuan', 'hotel'): 'foot',
+    ('rockbund', 'hotel'): 'foot', ('libaixie', 'bund'): 'foot', ('chiikawa', 'bund'): 'foot', ('bund', 'yuyuan'): 'foot', ('yuyuan', 'hotel'): 'foot',
     ('labelhood', 'zuoting'): 'car', ('henjiu', 'bund'): 'foot', ('iccf', 'lemaire'): 'foot', ('iccf', 'bakerspice'): 'foot', ('bakerspice', 'lemaire'): 'foot', ('henjiu', 'hotel'): 'car',
 }
 W, H_MIN, H_MAX = 360, 210, 300   # 지도 크기(논리 px), 2배로 저장
