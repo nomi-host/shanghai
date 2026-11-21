@@ -34,6 +34,7 @@ COORDS = {
     'charlietown': (31.24880, 121.44585), # 天安千树 1期 L층 W07 (같은 건물)
     'labelhood': (31.21806, 121.45168),
     'renheguan': (31.20176, 121.45832),  # 본점 肇嘉浜路407号 (OSM → GCJ)
+    'bakerspice': (31.21389, 121.44370), # Baker & Spice 安福路195号 (OSM → GCJ)
     'iccf': (31.20899, 121.44959),       # 衡山路2号
     'lemaire': (31.21242, 121.44028),    # 武康路40弄
     'onheon': (31.21140, 121.44220),     # 复兴西路49弄, 르메르에서 걸어서 3분
@@ -69,7 +70,7 @@ WALK_KM = 1.3            # 이보다 가까우면 걸어서 (아래 MODE 가 우
 # 일정 메모 기준으로 정한 구간별 이동 수단
 MODE = {
     ('rockbund', 'hotel'): 'foot', ('libaixie', 'bund'): 'foot', ('bund', 'yuyuan'): 'foot', ('yuyuan', 'hotel'): 'foot',
-    ('labelhood', 'zuoting'): 'car', ('henjiu', 'bund'): 'foot', ('iccf', 'lemaire'): 'foot', ('henjiu', 'hotel'): 'car',
+    ('labelhood', 'zuoting'): 'car', ('henjiu', 'bund'): 'foot', ('iccf', 'lemaire'): 'foot', ('iccf', 'bakerspice'): 'foot', ('bakerspice', 'lemaire'): 'foot', ('henjiu', 'hotel'): 'car',
 }
 W, H_MIN, H_MAX = 360, 210, 300   # 지도 크기(논리 px), 2배로 저장
 PAD = 26
