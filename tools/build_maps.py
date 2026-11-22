@@ -43,6 +43,7 @@ COORDS = {
     'miniso': (31.23601, 121.48121),     # MINISO LAND 全球壹号店 南京东路479号 (OSM → GCJ)
     'toptoy': (31.23585, 121.47967),     # TOP TOY 南京东路558号 (OSM → GCJ)
     'miniso2': (31.23549, 121.47744),    # 名创优品 先施公司旧址店 南京东路660号 (OSM → GCJ)
+    'henjiu818': (31.23110, 121.46096),  # 818广场 南京西路818号 (OSM → GCJ)
     'henjiu': (31.23553, 121.47466),     # 第一百货商业中心 B馆 (OSM → GCJ), 南京东路830号 6층
     'diandoude': (31.21159, 121.47693),  # 中海环宇荟 黄陂南路838弄 (OSM → GCJ)
     'notelab': (31.22173, 121.45710),    # 陕西南路15号
@@ -69,7 +70,7 @@ SKIP = {'sha'}           # 공항은 너무 멀어서 뺌
 WALK_KM = 1.3            # 이보다 가까우면 걸어서 (아래 MODE 가 우선)
 # 일정 메모 기준으로 정한 구간별 이동 수단
 MODE = {
-    ('rockbund', 'hotel'): 'foot', ('libaixie', 'bund'): 'foot', ('chiikawa', 'bund'): 'foot', ('hotel', 'yuyuan'): 'foot', ('yuyuan', 'bund'): 'foot', ('bund', 'henjiu'): 'foot', ('bund', 'yuyuan'): 'foot', ('yuyuan', 'hotel'): 'foot',
+    ('rockbund', 'hotel'): 'foot', ('libaixie', 'bund'): 'foot', ('chiikawa', 'bund'): 'foot', ('hotel', 'yuyuan'): 'foot', ('yuyuan', 'bund'): 'foot', ('bund', 'henjiu'): 'foot', ('bund', 'henjiu818'): 'car', ('bund', 'yuyuan'): 'foot', ('yuyuan', 'hotel'): 'foot',
     ('labelhood', 'zuoting'): 'car', ('henjiu', 'bund'): 'foot', ('iccf', 'lemaire'): 'foot', ('iccf', 'bakerspice'): 'foot', ('bakerspice', 'lemaire'): 'foot', ('henjiu', 'hotel'): 'car',
 }
 W, H_MIN, H_MAX = 360, 210, 300   # 지도 크기(논리 px), 2배로 저장
